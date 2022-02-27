@@ -4,19 +4,21 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-data class RemoteResult(
+@Parcelize
+data class TeamsData(
     val errors: List<String>,
     val results: Int,
     @SerializedName("response") val teams: List<Team>
-)
-
-data class Team(
-    @SerializedName("team") val details: Details,
-    val venue: Venue
-)
+): Parcelable
 
 @Parcelize
-data class Details(
+data class Team(
+    @SerializedName("team") val details: TeamDetails,
+    val venue: TeamVenue
+): Parcelable
+
+@Parcelize
+data class TeamDetails(
     val id: Int,
     val name: String,
     val code: String,
@@ -24,11 +26,10 @@ data class Details(
     val founded: Int,
     val national: Boolean,
     val logo: String,
-    // @SerializedName("vote_count") val voteCount: Int
 ) : Parcelable
 
 @Parcelize
-data class Venue(
+data class TeamVenue(
     val id: Int,
     val name: String,
     val address: String,

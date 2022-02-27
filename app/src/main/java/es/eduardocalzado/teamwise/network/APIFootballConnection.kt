@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.model
+package es.eduardocalzado.teamwise.network
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
-object RemoteConnection {
+object APIFootballConnection {
     private val okHttpClient = HttpLoggingInterceptor().run {
         level = HttpLoggingInterceptor.Level.BODY
         OkHttpClient.Builder().addInterceptor(this).build()
@@ -18,5 +18,5 @@ object RemoteConnection {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val service: RemoteService = builder.create()
+    val service: APIFootball = builder.create()
 }

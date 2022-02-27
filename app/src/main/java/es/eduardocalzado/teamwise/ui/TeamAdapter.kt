@@ -10,8 +10,10 @@ import es.eduardocalzado.teamwise.extensions.inflate
 import es.eduardocalzado.teamwise.extensions.loadUrl
 
 class TeamAdapter(
-    var teams: List<Team>
+    private val listener: (Team) -> Unit
     ) : RecyclerView.Adapter<TeamAdapter.ViewHolder>() {
+
+    var teams: List<Team> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = parent.inflate(R.layout.view_team, false)
@@ -23,6 +25,7 @@ class TeamAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val team = teams[position]
         holder.bind(team)
+        holder.itemView.setOnClickListener { listener(team) }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
