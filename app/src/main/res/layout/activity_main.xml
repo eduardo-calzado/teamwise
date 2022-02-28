@@ -21,4 +21,13 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3" />
 
+    <TextView
+        android:id="@+id/noresults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/no_results_found"
+        android:textSize="16sp"
+        android:visibility="gone"/>
+
 </RelativeLayout>

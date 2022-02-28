@@ -22,6 +22,12 @@ interface APIFootball {
     ): TeamsData
 
     @Headers(HOST, KEY)
+    @GET("teams")
+    suspend fun getTeams(
+        @Query("country") country: String,
+    ): TeamsData
+
+    @Headers(HOST, KEY)
     @GET("teams/statistics")
     suspend fun getTeamStats(
         @Query("league") league: Int,

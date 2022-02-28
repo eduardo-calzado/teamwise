@@ -20,9 +20,18 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
-                android:id="@+id/team_detail_image"
+                android:id="@+id/team_detail_background"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:alpha="0.6"
+                android:background="@drawable/ic_grass"/>
+
+            <ImageView
+                android:id="@+id/team_detail_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
                 android:fitsSystemWindows="true"
                 android:scaleType="fitCenter"
                 app:layout_collapseMode="parallax"
@@ -50,21 +59,12 @@
             android:transitionGroup="true">
 
             <TextView
-                android:id="@+id/team_detail_summary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                tools:text="Lorem ipsum" />
-
-            <TextView
                 android:id="@+id/team_detail_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:lineSpacingMultiplier="1.2"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:background="#CFCFCF"
                 tools:text="Lorem ipsum" />
 
             <TextView
@@ -74,7 +74,6 @@
                 android:padding="16dp"
                 android:lineSpacingMultiplier="1.2"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:background="#9A9A9A"
                 tools:text="Lorem ipsum" />
 
             <ProgressBar
@@ -91,7 +90,6 @@
                 android:padding="16dp"
                 android:lineSpacingMultiplier="1.2"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:background="#FFFFFF"
                 tools:text="Lorem ipsum" />
 
         </LinearLayout>

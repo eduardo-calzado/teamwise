@@ -21,7 +21,7 @@ data class Team(
 data class TeamDetails(
     val id: Int,
     val name: String,
-    val code: String,
+    val code: String?,
     val country: String,
     val founded: Int,
     val national: Boolean,

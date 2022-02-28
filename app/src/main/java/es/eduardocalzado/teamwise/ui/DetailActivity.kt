@@ -6,7 +6,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
+import androidx.core.text.italic
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import es.eduardocalzado.teamwise.constants.Constants.Companion.LEAGUE
 import es.eduardocalzado.teamwise.constants.Constants.Companion.SEASON
 import es.eduardocalzado.teamwise.constants.Constants.Companion.TEAM
@@ -14,9 +16,11 @@ import es.eduardocalzado.teamwise.databinding.ActivityDetailBinding
 import es.eduardocalzado.teamwise.extensions.loadUrl
 import es.eduardocalzado.teamwise.model.Team
 import es.eduardocalzado.teamwise.network.APIFootballConnection
+import es.eduardocalzado.teamwise.network.TeamRepository
 import kotlinx.coroutines.launch
 
 class DetailActivity : AppCompatActivity() {
+    private val teamRepository by lazy { TeamRepository(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,30 +28,25 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         intent.getParcelableExtra<Team>(TEAM)?.run {
-            binding.teamDetailToolbar.title = details.code
+            binding.teamDetailBackground.loadUrl(venue.image)
+            if (details.code?.isNullOrEmpty() == true) binding.teamDetailToolbar.title = details.name
+            else binding.teamDetailToolbar.title = "["+details.code+"] "+details.name
             binding.teamDetailImage.loadUrl(details.logo)
-            binding.teamDetailSummary.text = details.name
             binding.teamDetailInfo.text = buildSpannedString {
-                bold { append("Founded: ") }
+                bold { append("Founded in ") }
                 append(details.founded.toString())
             }
 
             binding.teamVenueInfo.text = buildSpannedString {
-                bold { append("Venue name: ") }
-                appendLine(venue.name)
-                bold { append("Address: ") }
-                appendLine(venue.address)
-                bold { append("City: ") }
-                appendLine(venue.city)
-                bold { append("Capacity ") }
-                appendLine(venue.capacity.toString())
-                bold { append("Surface: ") }
-                append(venue.surface)
+                bold { appendLine("Stadium") }
+                italic { appendLine("\t"+venue.name) }
+                appendLine("\tAt "+venue.address+" in "+venue.city)
+                append("\tCapacity for "+venue.capacity.toString()+" and "+venue.surface+" surface.")
             }
 
             lifecycleScope.launch {
                 binding.teamStatsProgressbar.visibility = View.VISIBLE
-                val res = APIFootballConnection.service.getTeamStats(LEAGUE, SEASON, details.id)
+                val res =  teamRepository.getTeamStats(details.id)
                 Thread.sleep(1000)
                 if (res.errors.isEmpty()) {
                     Log.d(this.toString(), res.stats.toString())
