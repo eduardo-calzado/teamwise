@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.ui
+package es.eduardocalzado.teamwise.ui.detail
 
 import android.os.Bundle
 import android.util.Log
@@ -8,15 +8,11 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.core.text.italic
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
-import es.eduardocalzado.teamwise.constants.Constants.Companion.LEAGUE
-import es.eduardocalzado.teamwise.constants.Constants.Companion.SEASON
-import es.eduardocalzado.teamwise.constants.Constants.Companion.TEAM
+import es.eduardocalzado.teamwise.model.constants.Constants.Companion.TEAM
 import es.eduardocalzado.teamwise.databinding.ActivityDetailBinding
-import es.eduardocalzado.teamwise.extensions.loadUrl
 import es.eduardocalzado.teamwise.model.Team
-import es.eduardocalzado.teamwise.network.APIFootballConnection
-import es.eduardocalzado.teamwise.network.TeamRepository
+import es.eduardocalzado.teamwise.model.extensions.loadUrl
+import es.eduardocalzado.teamwise.model.network.TeamRepository
 import kotlinx.coroutines.launch
 
 class DetailActivity : AppCompatActivity() {

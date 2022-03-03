@@ -1,7 +1,7 @@
-package es.eduardocalzado.teamwise.network
+package es.eduardocalzado.teamwise.model.network
 
 import androidx.appcompat.app.AppCompatActivity
-import es.eduardocalzado.teamwise.constants.Constants
+import es.eduardocalzado.teamwise.model.constants.Constants
 
 class TeamRepository(activity: AppCompatActivity) {
 

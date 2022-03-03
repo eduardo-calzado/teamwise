@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.network
+package es.eduardocalzado.teamwise.model.network
 
 import android.Manifest
 import android.location.Geocoder

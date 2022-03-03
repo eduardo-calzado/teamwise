@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.constants
+package es.eduardocalzado.teamwise.model.constants
 
 class Constants {
     companion object {

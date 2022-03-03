@@ -1,6 +1,5 @@
-package es.eduardocalzado.teamwise.network
+package es.eduardocalzado.teamwise.model.network
 
-import es.eduardocalzado.teamwise.model.Team
 import es.eduardocalzado.teamwise.model.TeamStatsData
 import es.eduardocalzado.teamwise.model.TeamsData
 import retrofit2.http.GET
