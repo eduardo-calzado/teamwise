@@ -35,7 +35,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateUi(state: MainViewModel.UiState) {
-        binding.progressBar.visibility = if(state.loading) View.VISIBLE else View.GONE
+        with(binding) {
+            progressBar.visibility = if (state.loading) View.VISIBLE else View.GONE
+            if (state.teams.isNullOrEmpty()) {
+                if (progressBar.visibility == View.GONE) noresults.visibility = View.VISIBLE
+                else noresults.visibility = View.GONE
+            }
+        }
         state.teams?.let {
             adapter.submitList(it)
         }
@@ -49,24 +55,4 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra(TEAM, team)
         startActivity(intent)
     }
-
-    /*
-    // -- how to use this code into the MVVM
-    @SuppressLint("NotifyDataSetChanged")
-    private fun callGetTeams() {
-        lifecycleScope.launch {
-            binding.progressBar.visibility = View.VISIBLE
-            val res = teamRepository.getTeamsByRegion()
-            if (res.errors.isEmpty() && res.results != 0) {
-                adapter.teams = res.teams
-                adapter.notifyDataSetChanged()
-                binding.noresults.visibility = View.GONE
-            } else {
-                binding.noresults.visibility = View.VISIBLE
-            }
-            Log.d(this.toString(), "errors: "+res.errors.toString())
-            binding.progressBar.visibility = View.GONE
-        }
-    }*/
-
 }

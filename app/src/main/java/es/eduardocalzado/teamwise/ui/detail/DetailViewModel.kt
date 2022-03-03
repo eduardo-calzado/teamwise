@@ -1,23 +1,26 @@
-package es.eduardocalzado.teamwise.ui.main
+package es.eduardocalzado.teamwise.ui.detail
 
 import androidx.lifecycle.*
 import es.eduardocalzado.teamwise.model.Team
+import es.eduardocalzado.teamwise.model.TeamStatsData
 import es.eduardocalzado.teamwise.model.network.TeamRepository
 import kotlinx.coroutines.launch
 
-class MainViewModel (
-    private val teamRepository: TeamRepository
+class DetailViewModel (
+    private val teamRepository: TeamRepository,
+    val team: Team
 ): ViewModel() {
 
     data class UiState(
         val loading: Boolean = false,
-        val teams: List<Team>? = null,
-        val navigateTo: Team? = null
+        val teamStats: TeamStatsData? = null,
+        val teamData: Team? = null,
     )
 
     private val _state = MutableLiveData(UiState())
     val state : LiveData<UiState> get() {
-        if (_state.value?.teams == null) {
+        _state.value = _state.value?.copy(teamData = team)
+        if (_state.value?.teamStats == null) {
             refresh()
         }
         return _state
@@ -25,25 +28,20 @@ class MainViewModel (
 
     private fun refresh() {
         viewModelScope.launch {
-            // we do a copy because a copy won't overwrite the state in uncertain cases
             _state.value = _state.value?.copy(loading = true)
-            _state.value = _state.value?.copy(teams = teamRepository.getTeamsByRegion().teams)
+            _state.value = _state.value?.copy(teamStats = teamRepository.getTeamStats(team.details.id))
             _state.value = _state.value?.copy(loading = false)
-            //_state.value = UiState(teams = teamRepository.getTeamsByRegion().teams)
         }
-    }
-
-    fun onTeamClicked(team: Team) {
-        _state.value = _state.value?.copy(navigateTo = team)
     }
 }
 
 // boiler plate required: it will be solved with State Flow.
 @Suppress("UNCHECKED_CAST")
-class MainViewModelFactory (
-    private val teamRepository: TeamRepository
+class DetailViewModelFactory (
+    private val teamRepository: TeamRepository,
+    private val team: Team
 ): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MainViewModel(teamRepository) as T
+        return DetailViewModel(teamRepository, team) as T
     }
 }
