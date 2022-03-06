@@ -1,9 +1,10 @@
 package es.eduardocalzado.teamwise.model.network
 
+import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import es.eduardocalzado.teamwise.model.constants.Constants
 
-class TeamRepository(activity: AppCompatActivity) {
+class TeamRepository(activity: Application) {
 
     private val regionRepository = RegionRepository(activity)
 

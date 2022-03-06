@@ -1,16 +1,17 @@
-package es.eduardocalzado.teamwise.utils
+package es.eduardocalzado.teamwise.model.utils
 
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
-class PermissionChecker (activity: AppCompatActivity, private val permission: String) {
+class PermissionRequester(fragment: Fragment, private val permission: String) {
 
     private var onRequest: (Boolean) -> Unit = {}
-    private val launcher = activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-        onRequest(isGranted)
-    }
+    private val launcher =
+        fragment.registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            onRequest(isGranted)
+        }
 
     suspend fun request(): Boolean =
         suspendCancellableCoroutine { continuation ->

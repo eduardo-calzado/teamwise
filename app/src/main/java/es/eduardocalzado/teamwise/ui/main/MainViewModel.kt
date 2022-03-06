@@ -14,33 +14,19 @@ class MainViewModel (
 
     data class UiState(
         val loading: Boolean = false,
-        val teams: List<Team>? = null,
-        val navigateTo: Team? = null
+        val teams: List<Team>? = null
     )
 
     private val _state = MutableStateFlow(UiState())
     val state : StateFlow<UiState> = _state.asStateFlow()
 
-    init {
-        refresh()
-    }
-
-    private fun refresh() {
+    fun onUiReady() {
         viewModelScope.launch {
             // we do a copy because a copy won't overwrite the state in uncertain cases
             _state.value = _state.value.copy(loading = true)
             _state.value = _state.value.copy(teams = teamRepository.getTeamsByRegion().teams)
             _state.value = _state.value.copy(loading = false)
-            //_state.value = UiState(teams = teamRepository.getTeamsByRegion().teams)
         }
-    }
-
-    fun onTeamClicked(team: Team) {
-        _state.value = _state.value.copy(navigateTo = team)
-    }
-
-    fun onNavigationDone() {
-        _state.value = _state.value.copy(navigateTo = null)
     }
 }
 

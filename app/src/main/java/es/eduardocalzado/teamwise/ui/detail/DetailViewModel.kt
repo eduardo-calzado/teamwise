@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class DetailViewModel (
-    //private val teamRepository: TeamRepository,
+    private val teamRepository: TeamRepository,
     val team: Team
 ): ViewModel() {
 
@@ -32,9 +32,9 @@ class DetailViewModel (
 
     private fun refresh() {
         viewModelScope.launch {
-            //_state.value = _state.value.copy(loading = true)
-            //_state.value = _state.value.copy(teamStats = teamRepository.getTeamStats(team.details.id))
-            //_state.value = _state.value.copy(loading = false)
+            _state.value = _state.value.copy(loading = true)
+            _state.value = _state.value.copy(teamStats = teamRepository.getTeamStats(team.details.id))
+            _state.value = _state.value.copy(loading = false)
         }
     }
 }
@@ -42,11 +42,10 @@ class DetailViewModel (
 // boiler plate required: it will be solved with State Flow.
 @Suppress("UNCHECKED_CAST")
 class DetailViewModelFactory (
-    //private val teamRepository: TeamRepository,
+    private val teamRepository: TeamRepository,
     private val team: Team
 ): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        //return DetailViewModel(teamRepository, team) as T
-        return DetailViewModel(team) as T
+        return DetailViewModel(teamRepository, team) as T
     }
 }

@@ -27,7 +27,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val viewModel: DetailViewModel by viewModels {
         DetailViewModelFactory(
-            // TeamRepository(requireActivity() as AppCompatActivity),
+            TeamRepository(requireActivity().application),
             requireNotNull(safeArgs.team)
         )
     }
