@@ -1,54 +1,60 @@
 package es.eduardocalzado.teamwise.ui.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.core.text.italic
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import es.eduardocalzado.teamwise.R
+import es.eduardocalzado.teamwise.databinding.FragmentDetailBinding
 import es.eduardocalzado.teamwise.model.constants.Constants.Companion.TEAM
-import es.eduardocalzado.teamwise.databinding.ActivityDetailBinding
-import es.eduardocalzado.teamwise.databinding.ActivityMainBinding
-import es.eduardocalzado.teamwise.model.Team
 import es.eduardocalzado.teamwise.model.extensions.loadUrl
 import es.eduardocalzado.teamwise.model.network.TeamRepository
-import es.eduardocalzado.teamwise.ui.main.MainViewModel
-import es.eduardocalzado.teamwise.ui.main.MainViewModelFactory
-import es.eduardocalzado.teamwise.ui.main.TeamAdapter
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class DetailActivity : AppCompatActivity() {
+class DetailFragment : Fragment(R.layout.fragment_detail) {
+
+    private val safeArgs: DetailFragmentArgs by navArgs()
 
     private val viewModel: DetailViewModel by viewModels {
         DetailViewModelFactory(
-            TeamRepository(this),
-            requireNotNull(intent.getParcelableExtra(TEAM))
+            // TeamRepository(requireActivity() as AppCompatActivity),
+            requireNotNull(safeArgs.team)
         )
     }
-    lateinit var binding: ActivityDetailBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val binding = FragmentDetailBinding.bind(view)
         // --
-        viewModel.state.observe(this) {
-            updateUi(it)
+        binding.teamDetailToolbar.setNavigationOnClickListener{findNavController().popBackStack()}
+        // --
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collect {
+                    binding.updateUi(it)
+                }
+            }
         }
     }
 
-    private fun updateUi(state: DetailViewModel.UiState) {
+    private fun FragmentDetailBinding.updateUi(state: DetailViewModel.UiState) {
         val details = state.teamData?.details
         val venue = state.teamData?.venue
         val stats = state.teamStats?.stats
 
-        with(binding) {
+        with(this) {
             details?.let {
-                if (it.code?.isNullOrEmpty() == true) teamDetailToolbar.title = it.name
+                if (it.code.isNullOrEmpty()) teamDetailToolbar.title = it.name
                 else teamDetailToolbar.title = "["+it.code+"] "+it.name
                 teamDetailImage.loadUrl(it.logo)
                 teamDetailInfo.text = buildSpannedString {
