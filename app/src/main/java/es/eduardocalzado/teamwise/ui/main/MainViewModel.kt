@@ -38,6 +38,10 @@ class MainViewModel (
     fun onTeamClicked(team: Team) {
         _state.value = _state.value.copy(navigateTo = team)
     }
+
+    fun onNavigationDone() {
+        _state.value = _state.value.copy(navigateTo = null)
+    }
 }
 
 // boiler plate required: it will be solved with State Flow.

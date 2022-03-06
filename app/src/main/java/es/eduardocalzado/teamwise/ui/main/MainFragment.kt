@@ -60,5 +60,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun navigateTo(team: Team) {
         val navAction = MainFragmentDirections.actionMainToDetail(team)
         findNavController().navigate(navAction)
+        viewModel.onNavigationDone()
     }
 }
