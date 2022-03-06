@@ -3,6 +3,9 @@ package es.eduardocalzado.teamwise.ui.main
 import androidx.lifecycle.*
 import es.eduardocalzado.teamwise.model.Team
 import es.eduardocalzado.teamwise.model.network.TeamRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class MainViewModel (
@@ -15,26 +18,25 @@ class MainViewModel (
         val navigateTo: Team? = null
     )
 
-    private val _state = MutableLiveData(UiState())
-    val state : LiveData<UiState> get() {
-        if (_state.value?.teams == null) {
-            refresh()
-        }
-        return _state
+    private val _state = MutableStateFlow(UiState())
+    val state : StateFlow<UiState> = _state.asStateFlow()
+
+    init {
+        refresh()
     }
 
     private fun refresh() {
         viewModelScope.launch {
             // we do a copy because a copy won't overwrite the state in uncertain cases
-            _state.value = _state.value?.copy(loading = true)
-            _state.value = _state.value?.copy(teams = teamRepository.getTeamsByRegion().teams)
-            _state.value = _state.value?.copy(loading = false)
+            _state.value = _state.value.copy(loading = true)
+            _state.value = _state.value.copy(teams = teamRepository.getTeamsByRegion().teams)
+            _state.value = _state.value.copy(loading = false)
             //_state.value = UiState(teams = teamRepository.getTeamsByRegion().teams)
         }
     }
 
     fun onTeamClicked(team: Team) {
-        _state.value = _state.value?.copy(navigateTo = team)
+        _state.value = _state.value.copy(navigateTo = team)
     }
 }
 
