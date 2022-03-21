@@ -1,7 +1,7 @@
 package es.eduardocalzado.teamwise.model.network
 
-import es.eduardocalzado.teamwise.model.TeamStatsData
-import es.eduardocalzado.teamwise.model.TeamsData
+import es.eduardocalzado.teamwise.model.remotedata.RemoteTeamStatsData
+import es.eduardocalzado.teamwise.model.remotedata.RemoteTeamsData
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -18,13 +18,13 @@ interface APIFootball {
     suspend fun getTeams(
         @Query("league") league: Int,
         @Query("season") season: Int,
-    ): TeamsData
+    ): RemoteTeamsData
 
     @Headers(HOST, KEY)
     @GET("teams")
     suspend fun getTeams(
         @Query("country") country: String,
-    ): TeamsData
+    ): RemoteTeamsData
 
     @Headers(HOST, KEY)
     @GET("teams/statistics")
@@ -32,6 +32,6 @@ interface APIFootball {
         @Query("league") league: Int,
         @Query("season") season: Int,
         @Query("team") team: Int,
-    ): TeamStatsData
+    ): RemoteTeamStatsData
 
 }

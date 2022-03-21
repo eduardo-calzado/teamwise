@@ -1,24 +1,26 @@
-package es.eduardocalzado.teamwise.model
+package es.eduardocalzado.teamwise.model.remotedata
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class TeamsData(
+data class RemoteTeamsData(
     val errors: List<String>,
     val results: Int,
-    @SerializedName("response") val teams: List<Team>
+    @SerializedName("response")
+    val teams: List<RemoteTeam>
 ): Parcelable
 
 @Parcelize
-data class Team(
-    @SerializedName("team") val details: TeamDetails,
-    val venue: TeamVenue
+data class RemoteTeam(
+    @SerializedName("team")
+    val details: RemoteTeamDetails,
+    val venue: RemoteTeamVenue
 ): Parcelable
 
 @Parcelize
-data class TeamDetails(
+data class RemoteTeamDetails(
     val id: Int,
     val name: String,
     val code: String?,
@@ -29,12 +31,12 @@ data class TeamDetails(
 ) : Parcelable
 
 @Parcelize
-data class TeamVenue(
+data class RemoteTeamVenue(
     val id: Int,
     val name: String,
-    val address: String,
-    val city: String,
+    val address: String?,
+    val city: String?,
     val capacity: Int,
-    val surface: String,
-    val image: String,
+    val surface: String?,
+    val image: String?,
 ) : Parcelable

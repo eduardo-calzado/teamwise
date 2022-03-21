@@ -25,6 +25,6 @@
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="team"
-            app:argType="es.eduardocalzado.teamwise.model.Team" />
+            app:argType="es.eduardocalzado.teamwise.model.database.Team" />
     </fragment>
 </navigation>

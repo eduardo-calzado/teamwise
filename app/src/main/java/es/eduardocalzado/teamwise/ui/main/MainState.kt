@@ -1,10 +1,7 @@
 package es.eduardocalzado.teamwise.ui.main
 
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
-import es.eduardocalzado.teamwise.model.Team
+import es.eduardocalzado.teamwise.model.database.Team
 import es.eduardocalzado.teamwise.model.utils.PermissionRequester
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

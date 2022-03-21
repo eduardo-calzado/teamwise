@@ -2,7 +2,6 @@ package es.eduardocalzado.teamwise.ui.detail
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.core.text.italic
@@ -13,9 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import es.eduardocalzado.teamwise.App
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentDetailBinding
-import es.eduardocalzado.teamwise.model.constants.Constants.Companion.TEAM
 import es.eduardocalzado.teamwise.model.extensions.loadUrl
 import es.eduardocalzado.teamwise.model.network.TeamRepository
 import kotlinx.coroutines.flow.collect
@@ -27,7 +26,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val viewModel: DetailViewModel by viewModels {
         DetailViewModelFactory(
-            TeamRepository(requireActivity().application),
+            TeamRepository(requireActivity().application as App),
             requireNotNull(safeArgs.team)
         )
     }
@@ -48,12 +47,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     private fun FragmentDetailBinding.updateUi(state: DetailViewModel.UiState) {
-        val details = state.teamData?.details
-        val venue = state.teamData?.venue
+        val team = state.teamData
         val stats = state.teamStats?.stats
 
         with(this) {
-            details?.let {
+            team?.let {
                 if (it.code.isNullOrEmpty()) teamDetailToolbar.title = it.name
                 else teamDetailToolbar.title = "["+it.code+"] "+it.name
                 teamDetailImage.loadUrl(it.logo)
@@ -61,9 +59,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     bold { append("Founded in ") }
                     append(it.founded.toString())
                 }
-            }
-            venue?.let {
-                teamDetailBackground.loadUrl(it.image)
+                teamDetailBackground.loadUrl(it.stadiumImage)
                 teamVenueInfo.text = buildSpannedString {
                     bold { appendLine("Stadium") }
                     italic { appendLine("\t"+it.name) }

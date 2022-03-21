@@ -9,6 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import es.eduardocalzado.teamwise.App
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentMainBinding
 import es.eduardocalzado.teamwise.model.network.TeamRepository
@@ -19,7 +20,7 @@ import kotlinx.coroutines.launch
 class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val viewModel: MainViewModel by viewModels {
-        MainViewModelFactory(TeamRepository(requireActivity().application))
+        MainViewModelFactory(TeamRepository(requireActivity().application as App))
     }
 
     private val adapter = TeamAdapter { mainState.onTeamClicked(team = it)}

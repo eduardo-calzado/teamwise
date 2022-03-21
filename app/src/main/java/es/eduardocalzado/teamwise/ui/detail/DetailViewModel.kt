@@ -1,9 +1,11 @@
 package es.eduardocalzado.teamwise.ui.detail
 
-import androidx.lifecycle.*
-import es.eduardocalzado.teamwise.model.Team
-import es.eduardocalzado.teamwise.model.TeamStatsData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import es.eduardocalzado.teamwise.model.database.Team
 import es.eduardocalzado.teamwise.model.network.TeamRepository
+import es.eduardocalzado.teamwise.model.remotedata.RemoteTeamStatsData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,7 +18,7 @@ class DetailViewModel (
 
     data class UiState(
         val loading: Boolean = false,
-        val teamStats: TeamStatsData? = null,
+        val teamStats: RemoteTeamStatsData? = null,
         val teamData: Team? = null,
     )
 
@@ -33,7 +35,7 @@ class DetailViewModel (
     private fun refresh() {
         viewModelScope.launch {
             _state.value = _state.value.copy(loading = true)
-            _state.value = _state.value.copy(teamStats = teamRepository.getTeamStats(team.details.id))
+            _state.value = _state.value.copy(teamStats = teamRepository.requestStats(team.id))
             _state.value = _state.value.copy(loading = false)
         }
     }

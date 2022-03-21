@@ -5,7 +5,6 @@ import android.app.Application
 import android.location.Geocoder
 import android.location.Location
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import es.eduardocalzado.teamwise.model.utils.LocationDataSource
 import es.eduardocalzado.teamwise.model.utils.PermissionChecker
 import es.eduardocalzado.teamwise.model.utils.PlayServicesLocationDataSource

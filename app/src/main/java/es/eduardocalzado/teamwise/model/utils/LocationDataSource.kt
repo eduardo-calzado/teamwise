@@ -1,12 +1,11 @@
 package es.eduardocalzado.teamwise.model.utils
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Application
 import android.location.Location
 import com.google.android.gms.location.LocationServices
-import kotlin.coroutines.resume
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 
 interface LocationDataSource {
     suspend fun findLastLocation(): Location?
