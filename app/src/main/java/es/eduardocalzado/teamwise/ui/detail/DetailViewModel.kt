@@ -9,11 +9,12 @@ import es.eduardocalzado.teamwise.model.remotedata.RemoteTeamStatsData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DetailViewModel (
     private val teamRepository: TeamRepository,
-    val team: Team
+    teamId: Int
 ): ViewModel() {
 
     data class UiState(
@@ -26,17 +27,18 @@ class DetailViewModel (
     val state : StateFlow<UiState> = _state.asStateFlow()
 
     init {
-        _state.value = _state.value.copy(teamData = team)
-        if (_state.value.teamStats == null) {
-            refresh()
+        viewModelScope.launch {
+            teamRepository.findById(teamId).collect {
+                _state.value = UiState(teamData = it)
+            }
         }
     }
 
-    private fun refresh() {
+    fun onFavoriteClicked() {
         viewModelScope.launch {
-            _state.value = _state.value.copy(loading = true)
-            _state.value = _state.value.copy(teamStats = teamRepository.requestStats(team.id))
-            _state.value = _state.value.copy(loading = false)
+            _state.value.teamData?.let {
+                teamRepository.switchFavorite(it)
+            }
         }
     }
 }
@@ -45,9 +47,9 @@ class DetailViewModel (
 @Suppress("UNCHECKED_CAST")
 class DetailViewModelFactory (
     private val teamRepository: TeamRepository,
-    private val team: Team
+    private val teamId: Int
 ): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return DetailViewModel(teamRepository, team) as T
+        return DetailViewModel(teamRepository, teamId) as T
     }
 }

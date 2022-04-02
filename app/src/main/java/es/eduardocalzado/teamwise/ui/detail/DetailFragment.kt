@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import es.eduardocalzado.teamwise.App
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentDetailBinding
+import es.eduardocalzado.teamwise.model.extensions.launchAndCollect
 import es.eduardocalzado.teamwise.model.extensions.loadUrl
 import es.eduardocalzado.teamwise.model.network.TeamRepository
 import kotlinx.coroutines.flow.collect
@@ -27,19 +28,22 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private val viewModel: DetailViewModel by viewModels {
         DetailViewModelFactory(
             TeamRepository(requireActivity().application as App),
-            requireNotNull(safeArgs.team)
+            requireNotNull(safeArgs.teamId)
         )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentDetailBinding.bind(view)
         // --
-        binding.teamDetailToolbar.setNavigationOnClickListener{findNavController().popBackStack()}
+        val binding = FragmentDetailBinding.bind(view).apply {
+            teamDetailToolbar.setNavigationOnClickListener{findNavController().popBackStack()}
+            teamDetailFavorite.setOnClickListener { viewModel.onFavoriteClicked() }
+        }
         // --
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect {
+                    binding.team = it.teamData
                     binding.updateUi(it)
                 }
             }
@@ -51,22 +55,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         val stats = state.teamStats?.stats
 
         with(this) {
-            team?.let {
-                if (it.code.isNullOrEmpty()) teamDetailToolbar.title = it.name
-                else teamDetailToolbar.title = "["+it.code+"] "+it.name
-                teamDetailImage.loadUrl(it.logo)
-                teamDetailInfo.text = buildSpannedString {
-                    bold { append("Founded in ") }
-                    append(it.founded.toString())
-                }
-                teamDetailBackground.loadUrl(it.stadiumImage)
-                teamVenueInfo.text = buildSpannedString {
-                    bold { appendLine("Stadium") }
-                    italic { appendLine("\t"+it.name) }
-                    appendLine("\tAt "+it.address+" in "+it.city)
-                    append("\tCapacity for "+it.capacity.toString()+" and "+it.surface+" surface.")
-                }
-            }
             stats?.let {
                 teamStatsProgressbar.visibility = if(state.loading) View.VISIBLE else View.GONE
                 teamStatsInfo.text = buildSpannedString {

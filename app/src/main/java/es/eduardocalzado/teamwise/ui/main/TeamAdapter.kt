@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import es.eduardocalzado.teamwise.R
-import es.eduardocalzado.teamwise.databinding.GridRowTeamBinding
+import es.eduardocalzado.teamwise.databinding.ViewTeamBinding
 import es.eduardocalzado.teamwise.model.database.Team
 import es.eduardocalzado.teamwise.model.extensions.basicDiffUtil
 import es.eduardocalzado.teamwise.model.extensions.inflate
@@ -16,7 +16,7 @@ class TeamAdapter(
 ): ListAdapter<Team, TeamAdapter.ViewHolder>(basicDiffUtil { old, new -> old.id == new.id }) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = parent.inflate(R.layout.grid_row_team, false)
+        val view = parent.inflate(R.layout.view_team, false)
         return ViewHolder(view)
     }
 
@@ -27,10 +27,9 @@ class TeamAdapter(
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = GridRowTeamBinding.bind(view)
-        fun bind(team: Team) = with(binding) {
-            teamName.text = team.name
-            teamCover.loadUrl(team.logo)
+        private val binding = ViewTeamBinding.bind(view)
+        fun bind(team: Team) {
+            binding.team = team
         }
     }
 }

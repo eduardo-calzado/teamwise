@@ -20,4 +20,5 @@ data class Team (
     val capacity: Int,
     val surface: String?,
     val stadiumImage: String,
+    val favorite: Boolean,
 ): Parcelable

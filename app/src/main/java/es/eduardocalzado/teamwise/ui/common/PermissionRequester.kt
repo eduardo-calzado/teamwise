@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.model.utils
+package es.eduardocalzado.teamwise.ui.common
 
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment

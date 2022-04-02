@@ -1,5 +1,6 @@
 package es.eduardocalzado.teamwise.model.network
 
+import android.util.Log
 import es.eduardocalzado.teamwise.App
 import es.eduardocalzado.teamwise.model.database.Team
 import es.eduardocalzado.teamwise.model.datasource.TeamLocalDataSource
@@ -16,22 +17,26 @@ class TeamRepository(application: App) {
     private val localDataSource = TeamLocalDataSource(
         teamDao = application.db.teamDao()
     )
-    private val remoteDataSource = TeamRemoteDataSource(
-        regionRepository = regionRepository
-    )
+    private val remoteDataSource = TeamRemoteDataSource()
 
     val teams = localDataSource.teams
+
+    fun findById(id: Int) = localDataSource.findById(id)
+
     suspend fun requestTeams() {
-        withContext(Dispatchers.IO) {
-            if (localDataSource.isEmpty()) {
-                val data = remoteDataSource.getTeamsByRegion()
-                localDataSource.save(data.teams.map {it.toLocalModel()})
-            }
+        if (localDataSource.isEmpty()) {
+            val data = remoteDataSource.getTeamsByRegion(regionRepository)
+            localDataSource.save(data.teams.map {it.toLocalModel()})
         }
     }
 
     suspend fun requestStats(id: Int): RemoteTeamStatsData {
         return remoteDataSource.getTeamStats(id)
+    }
+
+    suspend fun switchFavorite(team: Team) {
+        val updatedTeam = team.copy(favorite = !team.favorite)
+        localDataSource.save(listOf(updatedTeam))
     }
 }
 
@@ -48,4 +53,5 @@ private fun RemoteTeam.toLocalModel(): Team = Team(
     venue.capacity,
     venue.surface ?: "",
     venue.image ?: "",
+    false,
 )

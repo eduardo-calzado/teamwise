@@ -13,7 +13,7 @@ import es.eduardocalzado.teamwise.App
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentMainBinding
 import es.eduardocalzado.teamwise.model.network.TeamRepository
-import es.eduardocalzado.teamwise.model.utils.PermissionRequester
+import es.eduardocalzado.teamwise.ui.common.PermissionRequester
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -23,47 +23,29 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         MainViewModelFactory(TeamRepository(requireActivity().application as App))
     }
 
-    private val adapter = TeamAdapter { mainState.onTeamClicked(team = it)}
+    private val adapter = TeamAdapter { mainState.onTeamClicked(teamId = it.id)}
 
     private lateinit var mainState: MainState
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mainState = buildMainState()
+        // --
         val binding = FragmentMainBinding.bind(view).apply {
             recycler.adapter = adapter
         }
         // --
-        mainState = MainState(
-            viewLifecycleOwner.lifecycleScope,
-            PermissionRequester (
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ),
-            findNavController()
-        )
-        // --
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                  viewModel.state.collect {
-                    binding.updateUi(it)
-                }
+                     binding.loading = it.loading
+                     binding.teams = it.teams
+                 }
             }
         }
         // --
-        mainState.requestLocationPermission { viewModel.onUiReady() }
-    }
-
-    private fun FragmentMainBinding.updateUi(state: MainViewModel.UiState) {
-        with(this) {
-            progressBar.visibility = if (state.loading) View.VISIBLE else View.GONE
-            if (state.teams.isNullOrEmpty()) {
-                if (progressBar.visibility == View.GONE) noresults.visibility = View.VISIBLE
-                else noresults.visibility = View.GONE
-            }
-        }
-        state.teams?.let {
-            adapter.submitList(it)
+        mainState.requestLocationPermission {
+            viewModel.onUiReady()
         }
     }
-
 }
