@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.model.database
+package es.eduardocalzado.teamwise.data.database
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow

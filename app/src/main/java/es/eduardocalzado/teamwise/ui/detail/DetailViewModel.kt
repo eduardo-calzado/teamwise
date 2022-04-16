@@ -3,18 +3,19 @@ package es.eduardocalzado.teamwise.ui.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import es.eduardocalzado.teamwise.model.database.Team
-import es.eduardocalzado.teamwise.model.network.TeamRepository
-import es.eduardocalzado.teamwise.model.remotedata.RemoteTeamStatsData
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
+import es.eduardocalzado.teamwise.data.database.Team
+import es.eduardocalzado.teamwise.data.errors.toError
+import es.eduardocalzado.teamwise.data.network.TeamRepository
+import es.eduardocalzado.teamwise.data.remotedata.RemoteTeamStatsData
+import es.eduardocalzado.teamwise.domain.FindTeamUseCase
+import es.eduardocalzado.teamwise.domain.SwitchTeamFavoriteUseCase
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class DetailViewModel (
-    private val teamRepository: TeamRepository,
-    teamId: Int
+    teamId: Int,
+    findTeamUseCase: FindTeamUseCase,
+    private val switchTeamFavoriteUseCase: SwitchTeamFavoriteUseCase,
 ): ViewModel() {
 
     data class UiState(
@@ -28,16 +29,15 @@ class DetailViewModel (
 
     init {
         viewModelScope.launch {
-            teamRepository.findById(teamId).collect {
-                _state.value = UiState(teamData = it)
-            }
+            findTeamUseCase(teamId)
+                .collect { _state.value = UiState(teamData = it) }
         }
     }
 
     fun onFavoriteClicked() {
         viewModelScope.launch {
             _state.value.teamData?.let {
-                teamRepository.switchFavorite(it)
+                switchTeamFavoriteUseCase(it)
             }
         }
     }
@@ -46,10 +46,11 @@ class DetailViewModel (
 // boiler plate required: it will be solved with State Flow.
 @Suppress("UNCHECKED_CAST")
 class DetailViewModelFactory (
-    private val teamRepository: TeamRepository,
-    private val teamId: Int
+    private val teamId: Int,
+    private val findTeamUseCase: FindTeamUseCase,
+    private val switchTeamFavoriteUseCase: SwitchTeamFavoriteUseCase,
 ): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return DetailViewModel(teamRepository, teamId) as T
+        return DetailViewModel(teamId, findTeamUseCase, switchTeamFavoriteUseCase) as T
     }
 }

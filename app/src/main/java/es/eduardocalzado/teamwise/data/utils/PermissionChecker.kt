@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.model.utils
+package es.eduardocalzado.teamwise.data.utils
 
 import android.app.Application
 import android.content.pm.PackageManager

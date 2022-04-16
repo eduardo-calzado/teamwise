@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.model.utils
+package es.eduardocalzado.teamwise.data.utils
 
 import android.annotation.SuppressLint
 import android.app.Application

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
-import androidx.core.text.italic
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -14,10 +13,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import es.eduardocalzado.teamwise.App
 import es.eduardocalzado.teamwise.R
+import es.eduardocalzado.teamwise.data.extensions.app
 import es.eduardocalzado.teamwise.databinding.FragmentDetailBinding
-import es.eduardocalzado.teamwise.model.extensions.launchAndCollect
-import es.eduardocalzado.teamwise.model.extensions.loadUrl
-import es.eduardocalzado.teamwise.model.network.TeamRepository
+import es.eduardocalzado.teamwise.data.network.TeamRepository
+import es.eduardocalzado.teamwise.domain.FindTeamUseCase
+import es.eduardocalzado.teamwise.domain.SwitchTeamFavoriteUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -26,9 +26,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private val safeArgs: DetailFragmentArgs by navArgs()
 
     private val viewModel: DetailViewModel by viewModels {
+        val repository = TeamRepository(requireActivity().app)
         DetailViewModelFactory(
-            TeamRepository(requireActivity().application as App),
-            requireNotNull(safeArgs.teamId)
+            safeArgs.teamId,
+            FindTeamUseCase(repository),
+            SwitchTeamFavoriteUseCase(repository)
         )
     }
 

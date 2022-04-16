@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.model.remotedata
+package es.eduardocalzado.teamwise.data.remotedata
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

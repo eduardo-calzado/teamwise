@@ -1,14 +1,11 @@
 package es.eduardocalzado.teamwise.ui.common
 
-import android.text.Html
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import es.eduardocalzado.teamwise.model.database.Team
-import es.eduardocalzado.teamwise.model.extensions.loadUrl
+import es.eduardocalzado.teamwise.data.database.Team
+import es.eduardocalzado.teamwise.data.extensions.loadUrl
 
 @BindingAdapter("url")
 fun ImageView.bindUrl(url: String?) {

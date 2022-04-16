@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.model.network
+package es.eduardocalzado.teamwise.data.network
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

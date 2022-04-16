@@ -2,7 +2,7 @@ package es.eduardocalzado.teamwise
 
 import android.app.Application
 import androidx.room.Room
-import es.eduardocalzado.teamwise.model.database.TeamDatabase
+import es.eduardocalzado.teamwise.data.database.TeamDatabase
 
 class App : Application() {
 

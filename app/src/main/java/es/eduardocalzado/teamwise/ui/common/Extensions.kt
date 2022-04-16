@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.model.extensions
+package es.eduardocalzado.teamwise.data.extensions
 
 import android.content.Context
 import android.view.LayoutInflater

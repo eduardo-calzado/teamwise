@@ -1,7 +1,7 @@
-package es.eduardocalzado.teamwise.model.network
+package es.eduardocalzado.teamwise.data.network
 
-import es.eduardocalzado.teamwise.model.remotedata.RemoteTeamStatsData
-import es.eduardocalzado.teamwise.model.remotedata.RemoteTeamsData
+import es.eduardocalzado.teamwise.data.remotedata.RemoteTeamStatsData
+import es.eduardocalzado.teamwise.data.remotedata.RemoteTeamsData
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query

@@ -1,14 +1,13 @@
-package es.eduardocalzado.teamwise.model.network
+package es.eduardocalzado.teamwise.data.network
 
-import android.util.Log
 import es.eduardocalzado.teamwise.App
-import es.eduardocalzado.teamwise.model.database.Team
-import es.eduardocalzado.teamwise.model.datasource.TeamLocalDataSource
-import es.eduardocalzado.teamwise.model.datasource.TeamRemoteDataSource
-import es.eduardocalzado.teamwise.model.remotedata.RemoteTeam
-import es.eduardocalzado.teamwise.model.remotedata.RemoteTeamStatsData
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import es.eduardocalzado.teamwise.data.database.Team
+import es.eduardocalzado.teamwise.data.datasource.TeamLocalDataSource
+import es.eduardocalzado.teamwise.data.datasource.TeamRemoteDataSource
+import es.eduardocalzado.teamwise.data.errors.Error
+import es.eduardocalzado.teamwise.data.errors.tryCall
+import es.eduardocalzado.teamwise.data.remotedata.RemoteTeam
+import es.eduardocalzado.teamwise.data.remotedata.RemoteTeamStatsData
 
 class TeamRepository(application: App) {
 
@@ -23,7 +22,7 @@ class TeamRepository(application: App) {
 
     fun findById(id: Int) = localDataSource.findById(id)
 
-    suspend fun requestTeams() {
+    suspend fun requestTeams(): Error? = tryCall {
         if (localDataSource.isEmpty()) {
             val data = remoteDataSource.getTeamsByRegion(regionRepository)
             localDataSource.save(data.teams.map {it.toLocalModel()})
@@ -34,7 +33,7 @@ class TeamRepository(application: App) {
         return remoteDataSource.getTeamStats(id)
     }
 
-    suspend fun switchFavorite(team: Team) {
+    suspend fun switchFavorite(team: Team) = tryCall {
         val updatedTeam = team.copy(favorite = !team.favorite)
         localDataSource.save(listOf(updatedTeam))
     }

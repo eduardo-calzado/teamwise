@@ -5,13 +5,16 @@
 
     <data>
         <import type="java.util.List"/>
-        <import type="es.eduardocalzado.teamwise.model.database.Team"/>
+        <import type="es.eduardocalzado.teamwise.data.database.Team"/>
         <variable
             name="loading"
             type="boolean" />
         <variable
             name="teams"
             type="List&lt;Team>" />
+        <variable
+            name="error"
+            type="String" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -49,16 +52,16 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:spanCount="3"
-            app:items="@{teams}"/>
+            app:items="@{teams}"
+            app:visible="@{ error == null }" />
 
         <TextView
-            android:id="@+id/noresults"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/no_results_found"
-            android:textSize="16sp"
-            app:visible="@{loading}"/>
+            android:layout_gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+            android:textColor="?attr/colorError"
+            android:text="@{error}"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

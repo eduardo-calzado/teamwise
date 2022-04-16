@@ -1,8 +1,8 @@
-package es.eduardocalzado.teamwise.model.datasource
+package es.eduardocalzado.teamwise.data.datasource
 
-import es.eduardocalzado.teamwise.model.constants.Constants
-import es.eduardocalzado.teamwise.model.network.APIFootballConnection
-import es.eduardocalzado.teamwise.model.network.RegionRepository
+import es.eduardocalzado.teamwise.data.constants.Constants
+import es.eduardocalzado.teamwise.data.network.APIFootballConnection
+import es.eduardocalzado.teamwise.data.network.RegionRepository
 
 class TeamRemoteDataSource() {
     suspend fun getTeams() = APIFootballConnection.service.getTeams(Constants.LEAGUE, Constants.SEASON)

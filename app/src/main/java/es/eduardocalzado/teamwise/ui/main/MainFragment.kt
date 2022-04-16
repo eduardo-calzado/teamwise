@@ -1,6 +1,5 @@
 package es.eduardocalzado.teamwise.ui.main
 
-import android.Manifest
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -8,19 +7,23 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import es.eduardocalzado.teamwise.App
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentMainBinding
-import es.eduardocalzado.teamwise.model.network.TeamRepository
-import es.eduardocalzado.teamwise.ui.common.PermissionRequester
+import es.eduardocalzado.teamwise.data.network.TeamRepository
+import es.eduardocalzado.teamwise.domain.GetTeamsUseCase
+import es.eduardocalzado.teamwise.domain.RequestTeamsUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val viewModel: MainViewModel by viewModels {
-        MainViewModelFactory(TeamRepository(requireActivity().application as App))
+        val repository = TeamRepository(requireActivity().application as App)
+        MainViewModelFactory(
+            GetTeamsUseCase(repository),
+            RequestTeamsUseCase(repository)
+        )
     }
 
     private val adapter = TeamAdapter { mainState.onTeamClicked(teamId = it.id)}
@@ -40,6 +43,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                  viewModel.state.collect {
                      binding.loading = it.loading
                      binding.teams = it.teams
+                     binding.error = it.error?.let(mainState::errorToString)
                  }
             }
         }

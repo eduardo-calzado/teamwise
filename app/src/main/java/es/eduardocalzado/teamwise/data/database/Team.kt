@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.model.database
+package es.eduardocalzado.teamwise.data.database
 
 import android.os.Parcelable
 import androidx.room.Entity

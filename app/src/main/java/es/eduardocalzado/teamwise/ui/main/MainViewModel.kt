@@ -3,21 +3,24 @@ package es.eduardocalzado.teamwise.ui.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import es.eduardocalzado.teamwise.model.database.Team
-import es.eduardocalzado.teamwise.model.network.TeamRepository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
+import es.eduardocalzado.teamwise.data.database.Team
+import es.eduardocalzado.teamwise.data.errors.Error
+import es.eduardocalzado.teamwise.data.errors.toError
+import es.eduardocalzado.teamwise.data.network.TeamRepository
+import es.eduardocalzado.teamwise.domain.GetTeamsUseCase
+import es.eduardocalzado.teamwise.domain.RequestTeamsUseCase
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class MainViewModel (
-    private val teamRepository: TeamRepository
+    private val getTeamsUseCase: GetTeamsUseCase,
+    private val requestTeamsUseCase: RequestTeamsUseCase,
 ): ViewModel() {
 
     data class UiState(
         val loading: Boolean = false,
-        val teams: List<Team>? = null
+        val teams: List<Team>? = null,
+        val error: Error? = null
     )
 
     private val _state = MutableStateFlow(UiState())
@@ -25,18 +28,19 @@ class MainViewModel (
 
     init {
         viewModelScope.launch {
-            teamRepository.teams.collect { teams ->
-                _state.value = UiState(teams = teams)
-            }
+            getTeamsUseCase()
+                .catch { cause -> _state.update { it.copy(error = cause.toError()) } }
+                .collect { teams -> _state.update { UiState(teams = teams) } }
         }
     }
 
     fun onUiReady() {
         viewModelScope.launch {
             // we do a copy because a copy won't overwrite the state in uncertain cases
-            _state.value = _state.value.copy(loading = true)
-            teamRepository.requestTeams()
-            _state.value = _state.value.copy(loading = false)
+            _state.update { it.copy(loading = true) }
+            val error = requestTeamsUseCase()
+            _state.update { it.copy(error = error) }
+            _state.update { it.copy(loading = false) }
         }
     }
 }
@@ -44,9 +48,10 @@ class MainViewModel (
 // boiler plate required: it will be solved with State Flow.
 @Suppress("UNCHECKED_CAST")
 class MainViewModelFactory (
-    private val teamRepository: TeamRepository
+    private val getTeamsUseCase: GetTeamsUseCase,
+    private val requestTeamsUseCase: RequestTeamsUseCase,
 ): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MainViewModel(teamRepository) as T
+        return MainViewModel(getTeamsUseCase, requestTeamsUseCase) as T
     }
 }
