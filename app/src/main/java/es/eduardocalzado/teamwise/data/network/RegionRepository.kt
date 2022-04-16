@@ -5,9 +5,9 @@ import android.app.Application
 import android.location.Geocoder
 import android.location.Location
 import android.util.Log
-import es.eduardocalzado.teamwise.data.utils.LocationDataSource
+import es.eduardocalzado.teamwise.data.datasource.LocationDataSource
 import es.eduardocalzado.teamwise.data.utils.PermissionChecker
-import es.eduardocalzado.teamwise.data.utils.PlayServicesLocationDataSource
+import es.eduardocalzado.teamwise.framework.datasource.PlayServicesLocationDataSource
 import java.util.*
 
 class RegionRepository(application: Application) {

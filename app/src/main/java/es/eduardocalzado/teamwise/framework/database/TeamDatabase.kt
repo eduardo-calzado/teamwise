@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.data.database
+package es.eduardocalzado.teamwise.framework.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

@@ -1,19 +1,19 @@
 package es.eduardocalzado.teamwise.data.network
 
 import es.eduardocalzado.teamwise.App
-import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.data.datasource.TeamLocalDataSource
-import es.eduardocalzado.teamwise.data.datasource.TeamRemoteDataSource
 import es.eduardocalzado.teamwise.data.errors.Error
 import es.eduardocalzado.teamwise.data.errors.tryCall
-import es.eduardocalzado.teamwise.data.remotedata.RemoteTeam
 import es.eduardocalzado.teamwise.data.remotedata.RemoteTeamStatsData
+import es.eduardocalzado.teamwise.domain.Team
+import es.eduardocalzado.teamwise.framework.datasource.TeamRoomDataSource
+import es.eduardocalzado.teamwise.framework.datasource.TeamServerDataSource
 
 class TeamRepository(application: App) {
 
     private val regionRepository = RegionRepository(application)
-    private val localDataSource = TeamLocalDataSource(application.db.teamDao())
-    private val remoteDataSource = TeamRemoteDataSource()
+    private val localDataSource: TeamLocalDataSource = TeamRoomDataSource(application.db.teamDao())
+    private val remoteDataSource: TeamServerDataSource = TeamServerDataSource()
 
     val teams = localDataSource.teams
 
