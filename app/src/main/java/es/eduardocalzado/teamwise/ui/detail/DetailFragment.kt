@@ -11,13 +11,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import es.eduardocalzado.teamwise.App
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.data.extensions.app
 import es.eduardocalzado.teamwise.databinding.FragmentDetailBinding
 import es.eduardocalzado.teamwise.data.network.TeamRepository
-import es.eduardocalzado.teamwise.domain.FindTeamUseCase
-import es.eduardocalzado.teamwise.domain.SwitchTeamFavoriteUseCase
+import es.eduardocalzado.teamwise.usecases.FindTeamUseCase
+import es.eduardocalzado.teamwise.usecases.SwitchTeamFavoriteUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -53,7 +52,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     private fun FragmentDetailBinding.updateUi(state: DetailViewModel.UiState) {
-        val team = state.teamData
+        // val team = state.teamData
         val stats = state.teamStats?.stats
 
         with(this) {

@@ -5,7 +5,7 @@
 
     <data>
         <import type="java.util.List"/>
-        <import type="es.eduardocalzado.teamwise.data.database.Team"/>
+        <import type="es.eduardocalzado.teamwise.domain.Team"/>
         <variable
             name="loading"
             type="boolean" />

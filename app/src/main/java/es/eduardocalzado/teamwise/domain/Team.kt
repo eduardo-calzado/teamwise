@@ -1,11 +1,7 @@
-package es.eduardocalzado.teamwise.data.database
+package es.eduardocalzado.teamwise.domain
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity
 data class Team (
-    @PrimaryKey val id: Int,
+    val id: Int,
     val name: String,
     val code: String?,
     val country: String,

@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
-object APIFootballConnection {
+object RemoteConnection {
     private val okHttpClient = HttpLoggingInterceptor().run {
         level = HttpLoggingInterceptor.Level.BODY
         OkHttpClient.Builder().addInterceptor(this).build()
@@ -18,5 +18,5 @@ object APIFootballConnection {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val service: APIFootball = builder.create()
+    val service: RemoteService = builder.create()
 }

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.ViewTeamBinding
-import es.eduardocalzado.teamwise.data.database.Team
+import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.data.extensions.basicDiffUtil
 import es.eduardocalzado.teamwise.data.extensions.inflate
 

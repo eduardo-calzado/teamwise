@@ -3,12 +3,11 @@ package es.eduardocalzado.teamwise.ui.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import es.eduardocalzado.teamwise.data.database.Team
+import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.data.errors.Error
 import es.eduardocalzado.teamwise.data.errors.toError
-import es.eduardocalzado.teamwise.data.network.TeamRepository
-import es.eduardocalzado.teamwise.domain.GetTeamsUseCase
-import es.eduardocalzado.teamwise.domain.RequestTeamsUseCase
+import es.eduardocalzado.teamwise.usecases.GetTeamsUseCase
+import es.eduardocalzado.teamwise.usecases.RequestTeamsUseCase
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

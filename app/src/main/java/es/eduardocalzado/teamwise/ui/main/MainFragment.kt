@@ -11,8 +11,8 @@ import es.eduardocalzado.teamwise.App
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentMainBinding
 import es.eduardocalzado.teamwise.data.network.TeamRepository
-import es.eduardocalzado.teamwise.domain.GetTeamsUseCase
-import es.eduardocalzado.teamwise.domain.RequestTeamsUseCase
+import es.eduardocalzado.teamwise.usecases.GetTeamsUseCase
+import es.eduardocalzado.teamwise.usecases.RequestTeamsUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 

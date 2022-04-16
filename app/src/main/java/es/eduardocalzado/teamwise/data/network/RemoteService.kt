@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
 
-interface APIFootball {
+interface RemoteService {
 
     companion object {
         const val HOST: String = "x-rapidapi-host: api-football-v1.p.rapidapi.com"

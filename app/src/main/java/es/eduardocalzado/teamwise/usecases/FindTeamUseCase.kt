@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.domain
+package es.eduardocalzado.teamwise.usecases
 
 import es.eduardocalzado.teamwise.data.network.TeamRepository
 

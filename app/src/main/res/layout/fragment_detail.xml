@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="es.eduardocalzado.teamwise.data.database.Team"/>
+        <import type="es.eduardocalzado.teamwise.domain.Team"/>
         <variable
             name="team"
             type="Team" />
