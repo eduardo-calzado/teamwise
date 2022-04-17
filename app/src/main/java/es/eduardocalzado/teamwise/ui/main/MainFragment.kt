@@ -7,28 +7,19 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import es.eduardocalzado.teamwise.App
+import dagger.hilt.android.AndroidEntryPoint
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentMainBinding
-import es.eduardocalzado.teamwise.data.network.TeamRepository
-import es.eduardocalzado.teamwise.usecases.GetTeamsUseCase
-import es.eduardocalzado.teamwise.usecases.RequestTeamsUseCase
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private val viewModel: MainViewModel by viewModels {
-        val repository = TeamRepository(requireActivity().application as App)
-        MainViewModelFactory(
-            GetTeamsUseCase(repository),
-            RequestTeamsUseCase(repository)
-        )
-    }
-
-    private val adapter = TeamAdapter { mainState.onTeamClicked(teamId = it.id)}
+    private val viewModel: MainViewModel by viewModels()
 
     private lateinit var mainState: MainState
+
+    private val adapter = TeamAdapter { mainState.onTeamClicked(teamId = it.id)}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

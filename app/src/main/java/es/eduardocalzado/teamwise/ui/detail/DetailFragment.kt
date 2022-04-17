@@ -10,28 +10,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 import es.eduardocalzado.teamwise.R
-import es.eduardocalzado.teamwise.data.extensions.app
 import es.eduardocalzado.teamwise.databinding.FragmentDetailBinding
-import es.eduardocalzado.teamwise.data.network.TeamRepository
-import es.eduardocalzado.teamwise.usecases.FindTeamUseCase
-import es.eduardocalzado.teamwise.usecases.SwitchTeamFavoriteUseCase
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class DetailFragment : Fragment(R.layout.fragment_detail) {
 
-    private val safeArgs: DetailFragmentArgs by navArgs()
-
-    private val viewModel: DetailViewModel by viewModels {
-        val repository = TeamRepository(requireActivity().app)
-        DetailViewModelFactory(
-            safeArgs.teamId,
-            FindTeamUseCase(repository),
-            SwitchTeamFavoriteUseCase(repository)
-        )
-    }
+    private val viewModel: DetailViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

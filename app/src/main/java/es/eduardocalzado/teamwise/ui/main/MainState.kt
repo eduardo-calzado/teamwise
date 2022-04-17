@@ -7,10 +7,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import es.eduardocalzado.teamwise.R
+import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.ui.common.PermissionRequester
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import es.eduardocalzado.teamwise.data.errors.Error
 
 fun Fragment.buildMainState(
     context: Context = requireContext(),

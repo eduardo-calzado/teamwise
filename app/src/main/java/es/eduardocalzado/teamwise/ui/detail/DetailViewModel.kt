@@ -1,17 +1,22 @@
 package es.eduardocalzado.teamwise.ui.detail
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import es.eduardocalzado.teamwise.domain.Team
-import es.eduardocalzado.teamwise.data.remotedata.RemoteTeamStatsData
+import es.eduardocalzado.teamwise.framework.server.RemoteTeamStatsData
 import es.eduardocalzado.teamwise.usecases.FindTeamUseCase
 import es.eduardocalzado.teamwise.usecases.SwitchTeamFavoriteUseCase
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailViewModel (
-    teamId: Int,
+@HiltViewModel
+class DetailViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
     findTeamUseCase: FindTeamUseCase,
     private val switchTeamFavoriteUseCase: SwitchTeamFavoriteUseCase,
 ): ViewModel() {
@@ -21,6 +26,8 @@ class DetailViewModel (
         val teamStats: RemoteTeamStatsData? = null,
         val teamData: Team? = null,
     )
+
+    private val teamId = DetailFragmentArgs.fromSavedStateHandle(savedStateHandle).teamId
 
     private val _state = MutableStateFlow(UiState())
     val state : StateFlow<UiState> = _state.asStateFlow()
@@ -38,17 +45,5 @@ class DetailViewModel (
                 switchTeamFavoriteUseCase(it)
             }
         }
-    }
-}
-
-// boiler plate required: it will be solved with State Flow.
-@Suppress("UNCHECKED_CAST")
-class DetailViewModelFactory (
-    private val teamId: Int,
-    private val findTeamUseCase: FindTeamUseCase,
-    private val switchTeamFavoriteUseCase: SwitchTeamFavoriteUseCase,
-): ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return DetailViewModel(teamId, findTeamUseCase, switchTeamFavoriteUseCase) as T
     }
 }

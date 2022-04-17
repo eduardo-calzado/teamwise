@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.ViewTeamBinding
 import es.eduardocalzado.teamwise.domain.Team
-import es.eduardocalzado.teamwise.data.extensions.basicDiffUtil
-import es.eduardocalzado.teamwise.data.extensions.inflate
+import es.eduardocalzado.teamwise.ui.common.basicDiffUtil
+import es.eduardocalzado.teamwise.ui.common.inflate
 
 class TeamAdapter(
     private val listener: (Team) -> Unit

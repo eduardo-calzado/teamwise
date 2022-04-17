@@ -5,7 +5,6 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import es.eduardocalzado.teamwise.domain.Team
-import es.eduardocalzado.teamwise.data.extensions.loadUrl
 
 @BindingAdapter("url")
 fun ImageView.bindUrl(url: String?) {

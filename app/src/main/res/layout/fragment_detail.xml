@@ -7,7 +7,7 @@
         <import type="es.eduardocalzado.teamwise.domain.Team"/>
         <variable
             name="team"
-            type="Team" />
+            type="es.eduardocalzado.teamwise.domain.Team" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

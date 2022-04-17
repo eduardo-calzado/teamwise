@@ -1,17 +1,19 @@
 package es.eduardocalzado.teamwise.ui.main
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Team
-import es.eduardocalzado.teamwise.data.errors.Error
-import es.eduardocalzado.teamwise.data.errors.toError
+import es.eduardocalzado.teamwise.framework.toError
 import es.eduardocalzado.teamwise.usecases.GetTeamsUseCase
 import es.eduardocalzado.teamwise.usecases.RequestTeamsUseCase
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel (
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val getTeamsUseCase: GetTeamsUseCase,
     private val requestTeamsUseCase: RequestTeamsUseCase,
 ): ViewModel() {
@@ -41,16 +43,5 @@ class MainViewModel (
             _state.update { it.copy(error = error) }
             _state.update { it.copy(loading = false) }
         }
-    }
-}
-
-// boiler plate required: it will be solved with State Flow.
-@Suppress("UNCHECKED_CAST")
-class MainViewModelFactory (
-    private val getTeamsUseCase: GetTeamsUseCase,
-    private val requestTeamsUseCase: RequestTeamsUseCase,
-): ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MainViewModel(getTeamsUseCase, requestTeamsUseCase) as T
     }
 }
