@@ -35,7 +35,7 @@ inline fun <T> basicDiffUtil(
         areContentsTheSame(oldItem, newItem)
 }
 
-@Suppress("unused")
+@Suppress("unused", "UNUSED_EXPRESSION")
 fun <T> LifecycleOwner.launchAndCollect(
     flow: Flow<T>,
     state: Lifecycle.State = Lifecycle.State.STARTED,
