@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import es.eduardocalzado.teamwise.di.TeamId
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.framework.server.RemoteTeamStatsData
 import es.eduardocalzado.teamwise.usecases.FindTeamUseCase
@@ -16,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
+    @TeamId private val teamId: Int,
     findTeamUseCase: FindTeamUseCase,
     private val switchTeamFavoriteUseCase: SwitchTeamFavoriteUseCase,
 ): ViewModel() {
@@ -26,8 +27,6 @@ class DetailViewModel @Inject constructor(
         val teamStats: RemoteTeamStatsData? = null,
         val teamData: Team? = null,
     )
-
-    private val teamId = DetailFragmentArgs.fromSavedStateHandle(savedStateHandle).teamId
 
     private val _state = MutableStateFlow(UiState())
     val state : StateFlow<UiState> = _state.asStateFlow()
