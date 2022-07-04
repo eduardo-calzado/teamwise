@@ -1,7 +1,7 @@
 package es.eduardocalzado.teamwise.ui.detail
 
 import app.cash.turbine.test
-import es.eduardocalzado.teamwise.CoroutinesTestRule
+import es.eduardocalzado.teamwise.testrules.CoroutinesTestRule
 import es.eduardocalzado.teamwise.usecases.FindTeamUseCase
 import es.eduardocalzado.teamwise.usecases.SwitchTeamFavoriteUseCase
 import es.eduardocalzado.teamwise.usecases.sampleTeam

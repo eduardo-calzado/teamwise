@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise
+package es.eduardocalzado.teamwise.testrules
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.StandardTestDispatcher
