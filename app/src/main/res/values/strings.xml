@@ -4,6 +4,7 @@
     <string name="founded_in">Founded in %d</string>
     <string name="venue_info">Stadium\n\tAt %s in %s\n\tCapacity for %d and %s surface</string>
     <string name="connectivity_error">Connectivity Error</string>
-    <string name="server_error">\"Server Error: \"</string>
-    <string name="unknown_error">\"Unknown Error: \"</string>
+    <string name="server_error">Server Error: </string>
+    <string name="unknown_error">Unknown Error: </string>
+    <string name="noteams_error">No teams found</string>
 </resources>

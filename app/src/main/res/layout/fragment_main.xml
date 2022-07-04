@@ -42,7 +42,7 @@
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_gravity="center"
             app:visible="@{loading}"/>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -56,12 +56,14 @@
             app:visible="@{ error == null }" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
             android:textColor="?attr/colorError"
-            android:text="@{error}"/>
+            android:gravity="center"
+            android:text="@{error}"
+            android:textSize="16sp"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

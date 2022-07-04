@@ -27,6 +27,6 @@ class PlayServicesLocationDataSource @Inject constructor (application: Applicati
         val addresses = this?.let {
             geocoder.getFromLocation(latitude, longitude, 1)
         }
-        return addresses?.firstOrNull()?.countryCode
+        return addresses?.firstOrNull()?.countryName
     }
 }
