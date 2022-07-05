@@ -11,6 +11,7 @@ import es.eduardocalzado.teamwise.R
 @AndroidEntryPoint
 class NavHostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Teamwise_NoActionBar)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nav_host)
 

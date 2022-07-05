@@ -15,6 +15,7 @@
         android:theme="@style/Theme.Teamwise.NoActionBar">
         <activity
             android:name=".ui.NavHostActivity"
+            android:theme="@style/Theme.Teamwise.Splashscreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

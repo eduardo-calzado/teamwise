@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Teamwise.Splashscreen" parent="Theme.Teamwise">
+        <item name="android:windowBackground">@drawable/screen_splashscreen_layer</item>
+        <item name="android:windowSplashScreenBackground">@color/purple_500</item>
+        <item name="android:windowSplashScreenAnimationDuration">1000</item>
+    </style>
+
+</resources>
