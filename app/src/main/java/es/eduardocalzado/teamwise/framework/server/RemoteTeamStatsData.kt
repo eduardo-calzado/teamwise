@@ -9,8 +9,15 @@ data class RemoteTeamStatsData(
 )
 
 data class RemoteTeamStats(
+    val team: RemoteTeamStatsTeam,
     val league: RemoteTeamStatsLeague,
     val fixtures: RemoteTeamStatsFixtures,
+)
+
+data class RemoteTeamStatsTeam(
+    val id: Int,
+    val name: String,
+    val logo: String,
 )
 
 data class RemoteTeamStatsLeague(

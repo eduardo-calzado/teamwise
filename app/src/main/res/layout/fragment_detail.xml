@@ -8,6 +8,9 @@
         <variable
             name="team"
             type="es.eduardocalzado.teamwise.domain.Team" />
+        <variable
+            name="error"
+            type="String" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -106,7 +109,17 @@
                     android:padding="16dp"
                     android:lineSpacingMultiplier="1.2"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    tools:text="Lorem ipsum" />
+                    app:visible="@{ error == null }"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                    android:textColor="?attr/colorError"
+                    android:gravity="center"
+                    android:text="@{error}"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 

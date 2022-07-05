@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentDetailBinding
+import es.eduardocalzado.teamwise.ui.main.MainState
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -20,8 +21,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val viewModel: DetailViewModel by viewModels()
 
+    private lateinit var detailState: DetailState
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        detailState = buildDetailState()
         // --
         val binding = FragmentDetailBinding.bind(view).apply {
             teamDetailToolbar.setNavigationOnClickListener{findNavController().popBackStack()}
@@ -33,31 +37,31 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 viewModel.state.collect {
                     binding.team = it.teamData
                     binding.updateUi(it)
+                    binding.error = it.error?.let(detailState::errorToString)
                 }
             }
         }
+        viewModel.onUiReady()
     }
 
     private fun FragmentDetailBinding.updateUi(state: DetailViewModel.UiState) {
-        // val team = state.teamData
-        val stats = state.teamStats?.stats
-
+        val stats = state.teamStats
         with(this) {
             stats?.let {
                 teamStatsProgressbar.visibility = if(state.loading) View.VISIBLE else View.GONE
                 teamStatsInfo.text = buildSpannedString {
                     bold { appendLine("League") }
                     bold { append("\t- Name: ") }
-                    appendLine(stats.league.name)
+                    appendLine(it.league_name)
                     bold { append("\t- Country: ") }
-                    appendLine(stats.league.country)
+                    appendLine(it.league_country)
                     bold { appendLine("\nFixtures") }
                     bold { append("\t- Draws: ") }
-                    appendLine(stats.fixtures.draws.total.toString())
+                    appendLine(it.fixture_draws_total.toString())
                     bold { append("\t- Loses: ") }
-                    appendLine(stats.fixtures.loses.total.toString())
+                    appendLine(it.fixture_loses_total.toString())
                     bold { append("\t- Wins: ") }
-                    append(stats.fixtures.wins.total.toString())
+                    append(it.fixture_wins_total.toString())
                 }
             }
         }

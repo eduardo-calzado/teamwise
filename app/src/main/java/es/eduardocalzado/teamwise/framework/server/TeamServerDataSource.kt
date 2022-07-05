@@ -5,12 +5,14 @@ import es.eduardocalzado.teamwise.data.Constants
 import es.eduardocalzado.teamwise.data.datasource.TeamRemoteDataSource
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.domain.Error
+import es.eduardocalzado.teamwise.domain.TeamStats
 import es.eduardocalzado.teamwise.framework.tryCall
 import javax.inject.Inject
 
 class TeamServerDataSource @Inject constructor () : TeamRemoteDataSource {
-    // override suspend fun getTeams() = RemoteConnection.service.getTeams(Constants.LEAGUE, Constants.SEASON)
-
+    /**
+     * getTeamsByRegion. Get the team lists for a specific region (England by default)
+     */
     override suspend fun getTeamsByRegion(region: String) : Either<Error, List<Team>> = tryCall {
         RemoteConnection
             .service
@@ -19,27 +21,46 @@ class TeamServerDataSource @Inject constructor () : TeamRemoteDataSource {
             .toDomainModel()
     }
 
-    /* override suspend fun getTeamStats(team: Int) =
+    /**
+     * getTeamStats. Get the team statistics for a specific team
+     */
+    override suspend fun getTeamStats(league: Int, season: Int, team: Int) :Either<Error, TeamStats> = tryCall {
         RemoteConnection
             .service
-            .getTeamStats(Constants.LEAGUE, Constants.SEASON, team) */
+            .getTeamStats(league, season, team)
+            .stats
+            .toDomainModel()
+    }
+
+    // override suspend fun getTeams() = RemoteConnection.service.getTeams(Constants.LEAGUE, Constants.SEASON)
 }
 
-// #MARK: toDomainModel
+// #MARK: RemoteTeam.toDomainModel
 private fun List<RemoteTeam>.toDomainModel(): List<Team> = map { it.toDomainModel() }
 private fun RemoteTeam.toDomainModel(): Team =
     Team(
-        details.id,
-        details.name,
-        details.code,
-        details.country,
-        details.founded,
-        details.national,
-        details.logo,
-        venue.address,
-        venue.city,
-        venue.capacity,
-        venue.surface,
-        venue.image ?: "",
-        false,
+        id = details.id,
+        name = details.name,
+        code = details.code,
+        country = details.country,
+        founded = details.founded,
+        national = details.national,
+        logo = details.logo,
+        address = venue.address,
+        city = venue.city,
+        capacity = venue.capacity,
+        surface = venue.surface,
+        stadiumImage = venue.image ?: "",
+        favorite = false,
+    )
+
+// #MARK: RemoteTeamStats.toDomainModel
+private fun RemoteTeamStats.toDomainModel(): TeamStats =
+    TeamStats(
+        id = team.id,
+        league_name = league.name,
+        league_country = league.country,
+        fixture_draws_total =fixtures.draws.total,
+        fixture_loses_total =fixtures.loses.total,
+        fixture_wins_total =fixtures.wins.total,
     )

@@ -31,9 +31,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         // --
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                 viewModel.state.collect {
+                 viewModel.state.collect { it ->
                      binding.loading = it.loading
-                     binding.teams = it.teams
+                     binding.teams = it.teams?.let { teams ->
+                         teams.sortedByDescending { it.favorite }
+                     }
                      binding.error = it.error?.let(mainState::errorToString)
                  }
             }
