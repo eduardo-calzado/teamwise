@@ -28,4 +28,22 @@
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>
+    <fragment
+        android:id="@+id/players_dest"
+        android:name="es.eduardocalzado.teamwise.ui.players.PlayersFragment"
+        android:label="fragment_players"
+        tools:layout="@layout/fragment_players" >
+    </fragment>
+    <fragment
+        android:id="@+id/coaches_dest"
+        android:name="es.eduardocalzado.teamwise.ui.coaches.CoachesFragment"
+        android:label="fragment_coaches"
+        tools:layout="@layout/fragment_coaches" >
+    </fragment>
+    <fragment
+        android:id="@+id/stadiums_dest"
+        android:name="es.eduardocalzado.teamwise.ui.stadiums.StadiumsFragment"
+        android:label="fragment_stadiums"
+        tools:layout="@layout/fragment_stadiums" >
+    </fragment>
 </navigation>

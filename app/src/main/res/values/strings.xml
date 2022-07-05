@@ -7,4 +7,9 @@
     <string name="server_error">Server Error: </string>
     <string name="unknown_error">Unknown Error: </string>
     <string name="noteams_error">No teams found</string>
+
+    <string name="menu_teams">Teams</string>
+    <string name="menu_players">Players</string>
+    <string name="menu_coaches">Coaches</string>
+    <string name="menu_stadiums">Stadiums</string>
 </resources>

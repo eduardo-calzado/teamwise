@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- the id per item, should be the same id on nav_graph.xml -->
+    <item
+        android:id="@+id/main_dest"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_team_filled"
+        android:title="@string/menu_teams"/>
+    <item
+        android:id="@+id/players_dest"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_player_filled"
+        android:title="@string/menu_players"/>
+    <item
+        android:id="@+id/coaches_dest"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_coach_filled"
+        android:title="@string/menu_coaches"/>
+    <item
+        android:id="@+id/stadiums_dest"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_stadium_filled"
+        android:title="@string/menu_stadiums"/>
+</menu>
