@@ -42,7 +42,7 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             findTeamUseCase(teamId)
                 .collect {
-                    value -> println("Collected $value")
+                    value -> println("Collected team: $value")
                     _state.value = UiState(teamData = value)
                 }
         }

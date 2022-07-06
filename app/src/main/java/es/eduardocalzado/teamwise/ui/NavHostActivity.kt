@@ -11,13 +11,14 @@ import es.eduardocalzado.teamwise.R
 @AndroidEntryPoint
 class NavHostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.Theme_Teamwise_NoActionBar)
+        //Thread.sleep(1000)
+        setTheme(R.style.Theme_Teamwise_Main)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nav_host)
 
         // code needed for linking the bottom navigation view to the graph
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.activity_main_bottom_navigation_view)
-        bottomNavigationView.setupWithNavController(navHostFragment.navController)
+        // val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        // val bottomNavigationView = findViewById<BottomNavigationView>(R.id.activity_main_bottom_navigation_view)
+        // bottomNavigationView.setupWithNavController(navHostFragment.navController)
     }
 }

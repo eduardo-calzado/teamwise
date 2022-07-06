@@ -14,4 +14,41 @@
     <string name="menu_stadiums">Stadiums</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="search_title">Search</string>
+    <string name="country">Country</string>
+    <string name="england">England</string>
+    <string name="league">League</string>
+    <string name="premier_league">Premier League</string>
+    <string name="season">Season</string>
+    <string name="season_value">2021</string>
+    <string name="showFilters">Show filters</string>
+    <string name="main_header">Click on the top right icon to filter results.\nClick on a team and see their details.\nYour favorite teams are sorted first.</string>
+    <string name="submit">submit</string>
+
+    <string-array name="countries">
+        <item>England</item>
+        <item>Spain</item>
+        <item>Italy</item>
+    </string-array>
+    <string-array name="seasons">
+        <item>2021</item>
+        <item>2020</item>
+        <item>2019</item>
+        <item>2018</item>
+        <item>2017</item>
+    </string-array>
+    <string-array name="england_leagues">
+        <item>Premier League</item>
+        <item>English Football League Championship</item>
+        <item>English Football League One</item>
+    </string-array>
+    <string-array name="spanish_leagues">
+        <item>Primera División</item>
+        <item>Segunda División</item>
+        <item>Primera Federación</item>
+    </string-array>
+    <string-array name="italy_leagues">
+        <item>Serie A</item>
+        <item>Serie B</item>
+        <item>Serie C</item>
+    </string-array>
 </resources>

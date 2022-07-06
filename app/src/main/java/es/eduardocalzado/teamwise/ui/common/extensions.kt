@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -45,6 +46,14 @@ fun <T> LifecycleOwner.launchAndCollect(
         repeatOnLifecycle(state) {
             flow.collect { body }
         }
+    }
+}
+
+fun View.toggleVisibility () {
+    if (this.isVisible) {
+        this.visibility = View.GONE
+    } else {
+        this.visibility = View.VISIBLE
     }
 }
 

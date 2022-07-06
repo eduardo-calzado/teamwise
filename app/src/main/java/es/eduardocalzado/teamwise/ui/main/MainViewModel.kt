@@ -1,5 +1,7 @@
 package es.eduardocalzado.teamwise.ui.main
 
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,5 +45,10 @@ class MainViewModel @Inject constructor(
             _state.update { it.copy(error = error) }
             _state.update { it.copy(loading = false) }
         }
+    }
+
+
+    fun onSubmitClicked(view: View) {
+        print("say hello")
     }
 }

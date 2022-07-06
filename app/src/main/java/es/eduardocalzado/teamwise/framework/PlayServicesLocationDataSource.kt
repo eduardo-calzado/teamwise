@@ -6,6 +6,7 @@ import android.location.Geocoder
 import android.location.Location
 import es.eduardocalzado.teamwise.data.datasource.LocationDataSource
 import com.google.android.gms.location.LocationServices
+import es.eduardocalzado.teamwise.data.Constants
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.util.*
 import javax.inject.Inject
@@ -40,7 +41,7 @@ class PlayServicesLocationDataSource @Inject constructor (application: Applicati
      * @return: String - countryName
      */
     private fun getCountryName(countryCode: String?): String {
-        val loc = Locale("", countryCode)
+        val loc = Locale("", countryCode ?: "EN")
         return loc.getDisplayCountry(Locale("EN"))
     }
 }
