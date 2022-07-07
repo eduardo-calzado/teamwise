@@ -23,7 +23,7 @@ class MainHostActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // this was the cleanest way to show a splashscreen layout
+        // this was the cleanest way to show a splashscreen layout (not using Splashscreen API)
         // Thread.sleep(1000)
         setTheme(R.style.Theme_Teamwise_Main)
 
@@ -45,7 +45,6 @@ class MainHostActivity : AppCompatActivity() {
         detailBottomNavigationView.setupWithNavController(navController)
 
         // code needed to show/hide bottom bars, show/hide toolbars, any UI component.
-        //
         navController.addOnDestinationChangedListener {_, destination, _ ->
             when(destination.id) {
                 R.id.main_dest -> {

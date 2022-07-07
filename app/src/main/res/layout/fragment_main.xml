@@ -83,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:hint="@string/season"
                 app:startIconDrawable="@drawable/ic_calendar">
@@ -100,16 +100,32 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/submitFilterButton"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="30dp"
-                android:background="@color/purple_500"
-                android:text="@string/submit" />
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="28dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/submitFilterButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@color/purple_500"
+                    android:text="@string/submit" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/clearFilterButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@color/red"
+                    android:text="@string/clear" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -129,19 +145,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/headerTitle"
+            android:layout_marginTop="0dp"
             android:padding="8dp"
             app:items="@{teams}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="3"
-            app:visible="@{ error == null }" />
+            app:visible="@{ error == null || teams.size == 0 }" />
 
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            app:visible="@{loading}"/>
+            android:layout_centerInParent="true"
+            app:visible="@{loading}" />
 
         <TextView
             android:layout_width="match_parent"
@@ -152,6 +168,18 @@
             android:textColor="?attr/colorError"
             android:gravity="center"
             android:text="@{error}"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+            android:gravity="center"
+            android:padding="32dp"
+            android:text="@string/no_results_found"
+            app:visible="@{teams.size == 0 &amp;&amp; loading == false}"
             android:textSize="16sp"/>
 
     </RelativeLayout>

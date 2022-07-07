@@ -21,6 +21,8 @@ class TeamRoomDataSource @Inject constructor(private val teamDao: TeamDao) : Tea
         ifLeft = { it },
         ifRight = { null }
     )
+    // -- delete teams
+    override suspend fun deleteTeams() = teamDao.deleteTeams()
 }
 
 // #MARK: toDomainModel

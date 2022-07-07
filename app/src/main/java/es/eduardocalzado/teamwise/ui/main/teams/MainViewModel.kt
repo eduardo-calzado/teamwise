@@ -1,14 +1,14 @@
-package es.eduardocalzado.teamwise.ui.main
+package es.eduardocalzado.teamwise.ui.main.teams
 
-import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.framework.toError
+import es.eduardocalzado.teamwise.usecases.DeleteTeamsUseCase
 import es.eduardocalzado.teamwise.usecases.GetTeamsUseCase
+import es.eduardocalzado.teamwise.usecases.RequestTeamsByRegionUseCase
 import es.eduardocalzado.teamwise.usecases.RequestTeamsUseCase
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -17,7 +17,9 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getTeamsUseCase: GetTeamsUseCase,
+    private val requestTeamsByRegionUseCase: RequestTeamsByRegionUseCase,
     private val requestTeamsUseCase: RequestTeamsUseCase,
+    private val deleteTeamsUseCase: DeleteTeamsUseCase,
 ): ViewModel() {
 
     data class UiState(
@@ -41,14 +43,25 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             // we do a copy because a copy won't overwrite the state in uncertain cases
             _state.update { it.copy(loading = true) }
-            val error = requestTeamsUseCase()
+            val error = requestTeamsByRegionUseCase()
             _state.update { it.copy(error = error) }
             _state.update { it.copy(loading = false) }
         }
     }
 
+    fun onSubmitClicked(country: String, league: Int, season: Int) {
+        viewModelScope.launch {
+            // we do a copy because a copy won't overwrite the state in uncertain cases
+            _state.update { it.copy(loading = true) }
+            val error = requestTeamsUseCase(country, league, season)
+            _state.update { it.copy(error = error) }
+            _state.update { it.copy(loading = false) }
+        }
+    }
 
-    fun onSubmitClicked(view: View) {
-        print("say hello")
+    fun onDeleteClicked() {
+        viewModelScope.launch {
+            deleteTeamsUseCase()
+        }
     }
 }

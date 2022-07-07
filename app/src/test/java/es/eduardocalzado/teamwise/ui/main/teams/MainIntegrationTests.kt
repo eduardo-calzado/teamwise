@@ -1,17 +1,16 @@
-package es.eduardocalzado.teamwise.ui.main
+package es.eduardocalzado.teamwise.ui.main.teams
 
 import app.cash.turbine.test
 import es.eduardocalzado.teamwise.data.RegionRepository
 import es.eduardocalzado.teamwise.data.TeamRepository
-import es.eduardocalzado.teamwise.data.TeamRepositoryTest
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.testrules.CoroutinesTestRule
 import es.eduardocalzado.teamwise.ui.*
-import es.eduardocalzado.teamwise.ui.main.MainViewModel.*
+import es.eduardocalzado.teamwise.ui.main.teams.MainViewModel
+import es.eduardocalzado.teamwise.ui.main.teams.MainViewModel.*
 import es.eduardocalzado.teamwise.usecases.GetTeamsUseCase
-import es.eduardocalzado.teamwise.usecases.RequestTeamsUseCase
+import es.eduardocalzado.teamwise.usecases.RequestTeamsByRegionUseCase
 import es.eduardocalzado.teamwise.usecases.sampleTeam
-import junit.framework.Assert
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -63,7 +62,7 @@ class MainIntegrationTests {
         val remoteDataSource = FakeRemoteDataSource().apply { teams = remoteData }
         val teamRepository = TeamRepository(regionRepository, localDataSource, remoteDataSource)
         val getTeamsUseCase = GetTeamsUseCase(teamRepository)
-        val requestTeamsUseCase = RequestTeamsUseCase(teamRepository)
+        val requestTeamsUseCase = RequestTeamsByRegionUseCase(teamRepository)
         return MainViewModel(getTeamsUseCase, requestTeamsUseCase)
     }
 }

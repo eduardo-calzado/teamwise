@@ -10,4 +10,5 @@ interface TeamLocalDataSource {
     suspend fun isEmpty() : Boolean
     fun findById(id: Int): Flow<Team>
     suspend fun save (teams: List<Team>): Error?
+    suspend fun deleteTeams()
 }

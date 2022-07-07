@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentMainBinding
+import es.eduardocalzado.teamwise.domain.getTeamLeagueIdByName
 import es.eduardocalzado.teamwise.ui.main.teams.MainState.MainFilters.*
 import kotlinx.coroutines.launch
 
@@ -32,14 +33,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         mainState = buildMainState()
         // --
         binding = FragmentMainBinding.bind(view).apply {
-            // -- fill the team list adapter
             recycler.adapter = adapter
-            // -- listener of submit button
             submitFilterButton.setOnClickListener {
-                val country = "England"
-                val league = 39
-                val season = 2021
+                val country = autoCompleteTextViewCountry.text.toString()
+                val league = getTeamLeagueIdByName(autoCompleteTextViewLeague.text.toString())
+                val season = autoCompleteTextViewSeason.text.toString().toInt()
                 viewModel.onSubmitClicked(country, league, season)
+            }
+            clearFilterButton.setOnClickListener{
+                viewModel.onDeleteClicked()
             }
         }
         // --

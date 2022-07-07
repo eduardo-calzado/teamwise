@@ -1,9 +1,9 @@
-package es.eduardocalzado.teamwise.ui.detail
+package es.eduardocalzado.teamwise.ui.detail.stats
 
 import app.cash.turbine.test
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.testrules.CoroutinesTestRule
-import es.eduardocalzado.teamwise.ui.buildRepositoryWith
+import es.eduardocalzado.teamwise.ui.detail.stats.buildRepositoryWith
 import es.eduardocalzado.teamwise.ui.detail.stats.DetailViewModel
 import es.eduardocalzado.teamwise.ui.detail.stats.DetailViewModel.UiState
 import es.eduardocalzado.teamwise.usecases.FindTeamUseCase

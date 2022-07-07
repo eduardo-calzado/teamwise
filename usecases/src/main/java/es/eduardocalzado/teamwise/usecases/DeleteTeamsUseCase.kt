@@ -5,6 +5,6 @@ import es.eduardocalzado.teamwise.domain.Team
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetTeamsUseCase @Inject constructor (private val teamRepository: TeamRepository) {
-    operator fun invoke(): Flow<List<Team>> = teamRepository.teams
+class DeleteTeamsUseCase @Inject constructor (private val teamRepository: TeamRepository) {
+    suspend operator fun invoke() = teamRepository.deleteTeams()
 }

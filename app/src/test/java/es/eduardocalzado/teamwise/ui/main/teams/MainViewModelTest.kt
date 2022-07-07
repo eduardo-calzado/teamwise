@@ -1,9 +1,10 @@
-package es.eduardocalzado.teamwise.ui.main
+package es.eduardocalzado.teamwise.ui.main.teams
 
 import app.cash.turbine.test
 import es.eduardocalzado.teamwise.testrules.CoroutinesTestRule
+import es.eduardocalzado.teamwise.ui.main.teams.MainViewModel
 import es.eduardocalzado.teamwise.usecases.GetTeamsUseCase
-import es.eduardocalzado.teamwise.usecases.RequestTeamsUseCase
+import es.eduardocalzado.teamwise.usecases.RequestTeamsByRegionUseCase
 import es.eduardocalzado.teamwise.usecases.sampleTeam
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.flow.flowOf
@@ -24,14 +25,14 @@ class MainViewModelTest {
     @get: Rule val coroutinesTestRule = CoroutinesTestRule()
 
     @Mock lateinit var getTeamsUseCase: GetTeamsUseCase
-    @Mock lateinit var requestTeamsUseCase: RequestTeamsUseCase
+    @Mock lateinit var requestTeamsByRegionUseCase: RequestTeamsByRegionUseCase
     private lateinit var vm: MainViewModel
     private var teams = listOf(sampleTeam.copy(id = 1))
 
     @Before
     fun setUp() {
         whenever(getTeamsUseCase()).thenReturn(flowOf(teams))
-        vm = MainViewModel(getTeamsUseCase, requestTeamsUseCase)
+        vm = MainViewModel(getTeamsUseCase, requestTeamsByRegionUseCase)
     }
 
     @Test

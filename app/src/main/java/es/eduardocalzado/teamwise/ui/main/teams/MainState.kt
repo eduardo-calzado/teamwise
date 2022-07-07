@@ -1,9 +1,7 @@
-package es.eduardocalzado.teamwise.ui.main
+package es.eduardocalzado.teamwise.ui.main.teams
 
 import android.Manifest
 import android.content.Context
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -15,7 +13,7 @@ import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.ui.common.PermissionRequester
 import es.eduardocalzado.teamwise.ui.common.toggleVisibility
-import es.eduardocalzado.teamwise.ui.main.MainState.MainFilters.*
+import es.eduardocalzado.teamwise.ui.main.teams.MainState.MainFilters.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

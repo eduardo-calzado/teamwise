@@ -1,6 +1,6 @@
 <resources>
 <string name="app_name">Teamwise</string>
-    <string name="no_results_found">No results found</string>
+    <string name="no_results_found">No teams stored in database. Try to open the filters and search some data.</string>
 
     <!-- error strings -->
     <string name="connectivity_error">Connectivity Error</string>
@@ -24,6 +24,7 @@
     <!-- screen: teams -->
     <string name="main_header">Click on the top right icon to filter results.\nClick on a team and see their details.\nYour favorite teams are sorted first.</string>
     <string name="submit">submit</string>
+    <string name="clear">clear</string>
     <string name="showFilters">Show filters</string>
     <string name="search_title">Search</string>
     <string name="country">Country</string>
@@ -59,13 +60,14 @@
     </string-array>
     <string-array name="england_leagues">
         <item>Premier League</item>
-        <item>English Football League Championship</item>
-        <item>English Football League One</item>
+        <item>EFL Championship</item>
+        <item>EFL One</item>
     </string-array>
     <string-array name="spanish_leagues">
-        <item>Primera División</item>
-        <item>Segunda División</item>
-        <item>Primera Federación</item>
+        <item>La Liga</item>
+        <item>Segunda Division</item>
+        <item>Primera Division RFEF - Group 1</item>
+        <item>Primera Division RFEF - Group 2</item>
     </string-array>
     <string-array name="italy_leagues">
         <item>Serie A</item>

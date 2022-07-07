@@ -14,13 +14,14 @@ interface RemoteService {
     @Headers(HOST, KEY)
     @GET("teams")
     suspend fun getTeams(
+        @Query("country") country: String,
         @Query("league") league: Int,
         @Query("season") season: Int,
     ): RemoteTeamsData
 
     @Headers(HOST, KEY)
     @GET("teams")
-    suspend fun getTeams(
+    suspend fun getTeamsByRegion(
         @Query("country") country: String,
     ): RemoteTeamsData
 

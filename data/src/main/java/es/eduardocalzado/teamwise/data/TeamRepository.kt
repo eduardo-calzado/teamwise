@@ -18,12 +18,24 @@ class TeamRepository @Inject constructor(
 
     fun findById(id: Int) : Flow<Team> = localDataSource.findById(id)
 
-    suspend fun requestTeams(): Error? {
+    suspend fun requestTeamsByRegion(): Error? {
         if (localDataSource.isEmpty()) {
             val teamData = remoteDataSource.getTeamsByRegion(regionRepository.findLastRegion())
             teamData.fold(ifLeft = { return it }) {
                 localDataSource.save(it)
             }
+        }
+        return null
+    }
+
+    suspend fun deleteTeams() = localDataSource.deleteTeams()
+
+    suspend fun requestTeams(country: String, league: Int, season: Int): Error? {
+        if (!localDataSource.isEmpty())
+            localDataSource.deleteTeams()
+        val teamData = remoteDataSource.getTeams(country, league, season)
+        teamData.fold(ifLeft = { return it }) {
+            localDataSource.save(it)
         }
         return null
     }

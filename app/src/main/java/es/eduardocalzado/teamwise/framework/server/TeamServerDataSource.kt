@@ -1,7 +1,6 @@
 package es.eduardocalzado.teamwise.framework.server
 
 import arrow.core.Either
-import es.eduardocalzado.teamwise.data.Constants
 import es.eduardocalzado.teamwise.data.datasource.TeamRemoteDataSource
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.domain.Error
@@ -11,18 +10,29 @@ import javax.inject.Inject
 
 class TeamServerDataSource @Inject constructor () : TeamRemoteDataSource {
     /**
-     * getTeamsByRegion. Get the team lists for a specific region (England by default)
+     * getTeamsByRegion. Get the teams list for a specific region (England by default)
      */
     override suspend fun getTeamsByRegion(region: String) : Either<Error, List<Team>> = tryCall {
         RemoteConnection
             .service
-            .getTeams(region)
+            .getTeamsByRegion(region)
             .teams
             .toDomainModel()
     }
 
     /**
-     * getTeamStats. Get the team statistics for a specific team
+     * getTeamsByRegion. Get the teams list for a specific country, league and season.
+     */
+    override suspend fun getTeams(country: String, league: Int, season: Int): Either<Error, List<Team>> = tryCall {
+        RemoteConnection
+            .service
+            .getTeams(country, league, season)
+            .teams
+            .toDomainModel()
+    }
+
+    /**
+     * getTeamStats. Get the team statistics for a specific team.
      */
     override suspend fun getTeamStats(league: Int, season: Int, team: Int) :Either<Error, TeamStats> = tryCall {
         RemoteConnection

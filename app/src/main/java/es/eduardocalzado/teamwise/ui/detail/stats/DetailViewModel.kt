@@ -48,7 +48,8 @@ class DetailViewModel @Inject constructor(
     fun onUiReady() {
         viewModelScope.launch {
             _state.update { it.copy(loading = true) }
-            when (val request = requestTeamStatsUseCase(TeamLeague.ENGLAND.leagueId, Constants.SEASON, teamId)) {
+            // TODO: this!!
+            when (val request = requestTeamStatsUseCase(TeamLeague.PREMIER_LEAGUE.id, Constants.SEASON, teamId)) {
                 is Either.Left -> _state.update { it.copy(error = request.value) }
                 is Either.Right -> _state.update { it.copy(teamStats = request.value) }
             }
