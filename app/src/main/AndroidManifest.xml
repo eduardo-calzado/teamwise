@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Teamwise.Main">
         <activity
-            android:name=".ui.NavHostActivity"
+            android:name=".ui.MainHostActivity"
             android:theme="@style/Theme.Teamwise.Splashscreen"
             android:exported="true">
             <intent-filter>

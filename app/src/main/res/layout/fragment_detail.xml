@@ -132,7 +132,9 @@
             android:layout_margin="16dp"
             android:src="@{team.favorite ? @drawable/ic_favorite_on : @drawable/ic_favorite_off}"
             app:layout_anchor="@id/appBarLayout"
-            app:layout_anchorGravity="bottom|end" />
+            app:layout_anchorGravity="bottom|end"
+            android:contentDescription="@string/lorem_ipsum" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

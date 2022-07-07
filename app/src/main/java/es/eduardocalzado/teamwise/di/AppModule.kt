@@ -32,7 +32,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideMovieDao(db: TeamDatabase) = db.teamDao()
+    fun provideTeamDao(db: TeamDatabase) = db.teamDao()
 
 }
 

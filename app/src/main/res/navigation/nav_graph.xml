@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/main_dest"
         android:name="es.eduardocalzado.teamwise.ui.main.MainFragment"
-        android:label="fragment_main"
+        android:label="@string/main_title"
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_main_to_detail"
@@ -19,31 +19,19 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
+        android:id="@+id/info_dest"
+        android:name="es.eduardocalzado.teamwise.ui.main.InfoFragment"
+        android:label="@string/info_title"
+        tools:layout="@layout/fragment_info">
+    </fragment>
+    <fragment
         android:id="@+id/detail_dest"
         android:name="es.eduardocalzado.teamwise.ui.detail.DetailFragment"
-        android:label="fragment_detail"
+        android:label="@string/team_title"
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="teamId"
             app:argType="integer"
             android:defaultValue="-1" />
-    </fragment>
-    <fragment
-        android:id="@+id/players_dest"
-        android:name="es.eduardocalzado.teamwise.ui.players.PlayersFragment"
-        android:label="fragment_players"
-        tools:layout="@layout/fragment_players" >
-    </fragment>
-    <fragment
-        android:id="@+id/coaches_dest"
-        android:name="es.eduardocalzado.teamwise.ui.coaches.CoachesFragment"
-        android:label="fragment_coaches"
-        tools:layout="@layout/fragment_coaches" >
-    </fragment>
-    <fragment
-        android:id="@+id/stadiums_dest"
-        android:name="es.eduardocalzado.teamwise.ui.stadiums.StadiumsFragment"
-        android:label="fragment_stadiums"
-        tools:layout="@layout/fragment_stadiums" >
     </fragment>
 </navigation>

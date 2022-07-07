@@ -10,7 +10,6 @@
 
     <string name="menu_teams">Teams</string>
     <string name="menu_players">Players</string>
-    <string name="menu_coaches">Coaches</string>
     <string name="menu_stadiums">Stadiums</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="search_title">Search</string>
@@ -23,6 +22,12 @@
     <string name="showFilters">Show filters</string>
     <string name="main_header">Click on the top right icon to filter results.\nClick on a team and see their details.\nYour favorite teams are sorted first.</string>
     <string name="submit">submit</string>
+    <string name="menu_info">Info</string>
+    <string name="info_txt">This app is used to demo all my Android skills after the Architect Coders 2.0 expertise. Initially, teamwise was born to allow a team to have all their own data easily.\n\nToday, it is just a boilerplate that collects: Clean Architecture, Navigation Component, State Flow, Room Database, Testing and so on.\n\nThis is just the start point, let\'s rock it!</string>
+    <string name="info2_txt">©® Architect Coders by Antonio Leiva\nDeveloped by: Eduardo Calzado</string>
+    <string name="main_title">Teams</string>
+    <string name="info_title">Info</string>
+    <string name="team_title">Team</string>
 
     <string-array name="countries">
         <item>England</item>
