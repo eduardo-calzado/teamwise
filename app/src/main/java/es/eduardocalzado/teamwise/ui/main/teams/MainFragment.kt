@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.ui.main
+package es.eduardocalzado.teamwise.ui.main.teams
 
 import android.os.Bundle
 import android.view.Menu
@@ -6,7 +6,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -15,7 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentMainBinding
-import es.eduardocalzado.teamwise.ui.main.MainState.MainFilters.*
+import es.eduardocalzado.teamwise.ui.main.teams.MainState.MainFilters.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint

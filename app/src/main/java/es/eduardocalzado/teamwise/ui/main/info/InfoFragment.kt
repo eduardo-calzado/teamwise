@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.ui.main
+package es.eduardocalzado.teamwise.ui.main.info
 
 import android.os.Bundle
 import android.view.View

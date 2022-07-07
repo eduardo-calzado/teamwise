@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/main_dest"
-        android:name="es.eduardocalzado.teamwise.ui.main.MainFragment"
+        android:name="es.eduardocalzado.teamwise.ui.main.teams.MainFragment"
         android:label="@string/main_title"
         tools:layout="@layout/fragment_main" >
         <action
@@ -20,18 +20,24 @@
     </fragment>
     <fragment
         android:id="@+id/info_dest"
-        android:name="es.eduardocalzado.teamwise.ui.main.InfoFragment"
+        android:name="es.eduardocalzado.teamwise.ui.main.info.InfoFragment"
         android:label="@string/info_title"
         tools:layout="@layout/fragment_info">
     </fragment>
     <fragment
         android:id="@+id/detail_dest"
-        android:name="es.eduardocalzado.teamwise.ui.detail.DetailFragment"
+        android:name="es.eduardocalzado.teamwise.ui.detail.stats.DetailFragment"
         android:label="@string/team_title"
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="teamId"
             app:argType="integer"
             android:defaultValue="-1" />
+    </fragment>
+    <fragment
+        android:id="@+id/players_dest"
+        android:name="es.eduardocalzado.teamwise.ui.detail.players.PlayersFragment"
+        android:label="@string/players_title"
+        tools:layout="@layout/fragment_players" >
     </fragment>
 </navigation>

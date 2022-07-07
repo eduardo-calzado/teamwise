@@ -18,39 +18,54 @@ import es.eduardocalzado.teamwise.R
 class MainHostActivity : AppCompatActivity() {
 
     private lateinit var mainBottomNavigationView: BottomNavigationView
+    private lateinit var detailBottomNavigationView: BottomNavigationView
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // this was the cleanest way to show a splashscreen layout
         // Thread.sleep(1000)
         setTheme(R.style.Theme_Teamwise_Main)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_nav_host)
 
         toolbar = findViewById(R.id.toolbar)
         mainBottomNavigationView = findViewById(R.id.activity_main_bottom_navigation_view)
+        detailBottomNavigationView = findViewById(R.id.activity_detail_bottom_navigation_view)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         val appBarConfiguration = AppBarConfiguration(mainBottomNavigationView.menu)
+
         setSupportActionBar(toolbar)
         setupActionBarWithNavController(this, navController, appBarConfiguration)
 
         mainBottomNavigationView.setupWithNavController(navController)
+        detailBottomNavigationView.setupWithNavController(navController)
 
-        // code needed to show/hide bottom bars
+        // code needed to show/hide bottom bars, show/hide toolbars, any UI component.
+        //
         navController.addOnDestinationChangedListener {_, destination, _ ->
             when(destination.id) {
                 R.id.main_dest -> {
-                    handleMainBottomNavVisibility(View.VISIBLE)
+                    handleBottomNavVisibility(View.VISIBLE, mainBottomNavigationView)
+                    handleBottomNavVisibility(View.GONE, detailBottomNavigationView)
                     handleToolbarVisibility(View.VISIBLE)
                 }
                 R.id.info_dest -> {
-                    handleMainBottomNavVisibility(View.VISIBLE)
+                    handleBottomNavVisibility(View.VISIBLE, mainBottomNavigationView)
+                    handleBottomNavVisibility(View.GONE, detailBottomNavigationView)
+                    handleToolbarVisibility(View.VISIBLE)
+                }
+                R.id.players_dest -> {
+                    handleBottomNavVisibility(View.GONE, mainBottomNavigationView)
+                    handleBottomNavVisibility(View.VISIBLE, detailBottomNavigationView)
                     handleToolbarVisibility(View.VISIBLE)
                 }
                 else -> {
-                    handleMainBottomNavVisibility(View.GONE)
+                    handleBottomNavVisibility(View.GONE, mainBottomNavigationView)
+                    handleBottomNavVisibility(View.VISIBLE, detailBottomNavigationView)
                     handleToolbarVisibility(View.GONE)
                 }
             }
@@ -59,12 +74,11 @@ class MainHostActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun handleMainBottomNavVisibility(visible: Int) {
-        mainBottomNavigationView.visibility = visible
+    private fun handleBottomNavVisibility(visible: Int, view: BottomNavigationView) {
+        view.visibility = visible
     }
 
     private fun handleToolbarVisibility(visible: Int) {

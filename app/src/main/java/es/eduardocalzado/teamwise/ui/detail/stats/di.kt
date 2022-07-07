@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.ui.detail
+package es.eduardocalzado.teamwise.ui.detail.stats
 
 import androidx.lifecycle.SavedStateHandle
 import dagger.Module

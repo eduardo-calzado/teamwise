@@ -1,18 +1,15 @@
-package es.eduardocalzado.teamwise.ui.detail
+package es.eduardocalzado.teamwise.ui.detail.stats
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.Either
 import dagger.hilt.android.lifecycle.HiltViewModel
 import es.eduardocalzado.teamwise.data.Constants
-import es.eduardocalzado.teamwise.data.Constants.Companion.getTeamLeagueByCountry
 import es.eduardocalzado.teamwise.di.TeamId
 import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.domain.TeamLeague
 import es.eduardocalzado.teamwise.domain.TeamStats
-import es.eduardocalzado.teamwise.framework.toError
-import es.eduardocalzado.teamwise.ui.main.MainViewModel
 import es.eduardocalzado.teamwise.usecases.FindTeamUseCase
 import es.eduardocalzado.teamwise.usecases.RequestTeamStatsUseCase
 import es.eduardocalzado.teamwise.usecases.SwitchTeamFavoriteUseCase

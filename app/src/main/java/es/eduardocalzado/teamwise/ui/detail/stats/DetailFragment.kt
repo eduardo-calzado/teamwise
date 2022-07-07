@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.ui.detail
+package es.eduardocalzado.teamwise.ui.detail.stats
 
 import android.os.Bundle
 import android.view.View
@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentDetailBinding
-import es.eduardocalzado.teamwise.ui.main.MainState
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint

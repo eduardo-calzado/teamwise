@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.ui.main
+package es.eduardocalzado.teamwise.ui.main.teams
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView

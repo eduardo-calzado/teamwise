@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.ui.main
+package es.eduardocalzado.teamwise.ui.main.teams
 
 import android.view.View
 import android.view.ViewGroup
