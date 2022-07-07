@@ -4,11 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.Either
 import dagger.hilt.android.lifecycle.HiltViewModel
-import es.eduardocalzado.teamwise.data.Constants
+import es.eduardocalzado.teamwise.di.LeagueId
+import es.eduardocalzado.teamwise.di.SeasonId
 import es.eduardocalzado.teamwise.di.TeamId
 import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Team
-import es.eduardocalzado.teamwise.domain.TeamLeague
 import es.eduardocalzado.teamwise.domain.TeamStats
 import es.eduardocalzado.teamwise.usecases.FindTeamUseCase
 import es.eduardocalzado.teamwise.usecases.RequestTeamStatsUseCase
@@ -20,6 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     @TeamId private val teamId: Int,
+    @LeagueId private val leagueId: Int,
+    @SeasonId private val seasonId: Int,
     private val findTeamUseCase: FindTeamUseCase,
     private val requestTeamStatsUseCase: RequestTeamStatsUseCase,
     private val switchTeamFavoriteUseCase: SwitchTeamFavoriteUseCase,
@@ -48,8 +50,7 @@ class DetailViewModel @Inject constructor(
     fun onUiReady() {
         viewModelScope.launch {
             _state.update { it.copy(loading = true) }
-            // TODO: this!!
-            when (val request = requestTeamStatsUseCase(TeamLeague.PREMIER_LEAGUE.id, Constants.SEASON, teamId)) {
+            when (val request = requestTeamStatsUseCase(leagueId, seasonId, teamId)) {
                 is Either.Left -> _state.update { it.copy(error = request.value) }
                 is Either.Right -> _state.update { it.copy(teamStats = request.value) }
             }

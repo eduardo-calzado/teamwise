@@ -33,6 +33,14 @@
             android:name="teamId"
             app:argType="integer"
             android:defaultValue="-1" />
+        <argument
+            android:name="leagueId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="seasonId"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/players_dest"

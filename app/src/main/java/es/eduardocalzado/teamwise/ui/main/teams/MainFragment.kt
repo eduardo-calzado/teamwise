@@ -25,7 +25,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private lateinit var mainState: MainState
     private lateinit var binding: FragmentMainBinding
-    private val adapter = TeamAdapter { mainState.onTeamClicked(teamId = it.id)}
+    private val adapter = TeamAdapter {
+        mainState.onTeamClicked(
+            teamId = it.id,
+            leagueId = getFiltersData().second,
+            seasonId = getFiltersData().third)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,9 +40,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         binding = FragmentMainBinding.bind(view).apply {
             recycler.adapter = adapter
             submitFilterButton.setOnClickListener {
-                val country = autoCompleteTextViewCountry.text.toString()
-                val league = getTeamLeagueIdByName(autoCompleteTextViewLeague.text.toString())
-                val season = autoCompleteTextViewSeason.text.toString().toInt()
+                val (country, league, season) = getFiltersData()
                 viewModel.onSubmitClicked(country, league, season)
             }
             clearFilterButton.setOnClickListener{
@@ -89,5 +92,16 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             R.id.showFilters -> { mainState.toggleVisibility(binding); true }
             else -> false
         }
+    }
+
+    /**
+     * getFiltersData. Return the triple value of the filters:
+     * @return country@string, league@int, season@int
+     */
+    private fun getFiltersData(): Triple<String, Int, Int> {
+        val country = binding.autoCompleteTextViewCountry.text.toString()
+        val league = getTeamLeagueIdByName(binding.autoCompleteTextViewLeague.text.toString())
+        val season = binding.autoCompleteTextViewSeason.text.toString().toInt()
+        return Triple(country, league, season)
     }
 }

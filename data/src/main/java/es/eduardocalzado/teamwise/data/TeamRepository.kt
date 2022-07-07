@@ -31,8 +31,7 @@ class TeamRepository @Inject constructor(
     suspend fun deleteTeams() = localDataSource.deleteTeams()
 
     suspend fun requestTeams(country: String, league: Int, season: Int): Error? {
-        if (!localDataSource.isEmpty())
-            localDataSource.deleteTeams()
+        if (!localDataSource.isEmpty()) localDataSource.deleteTeams()
         val teamData = remoteDataSource.getTeams(country, league, season)
         teamData.fold(ifLeft = { return it }) {
             localDataSource.save(it)

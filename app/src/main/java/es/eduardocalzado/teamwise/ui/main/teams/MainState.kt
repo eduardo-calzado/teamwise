@@ -9,6 +9,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentMainBinding
+import es.eduardocalzado.teamwise.di.LeagueId
+import es.eduardocalzado.teamwise.di.SeasonId
 import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.ui.common.PermissionRequester
@@ -34,8 +36,8 @@ class MainState(
     private val navController: NavController,
 ) {
 
-    fun onTeamClicked(teamId: Int) {
-        val navAction = MainFragmentDirections.actionMainToDetail(teamId)
+    fun onTeamClicked(teamId: Int, leagueId: Int, seasonId: Int) {
+        val navAction = MainFragmentDirections.actionMainToDetail(teamId, leagueId, seasonId)
         navController.navigate(navAction)
     }
 

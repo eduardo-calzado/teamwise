@@ -41,7 +41,6 @@ class MainViewModel @Inject constructor(
 
     fun onUiReady() {
         viewModelScope.launch {
-            // we do a copy because a copy won't overwrite the state in uncertain cases
             _state.update { it.copy(loading = true) }
             val error = requestTeamsByRegionUseCase()
             _state.update { it.copy(error = error) }
@@ -51,7 +50,6 @@ class MainViewModel @Inject constructor(
 
     fun onSubmitClicked(country: String, league: Int, season: Int) {
         viewModelScope.launch {
-            // we do a copy because a copy won't overwrite the state in uncertain cases
             _state.update { it.copy(loading = true) }
             val error = requestTeamsUseCase(country, league, season)
             _state.update { it.copy(error = error) }

@@ -16,7 +16,7 @@
     <string name="menu_info">App Info</string>
 
     <!-- screen titles -->
-    <string name="main_title">Team</string>
+    <string name="main_title">Teams</string>
     <string name="info_title">App information</string>
     <string name="team_title">Team</string>
     <string name="players_title">Players</string>
