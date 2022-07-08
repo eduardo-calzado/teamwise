@@ -17,5 +17,6 @@ data class Team (
     val capacity: Int,
     val surface: String?,
     val stadiumImage: String,
+    val stadiumName: String,
     val favorite: Boolean,
 )

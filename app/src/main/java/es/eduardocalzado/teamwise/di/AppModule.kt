@@ -28,7 +28,7 @@ object AppModule {
         app,
         TeamDatabase::class.java,
         "team-db"
-    ).build()
+    ).fallbackToDestructiveMigration().build()
 
     @Provides
     @Singleton

@@ -35,15 +35,16 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect {
                     binding.team = it.teamData
-                    binding.updateUi(it)
+                    binding.teamStats = it.teamStats
                     binding.error = it.error?.let(detailState::errorToString)
+                    // binding.updateUi(it)
                 }
             }
         }
         viewModel.onUiReady()
     }
 
-    private fun FragmentDetailBinding.updateUi(state: DetailViewModel.UiState) {
+    /*private fun FragmentDetailBinding.updateUi(state: DetailViewModel.UiState) {
         val stats = state.teamStats
         with(this) {
             stats?.let {
@@ -64,5 +65,5 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 }
             }
         }
-    }
+    }*/
 }

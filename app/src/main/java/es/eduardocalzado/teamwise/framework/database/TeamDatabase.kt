@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [Team::class],
-    version = 1,
+    version = 2,
     exportSchema = false)
 abstract class TeamDatabase: RoomDatabase() {
     abstract fun teamDao(): TeamDao

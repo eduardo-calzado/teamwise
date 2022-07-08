@@ -39,6 +39,24 @@
     <string name="info2_txt">©® Architect Coders by Antonio Leiva\nDeveloped by: Eduardo Calzado</string>
 
     <!-- screen: stats -->
+    <string name="details_team_info">TEAM DATA</string>
+    <string name="details_team_info_name">NAME</string>
+    <string name="details_team_info_code">CODE</string>
+    <string name="details_team_info_founded">FOUNDED</string>
+    <string name="details_team_info_country">COUNTRY</string>
+    <string name="details_team_stadium">STADIUM</string>
+    <string name="details_team_stadium_street">ADDRESS</string>
+    <string name="details_team_stadium_surface">SURFACE</string>
+    <string name="details_team_stadium_capacity">CAPACITY</string>
+    <string name="details_team_stadium_name">NAME</string>
+    <string name="details_stats_league">LEAGUE</string>
+    <string name="details_stats_league_name">NAME</string>
+    <string name="details_stats_league_country">COUNTRY</string>
+    <string name="details_stats_fixtures">FIXTURES</string>
+    <string name="details_stats_fixtures_draws">DRAWS</string>
+    <string name="details_stats_fixtures_wins">WINS</string>
+    <string name="details_stats_fixtures_loses">LOSES</string>
+
     <string name="founded_in">Founded in %d</string>
     <string name="venue_info">Stadium\n\tAt %s in %s\n\tCapacity for %d and %s surface</string>
 

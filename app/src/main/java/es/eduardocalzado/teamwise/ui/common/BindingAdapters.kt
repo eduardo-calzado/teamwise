@@ -2,6 +2,7 @@ package es.eduardocalzado.teamwise.ui.common
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import es.eduardocalzado.teamwise.domain.Team
@@ -15,6 +16,11 @@ fun ImageView.bindUrl(url: String?) {
 @BindingAdapter("visible")
 fun View.setVisible(visible: Boolean?) {
     visibility = if (visible == true) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("value")
+fun TextView.setText(value: Int?) {
+    text = value.toString()
 }
 
 @BindingAdapter("toolbarTitle")

@@ -5,9 +5,13 @@
 
     <data>
         <import type="es.eduardocalzado.teamwise.domain.Team"/>
+        <import type="es.eduardocalzado.teamwise.domain.TeamStats"/>
         <variable
             name="team"
             type="es.eduardocalzado.teamwise.domain.Team" />
+        <variable
+            name="teamStats"
+            type="es.eduardocalzado.teamwise.domain.TeamStats" />
         <variable
             name="error"
             type="String" />
@@ -75,17 +79,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                android:padding="16dp"
                 android:transitionGroup="true">
 
-                <TextView
-                    android:id="@+id/team_detail_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:lineSpacingMultiplier="1.2"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:text="@{@string/founded_in(team.founded)}" />
+                <include
+                    layout="@layout/fragment_detail_info"
+                    app:team="@{team}"/>
 
+                <include
+                    layout="@layout/fragment_detail_stats"
+                    app:teamStats="@{teamStats}"/>
+
+                <!--
                 <TextView
                     android:id="@+id/team_venue_info"
                     android:layout_width="match_parent"
@@ -94,6 +100,7 @@
                     android:lineSpacingMultiplier="1.2"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:text="@{@string/venue_info(team.address, team.city, team.capacity, team.surface)}" />
+                    -->
 
                 <ProgressBar
                     android:id="@+id/team_stats_progressbar"

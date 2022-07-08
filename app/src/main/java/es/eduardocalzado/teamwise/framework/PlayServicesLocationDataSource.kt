@@ -47,7 +47,7 @@ class PlayServicesLocationDataSource @Inject constructor (application: Applicati
             Log.w("[OWN]: "+this.javaClass.simpleName, "Country code is null. Probably google places is not working as expect. The default value will be: $RegionRepository.DEFAULT_REGION")
             return RegionRepository.DEFAULT_REGION
         }
-        val loc = Locale("", countryCode ?: "EN")
+        val loc = Locale("", countryCode)
         val result = loc.getDisplayCountry(Locale("EN"))
         Log.d("[OWN]: "+this.javaClass.simpleName, "Country code is: $result")
         return result

@@ -41,6 +41,7 @@ private fun es.eduardocalzado.teamwise.framework.database.Team.toDomainModel(): 
         capacity,
         surface,
         stadiumImage,
+        stadiumName,
         favorite,
     )
 
@@ -60,5 +61,6 @@ private fun Team.fromDomainModel(): es.eduardocalzado.teamwise.framework.databas
         capacity,
         surface,
         stadiumImage,
+        stadiumName,
         favorite,
     )

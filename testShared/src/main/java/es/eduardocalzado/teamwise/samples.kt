@@ -15,5 +15,6 @@ val sampleTeam = Team (
     22222,
     "grass",
     "",
+    "El Sardinero",
     true,
 )
