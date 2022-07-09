@@ -41,6 +41,10 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
         viewModel.onUiReady()
     }
 

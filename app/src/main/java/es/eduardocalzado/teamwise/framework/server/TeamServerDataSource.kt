@@ -46,10 +46,10 @@ class TeamServerDataSource @Inject constructor () : TeamRemoteDataSource {
     /**
      * getTeamPlayers. Get the team players for a specific team.
      */
-    override suspend fun getTeamPlayers(league: Int, season: Int, team: Int) :Either<Error, List<TeamPlayer>> = tryCall {
+    override suspend fun getTeamPlayers(team: Int, season: Int) :Either<Error, List<TeamPlayer>> = tryCall {
         RemoteConnection
             .service
-            .getTeamPlayers(league, season, team)
+            .getTeamPlayers(team, season)
             .players
             .toDomainModel()
     }
@@ -90,9 +90,9 @@ private fun RemoteTeamStats.toDomainModel(): TeamStats =
     )
 
 // #MARK: RemotePlayer.toDomainModel
-@JvmName("toDomainModelRemotePlayer")
-private fun List<RemotePlayer>.toDomainModel(): List<TeamPlayer> = map { it.toDomainModel() }
-private fun RemotePlayer.toDomainModel(): TeamPlayer =
+@JvmName("toDomainModelRemoteTeamPlayer")
+private fun List<RemoteTeamPlayer>.toDomainModel(): List<TeamPlayer> = map { it.toDomainModel() }
+private fun RemoteTeamPlayer.toDomainModel(): TeamPlayer =
     TeamPlayer(
         id = player.id,
         name = player.name,

@@ -1,12 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <data>
+        <import type="java.util.List"/>
+        <import type="es.eduardocalzado.teamwise.domain.TeamPlayer"/>
+        <variable
+            name="loading"
+            type="boolean" />
+        <variable
+            name="players"
+            type="List&lt;TeamPlayer>" />
+        <variable
+            name="error"
+            type="String" />
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/menu_players"/>å∫
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/team_players_error"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="8dp"
+                android:background="?attr/colorError"
+                android:gravity="center"
+                android:text="@{error}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:visible="@{error != null}" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/team_players_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                app:players="@{players}"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="3"
+                app:visible="@{players.size >= 0 }" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/team_players_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:visible="@{loading}" />
+
+    </RelativeLayout>
+
+</layout>

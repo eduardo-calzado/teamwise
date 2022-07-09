@@ -44,8 +44,16 @@
     </fragment>
     <fragment
         android:id="@+id/players_dest"
-        android:name="es.eduardocalzado.teamwise.ui.detail.players.PlayersFragment"
+        android:name="es.eduardocalzado.teamwise.ui.detail.players.TeamPlayersFragment"
         android:label="@string/players_title"
         tools:layout="@layout/fragment_players" >
+        <argument
+            android:name="teamPlayerId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="seasonPlayerId"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
 </navigation>

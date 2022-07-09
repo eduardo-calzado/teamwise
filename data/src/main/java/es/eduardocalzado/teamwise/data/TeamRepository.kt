@@ -5,6 +5,7 @@ import es.eduardocalzado.teamwise.data.datasource.TeamLocalDataSource
 import es.eduardocalzado.teamwise.data.datasource.TeamRemoteDataSource
 import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Team
+import es.eduardocalzado.teamwise.domain.TeamPlayer
 import es.eduardocalzado.teamwise.domain.TeamStats
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -46,5 +47,9 @@ class TeamRepository @Inject constructor(
     suspend fun switchFavorite(team: Team) : Error? {
         val updatedTeam = team.copy(favorite = !team.favorite)
         return localDataSource.save(listOf(updatedTeam))
+    }
+
+    suspend fun requestTeamPlayers(team: Int, season: Int): Either<Error, List<TeamPlayer>> {
+        return remoteDataSource.getTeamPlayers(team, season)
     }
 }

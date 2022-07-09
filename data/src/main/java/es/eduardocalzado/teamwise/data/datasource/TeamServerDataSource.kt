@@ -10,5 +10,5 @@ interface TeamRemoteDataSource {
     suspend fun getTeamStats(league: Int, season: Int, team: Int): Either<Error, TeamStats>
     suspend fun getTeamsByRegion(region: String) : Either<Error, List<Team>>
     suspend fun getTeams(country: String, league: Int, season: Int) : Either<Error, List<Team>>
-    suspend fun getTeamPlayers(league: Int, season: Int, team: Int) :Either<Error, List<TeamPlayer>>
+    suspend fun getTeamPlayers(team: Int, season: Int) :Either<Error, List<TeamPlayer>>
 }

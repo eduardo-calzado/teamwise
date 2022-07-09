@@ -159,7 +159,7 @@
             android:textColor="?attr/colorError"
             android:gravity="center"
             android:text="@{error}"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="match_parent"
