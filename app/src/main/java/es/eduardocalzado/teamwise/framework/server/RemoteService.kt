@@ -33,4 +33,12 @@ interface RemoteService {
         @Query("team") team: Int,
     ): RemoteTeamStatsData
 
+    @Headers(HOST, KEY)
+    @GET("players")
+    suspend fun getTeamPlayers(
+        @Query("league") league: Int,
+        @Query("season") season: Int,
+        @Query("team") team: Int,
+    ): RemotePlayersData
+
 }

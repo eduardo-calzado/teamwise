@@ -2,31 +2,34 @@
 <string name="app_name">Teamwise</string>
     <string name="no_results_found">No teams stored in database. Try to open the filters and search some data.</string>
 
-    <!-- error strings -->
-    <string name="connectivity_error">Connectivity Error</string>
-    <string name="server_error">Server Error: </string>
-    <string name="unknown_error">Unknown Error: </string>
-    <string name="noteams_error">No teams found</string>
+    <!-- errors strings -->
+    <string name="connectivity_error">There was a connectivity error. Please check your connection before continue.</string>
+    <string name="server_error">No way! There was a server error:\n. </string>
+    <string name="unknown_error">No way! There was an unknown error:\n. </string>
+    <string name="no_teams_error">No teams found neither in database nor remote API. Please, try it again later.</string>
 
-    <!-- menu names -->
+    <!-- menus names -->
     <string name="menu_teams">Teams</string>
     <string name="menu_players">Players</string>
     <string name="menu_stadiums">Stadiums</string>
     <string name="menu_stats">Stats</string>
     <string name="menu_info">App Info</string>
 
-    <!-- screen titles -->
+    <!-- screens titles -->
     <string name="main_title">Teams</string>
     <string name="info_title">App information</string>
     <string name="team_title">Team</string>
     <string name="players_title">Players</string>
 
     <!-- screen: teams -->
-    <string name="main_header">Click on the top right icon to filter results.\nClick on a team and see their details.\nYour favorite teams are sorted first.</string>
-    <string name="submit">submit</string>
-    <string name="clear">clear</string>
-    <string name="showFilters">Show filters</string>
-    <string name="search_title">Search</string>
+    <string name="teams_main_header">Initially, your teams are filtered from your location.\nClick on the top right icon to filter results.\nAlso click on a team on the list to see their details.\nYour favorite teams are sorted first.</string>
+    <string name="teams_filter_submit">submit</string>
+    <string name="teams_filter_clear">clear</string>
+    <string name="teams_filters_show">Show filters</string>
+    <string name="teams_search_menu_item">Search</string>
+    <string name="teams_list_header_example_text">Teams (1234)</string>
+
+    <!-- general words -->
     <string name="country">Country</string>
     <string name="england">England</string>
     <string name="league">League</string>
@@ -35,8 +38,8 @@
     <string name="season_value">2021</string>
 
     <!-- screen: app info -->
-    <string name="info_txt">This app is used to demo all my Android skills after the Architect Coders 2.0 expertise. Initially, teamwise was born to allow a team to have all their own data easily.\n\nToday, it is just a boilerplate that collects: Clean Architecture, Navigation Component, State Flow, Room Database, Testing and so on.\n\nThis is just the start point, let\'s rock it!</string>
-    <string name="info2_txt">©® Architect Coders by Antonio Leiva\nDeveloped by: Eduardo Calzado</string>
+    <string name="app_info_txt_1">This app is used to demo all my Android skills after the Architect Coders 2.0 expertise. Initially, teamwise was born to allow a team to have all their own data easily.\n\nToday, it is just a boilerplate that collects: Clean Architecture, Navigation Component, State Flow, Room Database, Testing and so on.\n\nThis is just the start point, let\'s rock it!</string>
+    <string name="app_info_txt_2">©® Architect Coders by Antonio Leiva\nDeveloped by: Eduardo Calzado</string>
 
     <!-- screen: stats -->
     <string name="details_team_info">TEAM DATA</string>
@@ -56,9 +59,6 @@
     <string name="details_stats_fixtures_draws">DRAWS</string>
     <string name="details_stats_fixtures_wins">WINS</string>
     <string name="details_stats_fixtures_loses">LOSES</string>
-
-    <string name="founded_in">Founded in %d</string>
-    <string name="venue_info">Stadium\n\tAt %s in %s\n\tCapacity for %d and %s surface</string>
 
     <!-- others -->
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>

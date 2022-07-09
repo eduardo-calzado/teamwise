@@ -4,6 +4,7 @@ import arrow.core.Either
 import es.eduardocalzado.teamwise.data.datasource.TeamRemoteDataSource
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.domain.Error
+import es.eduardocalzado.teamwise.domain.TeamPlayer
 import es.eduardocalzado.teamwise.domain.TeamStats
 import es.eduardocalzado.teamwise.framework.tryCall
 import javax.inject.Inject
@@ -42,10 +43,22 @@ class TeamServerDataSource @Inject constructor () : TeamRemoteDataSource {
             .toDomainModel()
     }
 
+    /**
+     * getTeamPlayers. Get the team players for a specific team.
+     */
+    override suspend fun getTeamPlayers(league: Int, season: Int, team: Int) :Either<Error, List<TeamPlayer>> = tryCall {
+        RemoteConnection
+            .service
+            .getTeamPlayers(league, season, team)
+            .players
+            .toDomainModel()
+    }
+
     // override suspend fun getTeams() = RemoteConnection.service.getTeams(Constants.LEAGUE, Constants.SEASON)
 }
 
 // #MARK: RemoteTeam.toDomainModel
+@JvmName("toDomainModelRemoteTeam")
 private fun List<RemoteTeam>.toDomainModel(): List<Team> = map { it.toDomainModel() }
 private fun RemoteTeam.toDomainModel(): Team =
     Team(
@@ -74,4 +87,21 @@ private fun RemoteTeamStats.toDomainModel(): TeamStats =
         fixture_draws_total =fixtures.draws.total,
         fixture_loses_total =fixtures.loses.total,
         fixture_wins_total =fixtures.wins.total,
+    )
+
+// #MARK: RemotePlayer.toDomainModel
+@JvmName("toDomainModelRemotePlayer")
+private fun List<RemotePlayer>.toDomainModel(): List<TeamPlayer> = map { it.toDomainModel() }
+private fun RemotePlayer.toDomainModel(): TeamPlayer =
+    TeamPlayer(
+        id = player.id,
+        name = player.name,
+        firstName = player.firstName,
+        lastName = player.lastName,
+        age = player.age,
+        nationality = player.nationality,
+        height = player.height,
+        weight = player.weight,
+        injured = player.injured,
+        photo = player.photo,
     )

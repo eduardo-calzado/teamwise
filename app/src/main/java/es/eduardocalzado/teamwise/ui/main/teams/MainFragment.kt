@@ -11,11 +11,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentMainBinding
+import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.domain.getTeamLeagueIdByName
 import es.eduardocalzado.teamwise.ui.main.teams.MainState.MainFilters.*
+import es.eduardocalzado.teamwise.usecases.sampleTeam
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -38,7 +41,17 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         mainState = buildMainState()
         // --
         binding = FragmentMainBinding.bind(view).apply {
-            recycler.adapter = adapter
+            /*
+            // Header issues
+            val gridLayoutManager = GridLayoutManager(context, 3)
+            gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return if (position == 0) 3 else 1
+
+                }
+            }
+            teamsRecycler.layoutManager = gridLayoutManager*/
+            teamsRecycler.adapter = adapter
             submitFilterButton.setOnClickListener {
                 val (country, league, season) = getFiltersData()
                 viewModel.onSubmitClicked(country, league, season)
@@ -74,8 +87,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             autoCompleteTextViewSeason.setAdapter(mainState.initFilter(Season))
             // -- handle nested filters
             autoCompleteTextViewCountry.onItemClickListener = AdapterView.OnItemClickListener { _, _, _, _ ->
-                val country = autoCompleteTextViewCountry.text.toString()
-                val leaguesAdapter = mainState.initFilter(League, country)
+                val leaguesAdapter = mainState.initFilter(League, autoCompleteTextViewCountry.text.toString())
                 autoCompleteTextViewLeague.setText(leaguesAdapter.getItem(0).toString())
                 autoCompleteTextViewLeague.setAdapter(leaguesAdapter)
             }

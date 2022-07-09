@@ -1,5 +1,6 @@
 package es.eduardocalzado.teamwise.ui.common
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -21,9 +22,4 @@ fun View.setVisible(visible: Boolean?) {
 @BindingAdapter("value")
 fun TextView.setText(value: Int?) {
     text = value.toString()
-}
-
-@BindingAdapter("toolbarTitle")
-fun CollapsingToolbarLayout.setTitle(team: Team?) {
-    title = if (team?.code.isNullOrEmpty()) team?.name else "["+team?.code+"] "+team?.name
 }
