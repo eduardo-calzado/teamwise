@@ -23,3 +23,8 @@ fun View.setVisible(visible: Boolean?) {
 fun TextView.setText(value: Int?) {
     text = value.toString()
 }
+
+@BindingAdapter("boolValue")
+fun TextView.setText(value: Boolean?) {
+    text = value.toString()
+}

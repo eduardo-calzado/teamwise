@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.ui.detail.players
+package es.eduardocalzado.teamwise.ui.detail.players.player
 
 import android.content.Context
 import androidx.fragment.app.Fragment
@@ -9,25 +9,17 @@ import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.domain.Error
 import kotlinx.coroutines.CoroutineScope
 
-fun Fragment.buildPlayersState(
+fun Fragment.buildPlayerState(
     context: Context = requireContext(),
     scope: CoroutineScope = viewLifecycleOwner.lifecycleScope,
     navController: NavController = findNavController(),
-) = PlayersState(context, scope, navController)
+) = PlayerState(context, scope, navController)
 
-class PlayersState(
+class PlayerState(
     private val context: Context,
     private val scope: CoroutineScope,
     private val navController: NavController,
 ) {
-
-    fun onPlayerClicked(playerId: Int) {
-        // TODO
-        // val navAction = PlayersFragmentDirections.actionPlayersToPlayer(playerId)
-        val navAction = PlayersFragmentDirections.actionPlayersToPlayer()
-        navController.navigate(navAction)
-    }
-
     fun errorToString(error: Error) = when (error) {
         Error.Connectivity -> context.getString(R.string.connectivity_error)
         is Error.Server -> context.getString(R.string.server_error) + error.code

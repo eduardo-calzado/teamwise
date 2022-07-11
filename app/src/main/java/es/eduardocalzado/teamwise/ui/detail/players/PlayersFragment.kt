@@ -27,7 +27,7 @@ class PlayersFragment : Fragment(R.layout.fragment_players) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        playersState = buildPlayerState()
+        playersState = buildPlayersState()
         // --
         binding = FragmentPlayersBinding.bind(view).apply {
             playersRecycler.adapter = adapter
