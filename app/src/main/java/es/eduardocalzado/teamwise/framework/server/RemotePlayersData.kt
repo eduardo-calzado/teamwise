@@ -2,18 +2,18 @@ package es.eduardocalzado.teamwise.framework.server
 
 import com.google.gson.annotations.SerializedName
 
-data class RemoteTeamPlayersData(
+data class RemotePlayersData(
     val errors: List<String>,
     val results: Int,
     @SerializedName("response")
-    val players: List<RemoteTeamPlayer>
+    val players: List<RemotePlayer>
 )
 
-data class RemoteTeamPlayer(
-    val player: RemoteTeamPlayerInfo,
+data class RemotePlayer(
+    val player: RemotePlayerInfo,
 )
 
-data class RemoteTeamPlayerInfo(
+data class RemotePlayerInfo(
     val id: Int,
     val name: String,
     val firstName: String,

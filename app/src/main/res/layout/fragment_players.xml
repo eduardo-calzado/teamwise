@@ -4,13 +4,13 @@
 
     <data>
         <import type="java.util.List"/>
-        <import type="es.eduardocalzado.teamwise.domain.TeamPlayer"/>
+        <import type="es.eduardocalzado.teamwise.domain.Player"/>
         <variable
             name="loading"
             type="boolean" />
         <variable
             name="players"
-            type="List&lt;TeamPlayer>" />
+            type="List&lt;Player>" />
         <variable
             name="error"
             type="String" />
@@ -26,7 +26,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/team_players_error"
+                android:id="@+id/players_error"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -40,7 +40,7 @@
                 app:visible="@{error != null}" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/team_players_recycler"
+                android:id="@+id/players_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
@@ -51,7 +51,7 @@
         </LinearLayout>
 
         <ProgressBar
-            android:id="@+id/team_players_progressbar"
+            android:id="@+id/players_progressbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

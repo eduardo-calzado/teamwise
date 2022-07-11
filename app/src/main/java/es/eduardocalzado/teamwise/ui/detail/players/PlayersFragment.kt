@@ -13,24 +13,24 @@ import es.eduardocalzado.teamwise.databinding.FragmentPlayersBinding
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class TeamPlayersFragment : Fragment(R.layout.fragment_players) {
+class PlayersFragment : Fragment(R.layout.fragment_players) {
 
-    private val viewModel: TeamPlayersViewModel by viewModels()
+    private val viewModel: PlayersViewModel by viewModels()
 
-    private lateinit var teamPlayersState: TeamPlayersState
+    private lateinit var playersState: PlayersState
     private lateinit var binding: FragmentPlayersBinding
-    private val adapter = TeamPlayersAdapter {
-        teamPlayersState.onPlayerClicked(
+    private val adapter = PlayersAdapter {
+        playersState.onPlayerClicked(
             playerId = it.id
         )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        teamPlayersState = buildTeamPlayerState()
+        playersState = buildPlayerState()
         // --
         binding = FragmentPlayersBinding.bind(view).apply {
-            teamPlayersRecycler.adapter = adapter
+            playersRecycler.adapter = adapter
         }
         // --
         viewLifecycleOwner.lifecycleScope.launch {
@@ -38,7 +38,7 @@ class TeamPlayersFragment : Fragment(R.layout.fragment_players) {
                 viewModel.state.collect { it ->
                     binding.loading = it.loading
                     binding.players = it.players
-                    binding.error = it.error?.let(teamPlayersState::errorToString)
+                    binding.error = it.error?.let(playersState::errorToString)
                 }
             }
         }

@@ -10,17 +10,17 @@ import es.eduardocalzado.teamwise.di.*
 
 @Module
 @InstallIn(ViewModelComponent::class)
-class TeamPlayersViewModelModule {
+class PlayersViewModelModule {
 
     @Provides
     @ViewModelScoped
     @TeamPlayerId
     fun provideTeamPlayerId(savedStateHandle: SavedStateHandle) =
-        TeamPlayersFragmentArgs.fromSavedStateHandle(savedStateHandle).teamPlayerId
+        PlayersFragmentArgs.fromSavedStateHandle(savedStateHandle).teamPlayerId
 
     @Provides
     @ViewModelScoped
     @SeasonPlayerId
     fun provideSeasonPlayerId(savedStateHandle: SavedStateHandle) =
-        TeamPlayersFragmentArgs.fromSavedStateHandle(savedStateHandle).seasonPlayerId
+        PlayersFragmentArgs.fromSavedStateHandle(savedStateHandle).seasonPlayerId
 }

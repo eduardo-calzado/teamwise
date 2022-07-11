@@ -4,7 +4,7 @@ import arrow.core.Either
 import es.eduardocalzado.teamwise.data.datasource.TeamRemoteDataSource
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.domain.Error
-import es.eduardocalzado.teamwise.domain.TeamPlayer
+import es.eduardocalzado.teamwise.domain.Player
 import es.eduardocalzado.teamwise.domain.TeamStats
 import es.eduardocalzado.teamwise.framework.tryCall
 import javax.inject.Inject
@@ -43,17 +43,6 @@ class TeamServerDataSource @Inject constructor () : TeamRemoteDataSource {
             .toDomainModel()
     }
 
-    /**
-     * getTeamPlayers. Get the team players for a specific team.
-     */
-    override suspend fun getTeamPlayers(team: Int, season: Int) :Either<Error, List<TeamPlayer>> = tryCall {
-        RemoteConnection
-            .service
-            .getTeamPlayers(team, season)
-            .players
-            .toDomainModel()
-    }
-
     // override suspend fun getTeams() = RemoteConnection.service.getTeams(Constants.LEAGUE, Constants.SEASON)
 }
 
@@ -87,21 +76,4 @@ private fun RemoteTeamStats.toDomainModel(): TeamStats =
         fixture_draws_total =fixtures.draws.total,
         fixture_loses_total =fixtures.loses.total,
         fixture_wins_total =fixtures.wins.total,
-    )
-
-// #MARK: RemotePlayer.toDomainModel
-@JvmName("toDomainModelRemoteTeamPlayer")
-private fun List<RemoteTeamPlayer>.toDomainModel(): List<TeamPlayer> = map { it.toDomainModel() }
-private fun RemoteTeamPlayer.toDomainModel(): TeamPlayer =
-    TeamPlayer(
-        id = player.id,
-        name = player.name,
-        firstName = player.firstName,
-        lastName = player.lastName,
-        age = player.age,
-        nationality = player.nationality,
-        height = player.height,
-        weight = player.weight,
-        injured = player.injured,
-        photo = player.photo,
     )

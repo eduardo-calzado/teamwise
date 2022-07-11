@@ -6,13 +6,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.ViewPlayerItemBinding
-import es.eduardocalzado.teamwise.domain.TeamPlayer
+import es.eduardocalzado.teamwise.domain.Player
 import es.eduardocalzado.teamwise.ui.common.basicDiffUtil
 import es.eduardocalzado.teamwise.ui.common.inflate
 
-class TeamPlayersAdapter(
-    private val listener: (TeamPlayer) -> Unit
-): ListAdapter<TeamPlayer, RecyclerView.ViewHolder>(basicDiffUtil { old, new -> old.id == new.id }) {
+class PlayersAdapter(
+    private val listener: (Player) -> Unit
+): ListAdapter<Player, RecyclerView.ViewHolder>(basicDiffUtil { old, new -> old.id == new.id }) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerViewHolder {
         val view = parent.inflate(R.layout.view_player_item, false)
         return PlayerViewHolder(view)
@@ -26,7 +26,7 @@ class TeamPlayersAdapter(
 
     class PlayerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ViewPlayerItemBinding.bind(view)
-        fun bind(player: TeamPlayer) {
+        fun bind(player: Player) {
             binding.player = player
         }
     }

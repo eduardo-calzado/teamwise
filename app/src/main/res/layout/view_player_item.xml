@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="es.eduardocalzado.teamwise.domain.TeamPlayer"/>
+        <import type="es.eduardocalzado.teamwise.domain.Player"/>
         <variable
             name="player"
-            type="es.eduardocalzado.teamwise.domain.TeamPlayer" />
+            type="es.eduardocalzado.teamwise.domain.Player" />
     </data>
 
     <LinearLayout

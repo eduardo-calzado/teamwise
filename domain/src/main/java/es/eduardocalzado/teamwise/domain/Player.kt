@@ -1,6 +1,6 @@
 package es.eduardocalzado.teamwise.domain
 
-data class TeamPlayer (
+data class Player (
     val id: Int,
     val name: String,
     val firstName: String?,

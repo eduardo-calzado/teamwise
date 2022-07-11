@@ -62,6 +62,11 @@ class MainHostActivity : AppCompatActivity() {
                     handleBottomNavVisibility(View.VISIBLE, detailBottomNavigationView)
                     handleToolbarVisibility(View.VISIBLE)
                 }
+                R.id.player_dest -> {
+                    handleBottomNavVisibility(View.GONE, mainBottomNavigationView)
+                    handleBottomNavVisibility(View.GONE, detailBottomNavigationView)
+                    handleToolbarVisibility(View.GONE)
+                }
                 else -> {
                     handleBottomNavVisibility(View.GONE, mainBottomNavigationView)
                     handleBottomNavVisibility(View.VISIBLE, detailBottomNavigationView)

@@ -1,0 +1,25 @@
+package es.eduardocalzado.teamwise.framework.database
+
+import androidx.room.*
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface PlayerDao {
+    @Query("SELECT * FROM Player")
+    fun getAll(): Flow<List<Player>>
+
+    @Query("SELECT * FROM Player WHERE id = :id")
+    fun findById(id: Int): Flow<Player>
+
+    @Query("SELECT COUNT(id) FROM Player")
+    suspend fun playersCount(): Int
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPlayers(players: List<Player>)
+
+    @Update
+    fun updatePlayer(team: Player)
+
+    @Query("DELETE FROM Player")
+    suspend fun deletePlayers()
+}
