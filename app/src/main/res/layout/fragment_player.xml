@@ -42,6 +42,7 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/fragment_player_image"
                     android:padding="1dp"
+                    android:layout_marginBottom="12dp"
                     android:layout_width="125dp"
                     android:layout_height="125dp"
                     android:layout_gravity="center"

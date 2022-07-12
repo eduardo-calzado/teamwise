@@ -1,4 +1,4 @@
-package es.eduardocalzado.teamwise.ui.detail.players.player
+package es.eduardocalzado.teamwise.ui.detail.player
 
 import android.content.Context
 import androidx.fragment.app.Fragment

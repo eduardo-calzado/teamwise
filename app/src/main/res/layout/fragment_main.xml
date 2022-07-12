@@ -24,7 +24,7 @@
 
         <!-- Filters -->
         <LinearLayout
-            android:id="@+id/filterView"
+            android:id="@+id/teams_filter_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -32,7 +32,7 @@
             android:visibility="gone">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutCountry"
+                android:id="@+id/teams_til_country"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 app:startIconDrawable="@drawable/ic_place">
 
                 <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextViewCountry"
+                    android:id="@+id/teams_til_tv_country"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -52,7 +52,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutLeague"
+                android:id="@+id/teams_til_league"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                 app:startIconDrawable="@drawable/ic_country">
 
                 <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextViewLeague"
+                    android:id="@+id/teams_til_tv_league"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -73,7 +73,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutSeason"
+                android:id="@+id/teams_til_season"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
                 app:startIconDrawable="@drawable/ic_calendar">
 
                 <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextViewSeason"
+                    android:id="@+id/teams_til_tv_season"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -100,7 +100,7 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/submitFilterButton"
+                    android:id="@+id/teams_filter_submit_button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -109,7 +109,7 @@
                     android:text="@string/teams_filter_submit" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/clearFilterButton"
+                    android:id="@+id/teams_filter_clear_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -120,21 +120,36 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/headerTitle"
+            android:id="@+id/teams_header_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/filterView"
+            android:layout_below="@id/teams_filter_layout"
             android:gravity="center"
             android:padding="16dp"
             android:text="@string/teams_main_header"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
             android:textSize="14sp" />
 
+        <TextView
+            android:id="@+id/teams_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="?attr/colorError"
+            android:gravity="center"
+            android:layout_below="@id/teams_header_title"
+            android:padding="8dp"
+            android:text="@{error}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:visible="@{error != null}" />
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/teamsRecycler"
+            android:id="@+id/teams_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/headerTitle"
+            android:layout_below="@id/teams_error"
             android:layout_marginTop="0dp"
             android:padding="8dp"
             app:items="@{teams}"
@@ -144,22 +159,11 @@
 
 
         <ProgressBar
-            android:id="@+id/progressBar"
+            android:id="@+id/teams_progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             app:visible="@{loading}" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-            android:textColor="?attr/colorError"
-            android:gravity="center"
-            android:text="@{error}"
-            android:textSize="16sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -169,8 +173,8 @@
             android:padding="32dp"
             android:text="@string/no_results_found"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-            android:textSize="16sp"
-            app:visible="@{teams.size == 0 &amp;&amp; loading == false}"/>
+            android:textSize="14sp"
+            app:visible="@{teams.size == 0 &amp;&amp; loading == false}" />
 
     </RelativeLayout>
 

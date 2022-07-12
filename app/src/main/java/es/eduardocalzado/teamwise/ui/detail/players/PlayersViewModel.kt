@@ -1,23 +1,25 @@
 package es.eduardocalzado.teamwise.ui.detail.players
 
+import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import arrow.core.Either
+import dagger.assisted.Assisted
 import dagger.hilt.android.lifecycle.HiltViewModel
-import es.eduardocalzado.teamwise.di.*
+import es.eduardocalzado.teamwise.di.LeagueId
+import es.eduardocalzado.teamwise.di.SeasonId
+import es.eduardocalzado.teamwise.di.TeamId
 import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Player
 import es.eduardocalzado.teamwise.framework.toError
-import es.eduardocalzado.teamwise.ui.main.teams.MainViewModel
-import es.eduardocalzado.teamwise.usecases.*
+import es.eduardocalzado.teamwise.usecases.GetPlayersUseCase
+import es.eduardocalzado.teamwise.usecases.RequestPlayersByTeamUseCase
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class PlayersViewModel @Inject constructor(
-    @TeamPlayerId private val teamPlayerId: Int,
-    @SeasonPlayerId private val seasonPlayerId: Int,
     private val getPlayersUseCase: GetPlayersUseCase,
     private val requestPlayersByTeamUseCase: RequestPlayersByTeamUseCase,
 ): ViewModel() {

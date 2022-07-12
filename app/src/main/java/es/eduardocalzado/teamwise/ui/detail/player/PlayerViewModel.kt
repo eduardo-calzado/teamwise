@@ -1,14 +1,12 @@
-package es.eduardocalzado.teamwise.ui.detail.players.player
+package es.eduardocalzado.teamwise.ui.detail.player
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import arrow.core.Either
 import dagger.hilt.android.lifecycle.HiltViewModel
 import es.eduardocalzado.teamwise.di.*
 import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Player
 import es.eduardocalzado.teamwise.framework.toError
-import es.eduardocalzado.teamwise.ui.main.teams.MainViewModel
 import es.eduardocalzado.teamwise.usecases.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -16,8 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PlayerViewModel @Inject constructor(
-    @TeamPlayerId private val teamPlayerId: Int,
-    @SeasonPlayerId private val seasonPlayerId: Int,
+    @PlayerId playerId: Int,
     private val findPlayerByIdUseCase: FindPlayerByIdUseCase,
 ): ViewModel() {
 
@@ -32,7 +29,7 @@ class PlayerViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            findPlayerByIdUseCase(130)
+            findPlayerByIdUseCase(playerId)
                 .catch { cause -> _state.update { it.copy(error = cause.toError()) } }
                 .collect { player -> _state.update { UiState(player = player) } }
         }

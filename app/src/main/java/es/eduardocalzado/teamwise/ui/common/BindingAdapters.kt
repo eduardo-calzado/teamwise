@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.domain.Team
 import kotlinx.coroutines.*
 
@@ -26,5 +27,9 @@ fun TextView.setText(value: Int?) {
 
 @BindingAdapter("boolValue")
 fun TextView.setText(value: Boolean?) {
-    text = value.toString()
+    text = when (value) {
+        true -> resources.getString(R.string.yes)
+        false -> resources.getString(R.string.no)
+        else -> resources.getString(R.string.unknown)
+    }
 }

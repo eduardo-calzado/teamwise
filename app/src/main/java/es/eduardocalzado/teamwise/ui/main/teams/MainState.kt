@@ -82,7 +82,7 @@ class MainState(
     }
 
     fun toggleVisibility(binding: FragmentMainBinding) {
-        binding.filterView.toggleVisibility()
-        binding.headerTitle.toggleVisibility()
+        binding.teamsFilterLayout.toggleVisibility()
+        binding.teamsHeaderTitle.toggleVisibility()
     }
 }

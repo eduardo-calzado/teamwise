@@ -16,12 +16,12 @@ class PlayerRepository @Inject constructor(
     fun findById(id: Int) : Flow<Player> = localDataSource.findById(id)
     
     suspend fun requestPlayersByTeam(team: Int, season: Int): Error? {
-        if (localDataSource.isEmpty()) {
+        //if (localDataSource.isEmpty()) {
             val playersData = remoteDataSource.getPlayersByTeam(team, season)
             playersData.fold(ifLeft = { return it }) {
                 localDataSource.save(it)
             }
-        }
+        //}
         return null
     }
 }

@@ -52,11 +52,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             }
             teamsRecycler.layoutManager = gridLayoutManager*/
             teamsRecycler.adapter = adapter
-            submitFilterButton.setOnClickListener {
+            teamsFilterSubmitButton.setOnClickListener {
                 val (country, league, season) = getFiltersData()
                 viewModel.onSubmitClicked(country, league, season)
             }
-            clearFilterButton.setOnClickListener{
+            teamsFilterClearButton.setOnClickListener{
                 viewModel.onDeleteClicked()
             }
         }
@@ -81,15 +81,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         // -- fill the filter's adapters
         with(binding) {
             // -- init filters
-            autoCompleteTextViewCountry.setAdapter(mainState.initFilter(Country))
-            val country = autoCompleteTextViewCountry.text.toString()
-            autoCompleteTextViewLeague.setAdapter(mainState.initFilter(League, country))
-            autoCompleteTextViewSeason.setAdapter(mainState.initFilter(Season))
+            teamsTilTvCountry.setAdapter(mainState.initFilter(Country))
+            val country = teamsTilTvCountry.text.toString()
+            teamsTilTvLeague.setAdapter(mainState.initFilter(League, country))
+            teamsTilTvSeason.setAdapter(mainState.initFilter(Season))
             // -- handle nested filters
-            autoCompleteTextViewCountry.onItemClickListener = AdapterView.OnItemClickListener { _, _, _, _ ->
-                val leaguesAdapter = mainState.initFilter(League, autoCompleteTextViewCountry.text.toString())
-                autoCompleteTextViewLeague.setText(leaguesAdapter.getItem(0).toString())
-                autoCompleteTextViewLeague.setAdapter(leaguesAdapter)
+            teamsTilTvCountry.onItemClickListener = AdapterView.OnItemClickListener { _, _, _, _ ->
+                val leaguesAdapter = mainState.initFilter(League, teamsTilTvCountry.text.toString())
+                teamsTilTvLeague.setText(leaguesAdapter.getItem(0).toString())
+                teamsTilTvLeague.setAdapter(leaguesAdapter)
             }
         }
     }
@@ -111,9 +111,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
      * @return country@string, league@int, season@int
      */
     private fun getFiltersData(): Triple<String, Int, Int> {
-        val country = binding.autoCompleteTextViewCountry.text.toString()
-        val league = getTeamLeagueIdByName(binding.autoCompleteTextViewLeague.text.toString())
-        val season = binding.autoCompleteTextViewSeason.text.toString().toInt()
+        val country = binding.teamsTilTvCountry.text.toString()
+        val league = getTeamLeagueIdByName(binding.teamsTilTvLeague.text.toString())
+        val season = binding.teamsTilTvSeason.text.toString().toInt()
         return Triple(country, league, season)
     }
 }

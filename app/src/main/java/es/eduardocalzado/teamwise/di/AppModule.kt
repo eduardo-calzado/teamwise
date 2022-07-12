@@ -1,6 +1,7 @@
 package es.eduardocalzado.teamwise.di
 
 import android.app.Application
+import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
 import es.eduardocalzado.teamwise.framework.AndroidPermissionChecker
 import es.eduardocalzado.teamwise.framework.PlayServicesLocationDataSource
@@ -12,10 +13,12 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import es.eduardocalzado.teamwise.data.datasource.*
 import es.eduardocalzado.teamwise.framework.database.PlayerRoomDataSource
 import es.eduardocalzado.teamwise.framework.server.PlayerServerDataSource
+import es.eduardocalzado.teamwise.ui.detail.stats.DetailFragmentArgs
 import javax.inject.Singleton
 
 @Module

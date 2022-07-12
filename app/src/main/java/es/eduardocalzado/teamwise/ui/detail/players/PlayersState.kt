@@ -1,6 +1,7 @@
 package es.eduardocalzado.teamwise.ui.detail.players
 
 import android.content.Context
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -22,9 +23,8 @@ class PlayersState(
 ) {
 
     fun onPlayerClicked(playerId: Int) {
-        // TODO
-        // val navAction = PlayersFragmentDirections.actionPlayersToPlayer(playerId)
-        val navAction = PlayersFragmentDirections.actionPlayersToPlayer()
+        Log.d("test", "playerID: $playerId")
+        val navAction = PlayersFragmentDirections.actionPlayersToPlayer(playerId)
         navController.navigate(navAction)
     }
 
