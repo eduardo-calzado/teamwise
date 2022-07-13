@@ -63,7 +63,7 @@ private fun RemoteTeam.toDomainModel(): Team =
         capacity = venue.capacity,
         surface = venue.surface,
         stadiumImage = venue.image ?: "",
-        stadiumName = venue.name,
+        stadiumName = venue.name ?: "",
         favorite = false,
     )
 

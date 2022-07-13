@@ -37,5 +37,6 @@ private fun RemotePlayer.toDomainModel(): Player =
         height = player.height,
         weight = player.weight,
         injured = player.injured,
-        photo = player.photo
+        photo = player.photo,
+        team = -1,
     )

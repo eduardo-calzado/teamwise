@@ -18,11 +18,11 @@ import es.eduardocalzado.teamwise.R
 class MainHostActivity : AppCompatActivity() {
 
     private lateinit var mainBottomNavigationView: BottomNavigationView
-    private lateinit var detailBottomNavigationView: BottomNavigationView
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // TODO
         // this was the cleanest way to show a splashscreen layout (not using Splashscreen API)
         // Thread.sleep(1000)
         setTheme(R.style.Theme_Teamwise_Main)
@@ -32,7 +32,6 @@ class MainHostActivity : AppCompatActivity() {
 
         toolbar = findViewById(R.id.toolbar)
         mainBottomNavigationView = findViewById(R.id.activity_main_bottom_navigation_view)
-        detailBottomNavigationView = findViewById(R.id.activity_detail_bottom_navigation_view)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
@@ -42,34 +41,28 @@ class MainHostActivity : AppCompatActivity() {
         setupActionBarWithNavController(this, navController, appBarConfiguration)
 
         mainBottomNavigationView.setupWithNavController(navController)
-        detailBottomNavigationView.setupWithNavController(navController)
 
         // code needed to show/hide bottom bars, show/hide toolbars, any UI component.
         navController.addOnDestinationChangedListener {_, destination, _ ->
             when(destination.id) {
                 R.id.main_dest -> {
-                    handleBottomNavVisibility(View.VISIBLE, mainBottomNavigationView)
-                    handleBottomNavVisibility(View.GONE, detailBottomNavigationView)
+                    handleBottomNavVisibility(View.VISIBLE)
                     handleToolbarVisibility(View.VISIBLE)
                 }
                 R.id.info_dest -> {
-                    handleBottomNavVisibility(View.VISIBLE, mainBottomNavigationView)
-                    handleBottomNavVisibility(View.GONE, detailBottomNavigationView)
+                    handleBottomNavVisibility(View.VISIBLE)
+                    handleToolbarVisibility(View.VISIBLE)
+                }
+                R.id.me_dest -> {
+                    handleBottomNavVisibility(View.VISIBLE)
                     handleToolbarVisibility(View.VISIBLE)
                 }
                 R.id.players_dest -> {
-                    handleBottomNavVisibility(View.GONE, mainBottomNavigationView)
-                    handleBottomNavVisibility(View.VISIBLE, detailBottomNavigationView)
+                    handleBottomNavVisibility(View.GONE)
                     handleToolbarVisibility(View.VISIBLE)
                 }
-                R.id.player_dest -> {
-                    handleBottomNavVisibility(View.GONE, mainBottomNavigationView)
-                    handleBottomNavVisibility(View.GONE, detailBottomNavigationView)
-                    handleToolbarVisibility(View.GONE)
-                }
                 else -> {
-                    handleBottomNavVisibility(View.GONE, mainBottomNavigationView)
-                    handleBottomNavVisibility(View.VISIBLE, detailBottomNavigationView)
+                    handleBottomNavVisibility(View.GONE)
                     handleToolbarVisibility(View.GONE)
                 }
             }
@@ -81,8 +74,8 @@ class MainHostActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun handleBottomNavVisibility(visible: Int, view: BottomNavigationView) {
-        view.visibility = visible
+    private fun handleBottomNavVisibility(visible: Int) {
+        mainBottomNavigationView.visibility = visible
     }
 
     private fun handleToolbarVisibility(visible: Int) {

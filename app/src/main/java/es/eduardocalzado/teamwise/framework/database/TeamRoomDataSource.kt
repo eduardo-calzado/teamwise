@@ -1,7 +1,8 @@
 package es.eduardocalzado.teamwise.framework.database
 
 import es.eduardocalzado.teamwise.data.datasource.TeamLocalDataSource
-import es.eduardocalzado.teamwise.domain.Team
+import es.eduardocalzado.teamwise.domain.Team as Team
+import es.eduardocalzado.teamwise.framework.database.Team as TeamDB
 import es.eduardocalzado.teamwise.framework.tryCall
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -26,8 +27,8 @@ class TeamRoomDataSource @Inject constructor(private val teamDao: TeamDao) : Tea
 }
 
 // #MARK: toDomainModel
-private fun List<es.eduardocalzado.teamwise.framework.database.Team>.toDomainModel(): List<Team> = map { it.toDomainModel() }
-private fun es.eduardocalzado.teamwise.framework.database.Team.toDomainModel(): Team =
+private fun List<TeamDB>.toDomainModel(): List<Team> = map { it.toDomainModel() }
+private fun TeamDB.toDomainModel(): Team =
     Team(
         id,
         name,
@@ -46,9 +47,9 @@ private fun es.eduardocalzado.teamwise.framework.database.Team.toDomainModel(): 
     )
 
 // #MARK: fromDomainModel
-private fun List<Team>.fromDomainModel(): List<es.eduardocalzado.teamwise.framework.database.Team> = map { it.fromDomainModel() }
-private fun Team.fromDomainModel(): es.eduardocalzado.teamwise.framework.database.Team =
-    es.eduardocalzado.teamwise.framework.database.Team(
+private fun List<Team>.fromDomainModel(): List<TeamDB> = map { it.fromDomainModel() }
+private fun Team.fromDomainModel(): TeamDB =
+    TeamDB(
         id,
         name,
         code,

@@ -41,16 +41,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         mainState = buildMainState()
         // --
         binding = FragmentMainBinding.bind(view).apply {
-            /*
-            // Header issues
-            val gridLayoutManager = GridLayoutManager(context, 3)
-            gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    return if (position == 0) 3 else 1
-
-                }
-            }
-            teamsRecycler.layoutManager = gridLayoutManager*/
             teamsRecycler.adapter = adapter
             teamsFilterSubmitButton.setOnClickListener {
                 val (country, league, season) = getFiltersData()

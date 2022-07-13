@@ -25,6 +25,12 @@
         tools:layout="@layout/fragment_info">
     </fragment>
     <fragment
+        android:id="@+id/me_dest"
+        android:name="es.eduardocalzado.teamwise.ui.main.me.MeFragment"
+        android:label="@string/me_title"
+        tools:layout="@layout/fragment_me">
+    </fragment>
+    <fragment
         android:id="@+id/detail_dest"
         android:name="es.eduardocalzado.teamwise.ui.detail.stats.DetailFragment"
         android:label="@string/team_title"
@@ -41,12 +47,31 @@
             android:name="seasonId"
             app:argType="integer"
             android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_detail_to_players"
+            app:destination="@id/players_dest"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/players_dest"
         android:name="es.eduardocalzado.teamwise.ui.detail.players.PlayersFragment"
         android:label="@string/players_title"
         tools:layout="@layout/fragment_players" >
+        <argument
+            android:name="teamId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="leagueId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="seasonId"
+            app:argType="integer"
+            android:defaultValue="-1" />
         <action
             android:id="@+id/action_players_to_player"
             app:destination="@id/player_dest"

@@ -27,7 +27,7 @@ data class RemoteTeamDetails(
 
 data class RemoteTeamVenue(
     val id: Int,
-    val name: String,
+    val name: String?,
     val address: String?,
     val city: String?,
     val capacity: Int,

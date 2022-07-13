@@ -9,6 +9,9 @@ interface PlayerLocalDataSource {
 
     suspend fun isEmpty() : Boolean
     fun findById(id: Int): Flow<Player>
+    fun findByTeam(team: Int): Flow<List<Player>>
+    suspend fun filterByTeam(team: Int): List<Player>
     suspend fun save (players: List<Player>): Error?
     suspend fun deletePlayers()
+
 }

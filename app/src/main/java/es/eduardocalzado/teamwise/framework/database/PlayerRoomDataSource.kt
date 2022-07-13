@@ -15,6 +15,10 @@ class PlayerRoomDataSource @Inject constructor(private val playerDao: PlayerDao)
     override suspend fun isEmpty() : Boolean = playerDao.playersCount() == 0
     // -- find the player by id
     override fun findById(id: Int): Flow<Player> = playerDao.findById(id).map { it.toDomainModel() }
+    // -- find the team players
+    override fun findByTeam(team: Int): Flow<List<Player>> = playerDao.findByTeam(team).map { it.toDomainModel() }
+    // -- filter the team players
+    override suspend fun filterByTeam(team: Int): List<Player> = playerDao.filterByTeam(team).map { it.toDomainModel() }
     // -- save the player
     override suspend fun save (players: List<Player>) = tryCall {
         playerDao.insertPlayers(players.fromDomainModel())
@@ -39,7 +43,8 @@ private fun PlayerDB.toDomainModel(): Player =
         height,
         weight,
         injured,
-        photo
+        photo,
+        team,
     )
 
 // #MARK: fromDomainModel
@@ -55,5 +60,6 @@ private fun Player.fromDomainModel(): PlayerDB =
         height,
         weight,
         injured,
-        photo
+        photo,
+        team,
     )

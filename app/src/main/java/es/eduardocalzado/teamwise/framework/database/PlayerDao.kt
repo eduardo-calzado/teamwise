@@ -11,6 +11,12 @@ interface PlayerDao {
     @Query("SELECT * FROM Player WHERE id = :id")
     fun findById(id: Int): Flow<Player>
 
+    @Query("SELECT * FROM Player WHERE team = :team")
+    fun findByTeam(team: Int): Flow<List<Player>>
+
+    @Query("SELECT * FROM Player WHERE team = :team")
+    suspend fun filterByTeam(team: Int): List<Player>
+
     @Query("SELECT COUNT(id) FROM Player")
     suspend fun playersCount(): Int
 

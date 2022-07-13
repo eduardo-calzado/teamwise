@@ -28,6 +28,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         val binding = FragmentDetailBinding.bind(view).apply {
             teamDetailToolbar.setNavigationOnClickListener{findNavController().popBackStack()}
             teamDetailFavorite.setOnClickListener { viewModel.onFavoriteClicked() }
+            teamDetailPlayersButton.setOnClickListener { detailState.onPlayersButtonClicked(viewModel.teamId, viewModel.leagueId, viewModel.seasonId) }
         }
         // --
         viewLifecycleOwner.lifecycleScope.launch {
@@ -36,7 +37,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     binding.team = it.teamData
                     binding.teamStats = it.teamStats
                     binding.error = it.error?.let(detailState::errorToString)
-                    // binding.updateUi(it)
                 }
             }
         }
@@ -46,27 +46,4 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         super.onResume()
         viewModel.onUiReady()
     }
-
-    /*private fun FragmentDetailBinding.updateUi(state: DetailViewModel.UiState) {
-        val stats = state.teamStats
-        with(this) {
-            stats?.let {
-                teamStatsProgressbar.visibility = if(state.loading) View.VISIBLE else View.GONE
-                teamStatsInfo.text = buildSpannedString {
-                    bold { appendLine("League") }
-                    bold { append("\t- Name: ") }
-                    appendLine(it.league_name)
-                    bold { append("\t- Country: ") }
-                    appendLine(it.league_country)
-                    bold { appendLine("\nFixtures") }
-                    bold { append("\t- Draws: ") }
-                    appendLine(it.fixture_draws_total.toString())
-                    bold { append("\t- Loses: ") }
-                    appendLine(it.fixture_loses_total.toString())
-                    bold { append("\t- Wins: ") }
-                    append(it.fixture_wins_total.toString())
-                }
-            }
-        }
-    }*/
 }

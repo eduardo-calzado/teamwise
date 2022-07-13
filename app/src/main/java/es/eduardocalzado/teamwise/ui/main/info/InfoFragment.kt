@@ -5,5 +5,4 @@ import dagger.hilt.android.AndroidEntryPoint
 import es.eduardocalzado.teamwise.R
 
 @AndroidEntryPoint
-class InfoFragment : Fragment(R.layout.fragment_info){
-}
+class InfoFragment : Fragment(R.layout.fragment_info){}

@@ -1,12 +1,10 @@
 <resources>
 <string name="app_name">Teamwise</string>
-    <string name="no_results_found">No teams stored in database. Try to open the filters and search some data.</string>
 
     <!-- errors strings -->
     <string name="connectivity_error">There was a connectivity error. Please check your connection before continue.</string>
     <string name="server_error">No way! There was a server error:\n. </string>
     <string name="unknown_error">No way! There was an unknown error:\n. </string>
-    <string name="no_teams_error">No teams found neither in database nor remote API. Please, try it again later.</string>
 
     <!-- menus names -->
     <string name="menu_teams">Teams</string>
@@ -14,12 +12,14 @@
     <string name="menu_stadiums">Stadiums</string>
     <string name="menu_stats">Stats</string>
     <string name="menu_info">App Info</string>
+    <string name="menu_me">About me</string>
 
     <!-- screens titles -->
     <string name="main_title">Teams</string>
     <string name="info_title">App information</string>
     <string name="team_title">Team</string>
     <string name="players_title">Players</string>
+    <string name="me_title">About me</string>
 
     <!-- screen: teams -->
     <string name="teams_main_header">Initially, your teams are filtered from your location.\nClick on the top right icon to filter results.\nAlso click on a team on the list to see their details.\nYour favorite teams are sorted first.</string>
@@ -28,6 +28,7 @@
     <string name="teams_filters_show">Show filters</string>
     <string name="teams_search_menu_item">Search</string>
     <string name="teams_list_header_example_text">Teams (1234)</string>
+    <string name="teams_not_results_found">No teams found neither in database nor remote API. Please, use the filters above and try again.</string>
 
     <!-- general words -->
     <string name="country">Country</string>
@@ -59,6 +60,10 @@
     <string name="details_stats_fixtures_draws">DRAWS</string>
     <string name="details_stats_fixtures_wins">WINS</string>
     <string name="details_stats_fixtures_loses">LOSES</string>
+    <string name="details_button_view_players">PLAYERS LIST</string>
+
+    <!-- screen: player -->
+    <string name="players_not_results_found">No players found neither in database nor remote API. Please, try it again later.</string>
 
     <!-- screen: player -->
     <string name="player_title">Player</string>
@@ -76,6 +81,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="unknown">Unknown</string>
+    <string name="teams_search_bar">SEARCH</string>
 
     <!-- arrays -->
     <string-array name="countries">

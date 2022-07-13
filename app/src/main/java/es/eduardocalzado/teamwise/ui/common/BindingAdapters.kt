@@ -2,6 +2,7 @@ package es.eduardocalzado.teamwise.ui.common
 
 import android.annotation.SuppressLint
 import android.view.View
+import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -23,6 +24,11 @@ fun View.setVisible(visible: Boolean?) {
 @BindingAdapter("value")
 fun TextView.setText(value: Int?) {
     text = value.toString()
+}
+
+@BindingAdapter("webUrl")
+fun WebView.setUrl(url: String) {
+    this.loadUrl(url)
 }
 
 @BindingAdapter("boolValue")

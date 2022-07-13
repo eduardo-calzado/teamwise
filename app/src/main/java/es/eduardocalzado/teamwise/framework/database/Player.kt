@@ -14,5 +14,6 @@ data class Player (
     val height: String?,
     val weight: String?,
     val injured: Boolean,
-    val photo: String
+    val photo: String,
+    val team: Int,
 )

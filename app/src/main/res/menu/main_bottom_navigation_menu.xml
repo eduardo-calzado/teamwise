@@ -11,4 +11,9 @@
         android:enabled="true"
         android:icon="@drawable/ic_info"
         android:title="@string/menu_info"/>
+    <item
+        android:id="@+id/me_dest"
+        android:enabled="true"
+        android:icon="@drawable/ic_user"
+        android:title="@string/menu_me"/>
 </menu>

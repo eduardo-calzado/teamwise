@@ -19,9 +19,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    @TeamId private val teamId: Int,
-    @LeagueId private val leagueId: Int,
-    @SeasonId private val seasonId: Int,
+    @TeamId val teamId: Int,
+    @LeagueId val leagueId: Int,
+    @SeasonId val seasonId: Int,
     private val findTeamUseCase: FindTeamUseCase,
     private val requestTeamStatsUseCase: RequestTeamStatsUseCase,
     private val switchTeamFavoriteUseCase: SwitchTeamFavoriteUseCase,
@@ -45,6 +45,8 @@ class DetailViewModel @Inject constructor(
                     _state.value = UiState(teamData = value)
                 }
         }
+
+
     }
 
     fun onUiReady() {

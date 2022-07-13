@@ -2,6 +2,14 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/search_team"
+        android:enabled="true"
+        android:icon="@drawable/ic_search"
+        android:title="@string/teams_search_bar"
+        app:iconTint="@color/white"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/showFilters"
         android:enabled="true"
         android:icon="@drawable/ic_filter"
