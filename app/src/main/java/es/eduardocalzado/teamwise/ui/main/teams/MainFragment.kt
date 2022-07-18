@@ -15,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentMainBinding
 import es.eduardocalzado.teamwise.domain.getTeamLeagueIdByName
+import es.eduardocalzado.teamwise.prefs
 import es.eduardocalzado.teamwise.ui.main.teams.MainState.MainFilters.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -107,6 +108,7 @@ class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
         val country = binding.teamsTilTvCountry.text.toString()
         val league = getTeamLeagueIdByName(binding.teamsTilTvLeague.text.toString())
         val season = binding.teamsTilTvSeason.text.toString().toInt()
+
         return Triple(country, league, season)
     }
 

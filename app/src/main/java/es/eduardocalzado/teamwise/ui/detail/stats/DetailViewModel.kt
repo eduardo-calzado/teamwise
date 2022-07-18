@@ -1,9 +1,11 @@
 package es.eduardocalzado.teamwise.ui.detail.stats
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.Either
 import dagger.hilt.android.lifecycle.HiltViewModel
+import es.eduardocalzado.teamwise.data.Constants
 import es.eduardocalzado.teamwise.di.LeagueId
 import es.eduardocalzado.teamwise.di.SeasonId
 import es.eduardocalzado.teamwise.di.TeamId
@@ -52,6 +54,7 @@ class DetailViewModel @Inject constructor(
     fun onUiReady() {
         viewModelScope.launch {
             _state.update { it.copy(loading = true) }
+            Log.d(Constants.TAG, "[DetailViewModel.onUiReady] teamId: $teamId seasonId: $seasonId, leagueId: $leagueId")
             when (val request = requestTeamStatsUseCase(leagueId, seasonId, teamId)) {
                 is Either.Left -> _state.update { it.copy(error = request.value) }
                 is Either.Right -> _state.update { it.copy(teamStats = request.value) }

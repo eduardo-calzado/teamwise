@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import es.eduardocalzado.teamwise.R
+import es.eduardocalzado.teamwise.data.Constants
 import es.eduardocalzado.teamwise.domain.Error
 import kotlinx.coroutines.CoroutineScope
 
@@ -23,7 +24,7 @@ class PlayersState(
 ) {
 
     fun onPlayerClicked(playerId: Int) {
-        Log.d("test", "playerID: $playerId")
+        Log.d(Constants.TAG, "[PlayersState.onPlayerClicked] playerID: $playerId")
         val navAction = PlayersFragmentDirections.actionPlayersToPlayer(playerId)
         navController.navigate(navAction)
     }
