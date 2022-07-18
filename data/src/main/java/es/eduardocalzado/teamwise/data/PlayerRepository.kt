@@ -20,6 +20,8 @@ class PlayerRepository @Inject constructor(
 
     fun findByTeam(team: Int) : Flow<List<Player>> = localDataSource.findByTeam(team)
 
+    fun searchPlayers(query: String) = localDataSource.searchPlayers(query)
+
     suspend fun requestPlayersByTeam(team: Int, season: Int): Error? {
         if (localDataSource.filterByTeam(team).isNullOrEmpty()) {
             val playersData = remoteDataSource.getPlayersByTeam(team, season)

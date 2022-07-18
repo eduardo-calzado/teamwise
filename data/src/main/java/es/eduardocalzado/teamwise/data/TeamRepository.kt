@@ -19,6 +19,8 @@ class TeamRepository @Inject constructor(
 
     fun findById(id: Int) : Flow<Team> = localDataSource.findById(id)
 
+    fun searchTeams(query: String) = localDataSource.searchTeams(query)
+
     suspend fun requestTeamsByRegion(): Error? {
         if (localDataSource.isEmpty()) {
             val teamData = remoteDataSource.getTeamsByRegion(regionRepository.findLastRegion())

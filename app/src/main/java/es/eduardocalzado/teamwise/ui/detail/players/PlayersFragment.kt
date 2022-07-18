@@ -1,7 +1,10 @@
 package es.eduardocalzado.teamwise.ui.detail.players
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -14,7 +17,7 @@ import es.eduardocalzado.teamwise.databinding.FragmentPlayersBinding
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class PlayersFragment : Fragment(R.layout.fragment_players) {
+class PlayersFragment : Fragment(R.layout.fragment_players), SearchView.OnQueryTextListener {
 
     private val viewModel: PlayersViewModel by viewModels()
 
@@ -27,6 +30,7 @@ class PlayersFragment : Fragment(R.layout.fragment_players) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
         super.onViewCreated(view, savedInstanceState)
         playersState = buildPlayersState()
         // --
@@ -48,5 +52,29 @@ class PlayersFragment : Fragment(R.layout.fragment_players) {
     override fun onResume() {
         super.onResume()
         viewModel.onUiReady()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.search_menu, menu)
+
+        val search = menu?.findItem(R.id.menu_item_search)
+        val searchView = search?.actionView as SearchView
+        searchView.setOnQueryTextListener(this)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onQueryTextSubmit(p0: String?): Boolean {
+        searchDatabase(p0 ?: "")
+        return true
+    }
+
+    override fun onQueryTextChange(p0: String?): Boolean {
+        searchDatabase(p0 ?: "")
+        return true
+    }
+
+    private fun searchDatabase(query: String) {
+        viewModel.searchPlayers("%$query%")
     }
 }

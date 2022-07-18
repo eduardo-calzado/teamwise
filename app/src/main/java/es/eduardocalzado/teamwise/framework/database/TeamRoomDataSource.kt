@@ -15,9 +15,11 @@ class TeamRoomDataSource @Inject constructor(private val teamDao: TeamDao) : Tea
     override suspend fun isEmpty() : Boolean = teamDao.teamCount() == 0
     // -- find the team by id
     override fun findById(id: Int): Flow<Team> = teamDao.findById(id).map { it.toDomainModel() }
+    // -- search the team
+    override fun searchTeams(query: String): Flow<List<Team>> = teamDao.searchTeams(query).map { it.toDomainModel() }
     // -- save the team
     override suspend fun save (teams: List<Team>) = tryCall {
-        teamDao.insertTeam(teams.fromDomainModel())
+        teamDao.insertTeams(teams.fromDomainModel())
     }.fold(
         ifLeft = { it },
         ifRight = { null }

@@ -3,13 +3,12 @@ package es.eduardocalzado.teamwise.ui.main.teams
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import es.eduardocalzado.teamwise.data.TeamRepository
 import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.framework.toError
-import es.eduardocalzado.teamwise.usecases.DeleteTeamsUseCase
-import es.eduardocalzado.teamwise.usecases.GetTeamsUseCase
-import es.eduardocalzado.teamwise.usecases.RequestTeamsByRegionUseCase
-import es.eduardocalzado.teamwise.usecases.RequestTeamsUseCase
+import es.eduardocalzado.teamwise.usecases.*
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,6 +19,7 @@ class MainViewModel @Inject constructor(
     private val requestTeamsByRegionUseCase: RequestTeamsByRegionUseCase,
     private val requestTeamsUseCase: RequestTeamsUseCase,
     private val deleteTeamsUseCase: DeleteTeamsUseCase,
+    private val searchTeamsUseCase: SearchTeamsUseCase,
 ): ViewModel() {
 
     data class UiState(
@@ -60,6 +60,18 @@ class MainViewModel @Inject constructor(
     fun onDeleteClicked() {
         viewModelScope.launch {
             deleteTeamsUseCase()
+        }
+    }
+
+    fun searchTeams(query: String) {
+        viewModelScope.launch {
+            searchTeamsUseCase(query)
+                .catch { cause -> _state.update {
+                    it.copy(error = cause.toError()) }
+                }
+                .collect { teams -> _state.update {
+                    UiState(teams = teams) }
+                }
         }
     }
 }

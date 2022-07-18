@@ -25,7 +25,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
     private lateinit var binding: FragmentPlayerBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setHasOptionsMenu(true)
         super.onViewCreated(view, savedInstanceState)
         playerState = buildPlayerState()
         // --
@@ -39,21 +38,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
                     binding.player = it.player
                 }
             }
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.search_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
-            R.id.search -> {
-                print("do whatever")
-                true
-            }
-            else -> false
         }
     }
 }

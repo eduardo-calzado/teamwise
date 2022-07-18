@@ -15,6 +15,7 @@ import es.eduardocalzado.teamwise.ui.main.teams.MainViewModel
 import es.eduardocalzado.teamwise.usecases.FindPlayersByTeamUseCase
 import es.eduardocalzado.teamwise.usecases.GetPlayersUseCase
 import es.eduardocalzado.teamwise.usecases.RequestPlayersByTeamUseCase
+import es.eduardocalzado.teamwise.usecases.SearchPlayersUseCase
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,9 +25,9 @@ class PlayersViewModel @Inject constructor(
     @TeamId val teamId: Int,
     @LeagueId val leagueId: Int,
     @SeasonId val seasonId: Int,
-    private val getPlayersUseCase: GetPlayersUseCase,
     private val requestPlayersByTeamUseCase: RequestPlayersByTeamUseCase,
     private val findPlayersByTeamUseCase: FindPlayersByTeamUseCase,
+    private val searchPlayersUseCase: SearchPlayersUseCase,
 ): ViewModel() {
 
     data class UiState(
@@ -52,6 +53,13 @@ class PlayersViewModel @Inject constructor(
             val error = requestPlayersByTeamUseCase(teamId, seasonId)
             _state.update { it.copy(error = error) }
             _state.update { it.copy(loading = false) }
+        }
+    }
+
+    fun searchPlayers(query: String) {
+        viewModelScope.launch {
+            searchPlayersUseCase(query)
+                .collect { players -> _state.update { UiState(players = players) } }
         }
     }
 }

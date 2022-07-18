@@ -2,6 +2,7 @@ package es.eduardocalzado.teamwise.framework.database
 
 import es.eduardocalzado.teamwise.data.datasource.PlayerLocalDataSource
 import es.eduardocalzado.teamwise.domain.Player
+import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.framework.tryCall
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -17,6 +18,8 @@ class PlayerRoomDataSource @Inject constructor(private val playerDao: PlayerDao)
     override fun findById(id: Int): Flow<Player> = playerDao.findById(id).map { it.toDomainModel() }
     // -- find the team players
     override fun findByTeam(team: Int): Flow<List<Player>> = playerDao.findByTeam(team).map { it.toDomainModel() }
+    // -- search the team
+    override fun searchPlayers(query: String): Flow<List<Player>> = playerDao.searchPlayers(query).map { it.toDomainModel() }
     // -- filter the team players
     override suspend fun filterByTeam(team: Int): List<Player> = playerDao.filterByTeam(team).map { it.toDomainModel() }
     // -- save the player

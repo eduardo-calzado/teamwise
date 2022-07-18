@@ -15,11 +15,17 @@ interface TeamDao {
     suspend fun teamCount(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTeam(teams: List<Team>)
+    suspend fun insertTeams(teams: List<Team>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTeam(team: Team)
 
     @Update
     fun updateTeam(team: Team)
 
     @Query("DELETE FROM Team")
     suspend fun deleteTeams()
+
+    @Query("SELECT * FROM Team WHERE name LIKE :teamName")
+    fun searchTeams(teamName: String?): Flow<List<Team>>
 }

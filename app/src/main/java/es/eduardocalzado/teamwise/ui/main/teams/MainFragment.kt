@@ -1,28 +1,26 @@
 package es.eduardocalzado.teamwise.ui.main.teams
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.AdapterView
+import android.widget.SearchView
+import android.widget.SearchView.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentMainBinding
-import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.domain.getTeamLeagueIdByName
 import es.eduardocalzado.teamwise.ui.main.teams.MainState.MainFilters.*
-import es.eduardocalzado.teamwise.usecases.sampleTeam
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainFragment : Fragment(R.layout.fragment_main) {
+class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -86,12 +84,17 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
+
+        val search = menu?.findItem(R.id.main_search_team)
+        val searchView = search?.actionView as SearchView
+        searchView.setOnQueryTextListener(this)
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
-            R.id.showFilters -> { mainState.toggleVisibility(binding); true }
+            R.id.show_filters -> { mainState.toggleVisibility(binding); true }
             else -> false
         }
     }
@@ -105,5 +108,19 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         val league = getTeamLeagueIdByName(binding.teamsTilTvLeague.text.toString())
         val season = binding.teamsTilTvSeason.text.toString().toInt()
         return Triple(country, league, season)
+    }
+
+    override fun onQueryTextSubmit(p0: String?): Boolean {
+        searchDatabase(p0 ?: "")
+        return true
+    }
+
+    override fun onQueryTextChange(p0: String?): Boolean {
+        searchDatabase(p0 ?: "")
+        return true
+    }
+
+    private fun searchDatabase(query: String) {
+        viewModel.searchTeams("%$query%")
     }
 }

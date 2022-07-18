@@ -2,6 +2,7 @@ package es.eduardocalzado.teamwise.data.datasource
 
 import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Player
+import es.eduardocalzado.teamwise.domain.Team
 import kotlinx.coroutines.flow.Flow
 
 interface PlayerLocalDataSource {
@@ -13,5 +14,5 @@ interface PlayerLocalDataSource {
     suspend fun filterByTeam(team: Int): List<Player>
     suspend fun save (players: List<Player>): Error?
     suspend fun deletePlayers()
-
+    fun searchPlayers(query: String): Flow<List<Player>>
 }
