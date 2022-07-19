@@ -57,7 +57,7 @@ class PlayersFragment : Fragment(R.layout.fragment_players), SearchView.OnQueryT
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.search_menu, menu)
 
-        val search = menu?.findItem(R.id.menu_item_search)
+        val search = menu.findItem(R.id.menu_item_search)
         val searchView = search?.actionView as SearchView
         searchView.setOnQueryTextListener(this)
 

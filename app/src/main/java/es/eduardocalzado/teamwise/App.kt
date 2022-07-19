@@ -22,4 +22,9 @@ class App: Application()
         instance = this
         prefs = Prefs(applicationContext)
     }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        prefs?.firstInstall = false
+    }
 }

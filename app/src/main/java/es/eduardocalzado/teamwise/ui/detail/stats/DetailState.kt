@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.domain.Error
+import es.eduardocalzado.teamwise.prefs
 import es.eduardocalzado.teamwise.ui.detail.players.PlayersFragmentDirections
 
 fun Fragment.buildDetailState(

@@ -7,7 +7,7 @@ import es.eduardocalzado.teamwise.ui.detail.stats.buildRepositoryWith
 import es.eduardocalzado.teamwise.ui.detail.stats.DetailViewModel.UiState
 import es.eduardocalzado.teamwise.usecases.FindTeamUseCase
 import es.eduardocalzado.teamwise.usecases.SwitchTeamFavoriteUseCase
-import es.eduardocalzado.teamwise.usecases.sampleTeam
+import es.eduardocalzado.teamwise.sampleTeam
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

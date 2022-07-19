@@ -22,9 +22,7 @@ class MainHostActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // TODO
-        // this was the cleanest way to show a splashscreen layout (not using Splashscreen API)
-        // Thread.sleep(1000)
+        Thread.sleep(1000)
         setTheme(R.style.Theme_Teamwise_Main)
 
         super.onCreate(savedInstanceState)

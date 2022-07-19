@@ -125,7 +125,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/teams_filter_layout"
             android:gravity="center"
-            android:padding="16dp"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:text="@string/teams_main_header"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
             android:textSize="14sp" />
@@ -143,7 +146,7 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:visible="@{error != null}" />
+            app:visible="@{error != null &amp;&amp; loading == false}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/teams_recycler"
@@ -155,7 +158,7 @@
             app:items="@{teams}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="3"
-            app:visible="@{ error == null || teams.size == 0 }" />
+            app:visible="@{ error == null &amp;&amp; !teams.empty &amp;&amp; loading == false }" />
 
         <ProgressBar
             android:id="@+id/teams_progress_bar"
@@ -165,16 +168,18 @@
             app:visible="@{loading}" />
 
         <TextView
+            android:id="@+id/teams_not_found"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/teams_filter_layout"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="3dp"
             android:gravity="center"
             android:padding="32dp"
             android:text="@string/teams_not_results_found"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-            android:textSize="16sp"
-            android:visibility="invisible"
-            app:visible="@{teams.empty &amp;&amp; loading == false}" />
+            android:textSize="14sp"
+            app:visible="@{ error == null &amp;&amp; teams.empty &amp;&amp; loading == false}" />
 
     </RelativeLayout>
 

@@ -16,7 +16,7 @@ class TeamRoomDataSource @Inject constructor(private val teamDao: TeamDao) : Tea
     // -- find the team by id
     override fun findById(id: Int): Flow<Team> = teamDao.findById(id).map { it.toDomainModel() }
     // -- search the team
-    override fun searchTeams(query: String): Flow<List<Team>> = teamDao.searchTeams(query).map { it.toDomainModel() }
+    override fun searchTeams(search: String): Flow<List<Team>> = teamDao.searchTeams(search).map { it.toDomainModel() }
     // -- save the team
     override suspend fun save (teams: List<Team>) = tryCall {
         teamDao.insertTeams(teams.fromDomainModel())

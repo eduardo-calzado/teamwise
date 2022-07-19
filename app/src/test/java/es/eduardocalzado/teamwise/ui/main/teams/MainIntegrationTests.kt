@@ -6,11 +6,10 @@ import es.eduardocalzado.teamwise.data.TeamRepository
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.testrules.CoroutinesTestRule
 import es.eduardocalzado.teamwise.ui.*
-import es.eduardocalzado.teamwise.ui.main.teams.MainViewModel
 import es.eduardocalzado.teamwise.ui.main.teams.MainViewModel.*
 import es.eduardocalzado.teamwise.usecases.GetTeamsUseCase
 import es.eduardocalzado.teamwise.usecases.RequestTeamsByRegionUseCase
-import es.eduardocalzado.teamwise.usecases.sampleTeam
+import es.eduardocalzado.teamwise.sampleTeam
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

@@ -9,6 +9,7 @@ import es.eduardocalzado.teamwise.data.datasource.LocationDataSource
 import com.google.android.gms.location.LocationServices
 import es.eduardocalzado.teamwise.data.Constants
 import es.eduardocalzado.teamwise.data.RegionRepository
+import es.eduardocalzado.teamwise.prefs
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.util.*
 import javax.inject.Inject
@@ -45,11 +46,13 @@ class PlayServicesLocationDataSource @Inject constructor (application: Applicati
     private fun getCountryName(countryCode: String?): String {
         if (countryCode.isNullOrBlank()) {
             Log.w(Constants.TAG, "[PlayerServicesLocationDataSource.getCountryName] country code is null. Probably google places is not working as expect. The default value will be: $RegionRepository.DEFAULT_REGION")
+            prefs.localization = RegionRepository.DEFAULT_REGION
             return RegionRepository.DEFAULT_REGION
         }
         val loc = Locale("", countryCode)
         val result = loc.getDisplayCountry(Locale("EN"))
         Log.d(Constants.TAG, "[PlayerServicesLocationDataSource.getCountryName] country code is: $result")
+        prefs.localization = result
         return result
     }
 }

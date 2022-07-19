@@ -1,8 +1,10 @@
 package es.eduardocalzado.teamwise.ui.main.teams
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import es.eduardocalzado.teamwise.data.Constants
 import es.eduardocalzado.teamwise.data.TeamRepository
 import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Team
@@ -17,11 +19,11 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getTeamsUseCase: GetTeamsUseCase,
-    private val requestTeamsByRegionUseCase: RequestTeamsByRegionUseCase,
     private val requestTeamsUseCase: RequestTeamsUseCase,
     private val deleteTeamsUseCase: DeleteTeamsUseCase,
     private val searchTeamsUseCase: SearchTeamsUseCase,
-): ViewModel() {
+    private val getRegionRepositoryUseCase: GetRegionRepositoryUseCase,
+    ): ViewModel() {
 
     data class UiState(
         val loading: Boolean = false,
@@ -40,14 +42,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun onUiReady() {
-        viewModelScope.launch {
-            _state.update { it.copy(loading = true) }
-            val error = requestTeamsByRegionUseCase()
-            _state.update { it.copy(error = error) }
-            _state.update { it.copy(loading = false) }
-        }
-    }
+    suspend fun onRequestLastRegion() = getRegionRepositoryUseCase()
 
     fun onSubmitClicked(country: String, league: Int, season: Int) {
         viewModelScope.launch {
@@ -67,16 +62,8 @@ class MainViewModel @Inject constructor(
     fun searchTeams(query: String) {
         viewModelScope.launch {
             searchTeamsUseCase(query)
-                .catch { cause ->
-                    _state.update {
-                        it.copy(error = cause.toError())
-                    }
-                }
-                .collect { teams ->
-                    _state.update {
-                        UiState(teams = teams)
-                    }
-                }
+                .catch { cause -> _state.update { it.copy(error = cause.toError()) } }
+                .collect { teams -> _state.update { UiState(teams = teams) } }
         }
     }
 }

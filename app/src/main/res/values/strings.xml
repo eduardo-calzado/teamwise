@@ -22,13 +22,15 @@
     <string name="me_title">About me</string>
 
     <!-- screen: teams -->
-    <string name="teams_main_header">Initially, your teams are filtered from your location.\nClick on the top right icon to filter results.\nAlso click on a team on the list to see their details.\nYour favorite teams are sorted first.</string>
+    <string name="teams_main_header">You can use the toolbar icons to request teams from your location or request it by some filters. Also, click on a team on the list to see their details. Additionally, your favorite teams will be sort first.</string>
     <string name="teams_filter_submit">submit</string>
     <string name="teams_filter_clear">clear</string>
     <string name="teams_filters_show">Show filters</string>
     <string name="teams_search_menu_item">Search</string>
     <string name="teams_list_header_example_text">Teams (1234)</string>
-    <string name="teams_not_results_found">No teams found neither in database nor remote API. Please, use the filters above and try again.</string>
+    <string name="teams_not_results_found">No teams found in local database.\nPlease, use the toolbar icons to get them.</string>
+    <string name="teams_search_bar">SEARCH</string>
+    <string name="teams_location_bar">Get location</string>
 
     <!-- general words -->
     <string name="country">Country</string>
@@ -81,7 +83,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="unknown">Unknown</string>
-    <string name="teams_search_bar">SEARCH</string>
 
     <!-- arrays -->
     <string-array name="countries">

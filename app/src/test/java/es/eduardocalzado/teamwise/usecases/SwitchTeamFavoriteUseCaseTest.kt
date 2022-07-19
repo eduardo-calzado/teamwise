@@ -1,6 +1,7 @@
 package es.eduardocalzado.teamwise.usecases
 
 import es.eduardocalzado.teamwise.data.TeamRepository
+import es.eduardocalzado.teamwise.sampleTeam
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.mockito.kotlin.mock

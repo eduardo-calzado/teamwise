@@ -2,12 +2,10 @@ package es.eduardocalzado.teamwise.framework.server
 
 import arrow.core.Either
 import es.eduardocalzado.teamwise.data.datasource.TeamRemoteDataSource
-import es.eduardocalzado.teamwise.domain.Team
-import es.eduardocalzado.teamwise.domain.Error
-import es.eduardocalzado.teamwise.domain.Player
-import es.eduardocalzado.teamwise.domain.TeamStats
+import es.eduardocalzado.teamwise.domain.*
 import es.eduardocalzado.teamwise.framework.tryCall
 import javax.inject.Inject
+import kotlin.math.log
 
 class TeamServerDataSource @Inject constructor () : TeamRemoteDataSource {
     /**
@@ -42,8 +40,6 @@ class TeamServerDataSource @Inject constructor () : TeamRemoteDataSource {
             .stats
             .toDomainModel()
     }
-
-    // override suspend fun getTeams() = RemoteConnection.service.getTeams(Constants.LEAGUE, Constants.SEASON)
 }
 
 // #MARK: RemoteTeam.toDomainModel

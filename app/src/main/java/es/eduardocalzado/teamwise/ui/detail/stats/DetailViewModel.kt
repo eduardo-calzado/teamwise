@@ -15,7 +15,10 @@ import es.eduardocalzado.teamwise.domain.TeamStats
 import es.eduardocalzado.teamwise.usecases.FindTeamUseCase
 import es.eduardocalzado.teamwise.usecases.RequestTeamStatsUseCase
 import es.eduardocalzado.teamwise.usecases.SwitchTeamFavoriteUseCase
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -43,12 +46,10 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             findTeamUseCase(teamId)
                 .collect {
-                    value -> println("Collected team: $value")
+                    value -> println("[DetailViewModel.init] team: $value")
                     _state.value = UiState(teamData = value)
                 }
         }
-
-
     }
 
     fun onUiReady() {

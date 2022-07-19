@@ -4,7 +4,7 @@ import app.cash.turbine.test
 import es.eduardocalzado.teamwise.testrules.CoroutinesTestRule
 import es.eduardocalzado.teamwise.usecases.FindTeamUseCase
 import es.eduardocalzado.teamwise.usecases.SwitchTeamFavoriteUseCase
-import es.eduardocalzado.teamwise.usecases.sampleTeam
+import es.eduardocalzado.teamwise.sampleTeam
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runCurrent

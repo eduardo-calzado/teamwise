@@ -2,12 +2,17 @@ package es.eduardocalzado.teamwise.ui.main.teams
 
 import android.Manifest
 import android.content.Context
+import android.util.Log
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import es.eduardocalzado.teamwise.R
+import es.eduardocalzado.teamwise.data.Constants
+import es.eduardocalzado.teamwise.data.RegionRepository
+import es.eduardocalzado.teamwise.data.TeamRepository
 import es.eduardocalzado.teamwise.databinding.FragmentMainBinding
 import es.eduardocalzado.teamwise.di.LeagueId
 import es.eduardocalzado.teamwise.di.SeasonId
@@ -60,7 +65,7 @@ class MainState(
     }
 
     enum class MainFilters { Country, League, Season }
-    fun initFilter(filter: MainFilters, country: String? = null): ArrayAdapter<String> {
+    fun loadData(filter: MainFilters, country: String? = null): ArrayAdapter<String> {
         return when (filter) {
             Country -> {
                 val countries = context.resources.getStringArray(R.array.countries)

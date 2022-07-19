@@ -2,7 +2,7 @@ package es.eduardocalzado.teamwise.data
 
 import es.eduardocalzado.teamwise.data.datasource.TeamLocalDataSource
 import es.eduardocalzado.teamwise.data.datasource.TeamRemoteDataSource
-import es.eduardocalzado.teamwise.usecases.sampleTeam
+import es.eduardocalzado.teamwise.sampleTeam
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals

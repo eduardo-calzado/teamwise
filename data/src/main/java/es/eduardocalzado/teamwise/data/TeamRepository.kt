@@ -5,7 +5,6 @@ import es.eduardocalzado.teamwise.data.datasource.TeamLocalDataSource
 import es.eduardocalzado.teamwise.data.datasource.TeamRemoteDataSource
 import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Team
-import es.eduardocalzado.teamwise.domain.Player
 import es.eduardocalzado.teamwise.domain.TeamStats
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -21,6 +20,10 @@ class TeamRepository @Inject constructor(
 
     fun searchTeams(query: String) = localDataSource.searchTeams(query)
 
+    suspend fun deleteTeams() = localDataSource.deleteTeams()
+
+    suspend fun getRegionRepository(): String = regionRepository.findLastRegion()
+
     suspend fun requestTeamsByRegion(): Error? {
         if (localDataSource.isEmpty()) {
             val teamData = remoteDataSource.getTeamsByRegion(regionRepository.findLastRegion())
@@ -31,10 +34,9 @@ class TeamRepository @Inject constructor(
         return null
     }
 
-    suspend fun deleteTeams() = localDataSource.deleteTeams()
-
     suspend fun requestTeams(country: String, league: Int, season: Int): Error? {
-        if (!localDataSource.isEmpty()) localDataSource.deleteTeams()
+        if (!localDataSource.isEmpty())
+            localDataSource.deleteTeams()
         val teamData = remoteDataSource.getTeams(country, league, season)
         teamData.fold(ifLeft = { return it }) {
             localDataSource.save(it)
@@ -42,9 +44,8 @@ class TeamRepository @Inject constructor(
         return null
     }
 
-    suspend fun requestTeamStats(league: Int, season: Int, team: Int): Either<Error, TeamStats> {
-        return remoteDataSource.getTeamStats(league, season, team)
-    }
+    suspend fun requestTeamStats(league: Int, season: Int, team: Int): Either<Error, TeamStats> =
+        remoteDataSource.getTeamStats(league, season, team)
 
     suspend fun switchFavorite(team: Team) : Error? {
         val updatedTeam = team.copy(favorite = !team.favorite)

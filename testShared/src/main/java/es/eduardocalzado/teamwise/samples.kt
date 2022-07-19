@@ -1,20 +1,20 @@
-package es.eduardocalzado.teamwise.usecases
+package es.eduardocalzado.teamwise
 
 import es.eduardocalzado.teamwise.domain.Team
 
 val sampleTeam = Team (
-    0,
-    "Racing de Santander",
-    "SDR",
+    4665,
+    "Racing Santander",
+    "SAN",
     "Spain",
     1913,
     false,
-    "",
-    "",
+    "https://media.api-sports.io/football/teams/4665.png",
+    "Calle del Real Racing Club",
     "Santander",
-    22222,
+    22271,
     "grass",
-    "",
-    "El Sardinero",
+    "https://media.api-sports.io/football/venues/3516.png",
+    "Campos de Sport de El Sardinero",
     true,
 )

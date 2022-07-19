@@ -1,5 +1,6 @@
 package es.eduardocalzado.teamwise.usecases
 
+import es.eduardocalzado.teamwise.sampleTeam
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*

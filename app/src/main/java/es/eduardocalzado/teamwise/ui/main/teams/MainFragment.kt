@@ -1,6 +1,7 @@
 package es.eduardocalzado.teamwise.ui.main.teams
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.SearchView
@@ -8,16 +9,16 @@ import android.widget.SearchView.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import es.eduardocalzado.teamwise.R
+import es.eduardocalzado.teamwise.data.Constants
 import es.eduardocalzado.teamwise.databinding.FragmentMainBinding
 import es.eduardocalzado.teamwise.domain.getTeamLeagueIdByName
 import es.eduardocalzado.teamwise.prefs
+import es.eduardocalzado.teamwise.ui.common.toggleVisibility
 import es.eduardocalzado.teamwise.ui.main.teams.MainState.MainFilters.*
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -44,49 +45,33 @@ class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
             teamsFilterSubmitButton.setOnClickListener {
                 val (country, league, season) = getFiltersData()
                 viewModel.onSubmitClicked(country, league, season)
+                mainState.toggleVisibility(binding)
             }
-            teamsFilterClearButton.setOnClickListener{
+            teamsFilterClearButton.setOnClickListener {
                 viewModel.onDeleteClicked()
             }
         }
         // --
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                 viewModel.state.collect { it ->
+                 viewModel.state.collect {
                      binding.loading = it.loading
                      binding.teams = it.teams?.let(mainState::sortTeams)
                      binding.error = it.error?.let(mainState::errorToString)
                  }
             }
         }
-        // --
-        mainState.requestLocationPermission {
-            viewModel.onUiReady()
-        }
     }
 
     override fun onResume() {
         super.onResume()
-        // -- fill the filter's adapters
-        with(binding) {
-            // -- init filters
-            teamsTilTvCountry.setAdapter(mainState.initFilter(Country))
-            val country = teamsTilTvCountry.text.toString()
-            teamsTilTvLeague.setAdapter(mainState.initFilter(League, country))
-            teamsTilTvSeason.setAdapter(mainState.initFilter(Season))
-            // -- handle nested filters
-            teamsTilTvCountry.onItemClickListener = AdapterView.OnItemClickListener { _, _, _, _ ->
-                val leaguesAdapter = mainState.initFilter(League, teamsTilTvCountry.text.toString())
-                teamsTilTvLeague.setText(leaguesAdapter.getItem(0).toString())
-                teamsTilTvLeague.setAdapter(leaguesAdapter)
-            }
-        }
+        loadFilters()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
 
-        val search = menu?.findItem(R.id.main_search_team)
+        val search = menu.findItem(R.id.main_search_team)
         val searchView = search?.actionView as SearchView
         searchView.setOnQueryTextListener(this)
 
@@ -96,9 +81,57 @@ class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.show_filters -> { mainState.toggleVisibility(binding); true }
+            R.id.main_location -> {
+                mainState.requestLocationPermission {
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        with(binding) {
+                            loadFilters(getLocation())
+                            mainState.toggleVisibility(binding)
+                            teamsFilterSubmitButton.run { callOnClick() }
+                        }
+                    }
+                }
+                true
+            }
             else -> false
         }
     }
+
+    /**
+     * loadFilters. Load data of the filters. BE CAUTION, they loose the context when you go back,
+     * and that's the reason to be called in onResume.
+     */
+    private fun loadFilters(region: String? = null) {
+        with(binding) {
+            val country = when (region.isNullOrEmpty()) {
+                true -> teamsTilTvCountry.text.toString()
+                false -> region
+            }
+            teamsTilTvCountry.setAdapter(mainState.loadData(Country))
+            teamsTilTvCountry.setText(country, false)
+            val leaguesAdapter = mainState.loadData(League, teamsTilTvCountry.text.toString())
+            teamsTilTvLeague.setText(leaguesAdapter.getItem(0).toString())
+            teamsTilTvLeague.setAdapter(leaguesAdapter)
+            teamsTilTvSeason.setAdapter(mainState.loadData(Season))
+            // -- onItemClickListener
+            teamsTilTvCountry.onItemClickListener = AdapterView.OnItemClickListener { _, _, _, _ ->
+                val leaguesAdapter = mainState.loadData(League, teamsTilTvCountry.text.toString())
+                teamsTilTvLeague.setText(leaguesAdapter.getItem(0).toString())
+                teamsTilTvLeague.setAdapter(leaguesAdapter)
+            }
+
+            if (prefs.firstInstall) {
+                teamsFilterSubmitButton.callOnClick()
+                mainState.toggleVisibility(binding)
+            }
+        }
+    }
+
+
+    /**
+     * getLocation. returns the country where the user is located
+     */
+    private suspend fun getLocation() = viewModel.onRequestLastRegion()
 
     /**
      * getFiltersData. Return the triple value of the filters:
@@ -112,17 +145,19 @@ class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
         return Triple(country, league, season)
     }
 
+    /**
+     * onQuery*. Methods used by the search view
+     * @return true
+     */
     override fun onQueryTextSubmit(p0: String?): Boolean {
-        searchDatabase(p0 ?: "")
+        val query = p0 ?: ""
+        viewModel.searchTeams("%$query%")
         return true
     }
 
     override fun onQueryTextChange(p0: String?): Boolean {
-        searchDatabase(p0 ?: "")
-        return true
-    }
-
-    private fun searchDatabase(query: String) {
+        val query = p0 ?: ""
         viewModel.searchTeams("%$query%")
+        return true
     }
 }

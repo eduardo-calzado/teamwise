@@ -17,18 +17,18 @@ enum class TeamLeague (val id: Int, val description: String) {
 
 
 fun getTeamLeagueIdByName(leagueName: String) : Int {
-    when(leagueName) {
-        PREMIER_LEAGUE.description -> return PREMIER_LEAGUE.id
-        EFL_CHAMPIONSHIP.description -> return EFL_CHAMPIONSHIP.id
-        EFL_ONE.description -> return EFL_ONE.id
-        LA_LIGA.description -> return LA_LIGA.id
-        SEGUNDA_DIVISION.description -> return SEGUNDA_DIVISION.id
-        PRIMERA_RFEF_G1.description -> return PRIMERA_RFEF_G1.id
-        PRIMERA_RFEF_G2.description -> return PRIMERA_RFEF_G2.id
-        SERIE_A.description -> return SERIE_A.id
-        SERIE_B.description -> return SERIE_B.id
-        SERIE_C.description -> return SERIE_C.id
-        else -> return 0
+    return when(leagueName) {
+        PREMIER_LEAGUE.description -> PREMIER_LEAGUE.id
+        EFL_CHAMPIONSHIP.description -> EFL_CHAMPIONSHIP.id
+        EFL_ONE.description -> EFL_ONE.id
+        LA_LIGA.description -> LA_LIGA.id
+        SEGUNDA_DIVISION.description -> SEGUNDA_DIVISION.id
+        PRIMERA_RFEF_G1.description -> PRIMERA_RFEF_G1.id
+        PRIMERA_RFEF_G2.description -> PRIMERA_RFEF_G2.id
+        SERIE_A.description -> SERIE_A.id
+        SERIE_B.description -> SERIE_B.id
+        SERIE_C.description -> SERIE_C.id
+        else -> 0
     }
 }
 

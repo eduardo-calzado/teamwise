@@ -12,7 +12,8 @@ data class RemoteTeamsData(
 data class RemoteTeam(
     @SerializedName("team")
     val details: RemoteTeamDetails,
-    val venue: RemoteTeamVenue
+    val venue: RemoteTeamVenue,
+    val league: Int?,
 )
 
 data class RemoteTeamDetails(

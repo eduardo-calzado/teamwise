@@ -1,7 +1,5 @@
 package es.eduardocalzado.teamwise.data
 
-import es.eduardocalzado.teamwise.domain.TeamLeague
-
 class Constants {
     companion object {
         const val TAG = "TeamwiseApp"
@@ -13,5 +11,8 @@ class Constants {
         const val PREFS_SEASONID = PREFS + "Season"
         const val PREFS_LEAGUEID = PREFS + "League"
         const val PREFS_COUNTRYID = PREFS + "Country"
+        const val PREFS_LOCALIZATION = PREFS + "Localization"
+        const val PREFS_LOCALIZATION_GPS = PREFS_LOCALIZATION + "GPS"
+        const val PREFS_FIRST_INSTALL = PREFS + "FirstInstall"
     }
 }

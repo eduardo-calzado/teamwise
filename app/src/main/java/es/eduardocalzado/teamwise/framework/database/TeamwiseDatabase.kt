@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
         Team::class,
         Player::class
     ],
-    version = 4,
+    version = 6,
     exportSchema = false
 )
 abstract class TeamwiseDatabase: RoomDatabase() {
