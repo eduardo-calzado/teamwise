@@ -38,6 +38,6 @@ interface RemoteService {
     suspend fun getPlayersByTeam(
         @Query("team") player: Int,
         @Query("season") season: Int,
-    ): RemotePlayersData
+    ): RemotePlayers
 
 }

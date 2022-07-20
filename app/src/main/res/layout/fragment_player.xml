@@ -86,6 +86,11 @@
                     layout="@layout/fragment_player_info"
                     app:player="@{player}" />
 
+                <include
+                    android:id="@+id/fragment_player_stats_layout"
+                    layout="@layout/fragment_player_stats"
+                    app:stats="@{player.statistics}" />
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

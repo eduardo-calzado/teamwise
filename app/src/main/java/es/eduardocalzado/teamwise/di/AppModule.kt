@@ -1,24 +1,22 @@
 package es.eduardocalzado.teamwise.di
 
 import android.app.Application
-import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
-import es.eduardocalzado.teamwise.framework.AndroidPermissionChecker
-import es.eduardocalzado.teamwise.framework.PlayServicesLocationDataSource
-import es.eduardocalzado.teamwise.framework.database.TeamwiseDatabase
-import es.eduardocalzado.teamwise.framework.database.TeamRoomDataSource
-import es.eduardocalzado.teamwise.framework.server.TeamServerDataSource
-import es.eduardocalzado.teamwise.data.PermissionChecker
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
+import es.eduardocalzado.teamwise.data.PermissionChecker
 import es.eduardocalzado.teamwise.data.datasource.*
+import es.eduardocalzado.teamwise.framework.AndroidPermissionChecker
+import es.eduardocalzado.teamwise.framework.PlayServicesLocationDataSource
+import es.eduardocalzado.teamwise.framework.database.Converters
 import es.eduardocalzado.teamwise.framework.database.PlayerRoomDataSource
+import es.eduardocalzado.teamwise.framework.database.TeamRoomDataSource
+import es.eduardocalzado.teamwise.framework.database.TeamwiseDatabase
 import es.eduardocalzado.teamwise.framework.server.PlayerServerDataSource
-import es.eduardocalzado.teamwise.ui.detail.stats.DetailFragmentArgs
+import es.eduardocalzado.teamwise.framework.server.TeamServerDataSource
 import javax.inject.Singleton
 
 @Module
@@ -27,11 +25,16 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(app: Application) = Room.databaseBuilder(
-        app,
-        TeamwiseDatabase::class.java,
-        "team-db"
-    ).fallbackToDestructiveMigration().build()
+    fun provideDatabase(app: Application): TeamwiseDatabase {
+        return Room.databaseBuilder(
+            app,
+            TeamwiseDatabase::class.java,
+            "team-db"
+        )
+        .addTypeConverter(Converters())
+        .fallbackToDestructiveMigration()
+        .build()
+    }
 
     @Provides
     @Singleton

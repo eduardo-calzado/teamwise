@@ -19,6 +19,7 @@ import es.eduardocalzado.teamwise.domain.getTeamLeagueIdByName
 import es.eduardocalzado.teamwise.prefs
 import es.eduardocalzado.teamwise.ui.common.toggleVisibility
 import es.eduardocalzado.teamwise.ui.main.teams.MainState.MainFilters.*
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -123,6 +124,7 @@ class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
             if (prefs.firstInstall) {
                 teamsFilterSubmitButton.callOnClick()
                 mainState.toggleVisibility(binding)
+                prefs.firstInstall = false
             }
         }
     }
