@@ -106,16 +106,17 @@ class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
      */
     private fun loadFilters(region: String? = null) {
         with(binding) {
-            val country = when (region.isNullOrEmpty()) {
-                true -> teamsTilTvCountry.text.toString()
-                false -> region
-            }
+
             val countryAdapter = mainState.loadData(Country)
             teamsTilTvCountry.setAdapter(countryAdapter)
-            when (prefs.countryId.isNullOrEmpty()) {
-                true -> teamsTilTvLeague.setText(countryAdapter.getItem(0).toString())
-                false -> teamsTilTvCountry.setText(country, false)
+            val country = when (region.isNullOrEmpty()) {
+                true -> when (prefs.countryId.isNullOrEmpty()) {
+                    true -> countryAdapter.getItem(0).toString()
+                    false -> prefs.countryId
+                }
+                false -> region
             }
+            teamsTilTvCountry.setText(country, false)
 
             val leaguesAdapter = mainState.loadData(League, country)
             teamsTilTvLeague.setAdapter(leaguesAdapter)
@@ -133,9 +134,9 @@ class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
 
             // -- onItemClickListener
             teamsTilTvCountry.onItemClickListener = AdapterView.OnItemClickListener { _, _, _, _ ->
-                val leaguesAdapter = mainState.loadData(League, teamsTilTvCountry.text.toString())
-                teamsTilTvLeague.setText(leaguesAdapter.getItem(0).toString())
-                teamsTilTvLeague.setAdapter(leaguesAdapter)
+                val leaguesAdapter2 = mainState.loadData(League, teamsTilTvCountry.text.toString())
+                teamsTilTvLeague.setText(leaguesAdapter2.getItem(0).toString())
+                teamsTilTvLeague.setAdapter(leaguesAdapter2)
             }
 
             if (prefs.firstInstall) {
