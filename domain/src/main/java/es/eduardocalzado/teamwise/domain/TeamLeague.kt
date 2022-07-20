@@ -32,4 +32,20 @@ fun getTeamLeagueIdByName(leagueName: String) : Int {
     }
 }
 
+fun getTeamLeagueNameById(leagueId: Int) : String {
+    return when(leagueId) {
+        PREMIER_LEAGUE.id -> PREMIER_LEAGUE.description
+        EFL_CHAMPIONSHIP.id -> EFL_CHAMPIONSHIP.description
+        EFL_ONE.id -> EFL_ONE.description
+        LA_LIGA.id -> LA_LIGA.description
+        SEGUNDA_DIVISION.id -> SEGUNDA_DIVISION.description
+        PRIMERA_RFEF_G1.id -> PRIMERA_RFEF_G1.description
+        PRIMERA_RFEF_G2.id -> PRIMERA_RFEF_G2.description
+        SERIE_A.id -> SERIE_A.description
+        SERIE_B.id -> SERIE_B.description
+        SERIE_C.id -> SERIE_C.description
+        else -> ""
+    }
+}
+
 

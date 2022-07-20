@@ -15,7 +15,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.data.Constants
 import es.eduardocalzado.teamwise.databinding.FragmentMainBinding
+import es.eduardocalzado.teamwise.domain.TeamLeague
 import es.eduardocalzado.teamwise.domain.getTeamLeagueIdByName
+import es.eduardocalzado.teamwise.domain.getTeamLeagueNameById
 import es.eduardocalzado.teamwise.prefs
 import es.eduardocalzado.teamwise.ui.common.toggleVisibility
 import es.eduardocalzado.teamwise.ui.main.teams.MainState.MainFilters.*
@@ -108,12 +110,27 @@ class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
                 true -> teamsTilTvCountry.text.toString()
                 false -> region
             }
-            teamsTilTvCountry.setAdapter(mainState.loadData(Country))
-            teamsTilTvCountry.setText(country, false)
-            val leaguesAdapter = mainState.loadData(League, teamsTilTvCountry.text.toString())
-            teamsTilTvLeague.setText(leaguesAdapter.getItem(0).toString())
+            val countryAdapter = mainState.loadData(Country)
+            teamsTilTvCountry.setAdapter(countryAdapter)
+            when (prefs.countryId.isNullOrEmpty()) {
+                true -> teamsTilTvLeague.setText(countryAdapter.getItem(0).toString())
+                false -> teamsTilTvCountry.setText(country, false)
+            }
+
+            val leaguesAdapter = mainState.loadData(League, country)
             teamsTilTvLeague.setAdapter(leaguesAdapter)
-            teamsTilTvSeason.setAdapter(mainState.loadData(Season))
+            when (prefs.leagueId == -1) {
+                true -> teamsTilTvLeague.setText(leaguesAdapter.getItem(0).toString())
+                false -> teamsTilTvLeague.setText(getTeamLeagueNameById(prefs.leagueId), false)
+            }
+
+            val seasonsAdapter = mainState.loadData(Season)
+            teamsTilTvSeason.setAdapter(seasonsAdapter)
+            when (prefs.seasonId == -1) {
+                true -> teamsTilTvSeason.setText(seasonsAdapter.getItem(0).toString(), false)
+                false -> teamsTilTvSeason.setText(prefs.seasonId.toString(), false)
+            }
+
             // -- onItemClickListener
             teamsTilTvCountry.onItemClickListener = AdapterView.OnItemClickListener { _, _, _, _ ->
                 val leaguesAdapter = mainState.loadData(League, teamsTilTvCountry.text.toString())
