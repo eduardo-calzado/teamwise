@@ -42,10 +42,10 @@ class TeamServerDataSource @Inject constructor () : TeamRemoteDataSource {
     }
 }
 
-// #MARK: RemoteTeam.toDomainModel
-@JvmName("toDomainModelRemoteTeam")
-private fun List<RemoteTeam>.toDomainModel(): List<Team> = map { it.toDomainModel() }
-private fun RemoteTeam.toDomainModel(): Team =
+// #MARK: RemoteTeams.Team.toDomainModel
+@JvmName("toDomainModelRemoteTeamsTeam")
+private fun List<RemoteTeams.Team>.toDomainModel(): List<Team> = map { it.toDomainModel() }
+private fun RemoteTeams.Team.toDomainModel(): Team =
     Team(
         id = details.id,
         name = details.name,
@@ -63,8 +63,8 @@ private fun RemoteTeam.toDomainModel(): Team =
         favorite = false,
     )
 
-// #MARK: RemoteTeamStats.toDomainModel
-private fun RemoteTeamStats.toDomainModel(): TeamStats =
+// #MARK: RemoteTeamStats.Stat.toDomainModel
+private fun RemoteTeamStats.Stat.toDomainModel(): TeamStats =
     TeamStats(
         id = team.id,
         league_name = league.name,

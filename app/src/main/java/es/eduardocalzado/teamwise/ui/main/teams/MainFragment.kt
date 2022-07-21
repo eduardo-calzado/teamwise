@@ -106,7 +106,6 @@ class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
      */
     private fun loadFilters(region: String? = null) {
         with(binding) {
-
             val countryAdapter = mainState.loadData(Country)
             teamsTilTvCountry.setAdapter(countryAdapter)
             val country = when (region.isNullOrEmpty()) {

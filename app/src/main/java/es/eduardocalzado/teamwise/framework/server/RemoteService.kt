@@ -17,13 +17,13 @@ interface RemoteService {
         @Query("country") country: String,
         @Query("league") league: Int,
         @Query("season") season: Int,
-    ): RemoteTeamsData
+    ): RemoteTeams
 
     @Headers(HOST, KEY)
     @GET("teams")
     suspend fun getTeamsByRegion(
         @Query("country") country: String,
-    ): RemoteTeamsData
+    ): RemoteTeams
 
     @Headers(HOST, KEY)
     @GET("teams/statistics")
@@ -31,7 +31,7 @@ interface RemoteService {
         @Query("league") league: Int,
         @Query("season") season: Int,
         @Query("team") team: Int,
-    ): RemoteTeamStatsData
+    ): RemoteTeamStats
 
     @Headers(HOST, KEY)
     @GET("players")
