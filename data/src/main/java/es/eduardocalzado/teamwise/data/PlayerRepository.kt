@@ -20,7 +20,7 @@ class PlayerRepository @Inject constructor(
 
     fun findByTeam(team: Int) : Flow<List<Player>> = localDataSource.findByTeam(team)
 
-    fun searchPlayers(query: String) = localDataSource.searchPlayers(query)
+    fun searchPlayers(query: String, teamId: Int) = localDataSource.searchPlayers(query, teamId)
 
     suspend fun requestPlayersByTeam(team: Int, season: Int): Error? {
         if (localDataSource.filterByTeam(team).isNullOrEmpty()) {

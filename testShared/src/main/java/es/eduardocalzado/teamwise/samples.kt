@@ -17,4 +17,5 @@ val sampleTeam = Team (
     "https://media.api-sports.io/football/venues/3516.png",
     "Campos de Sport de El Sardinero",
     true,
+    emptyList()
 )

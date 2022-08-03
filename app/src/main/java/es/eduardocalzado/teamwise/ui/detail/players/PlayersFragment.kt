@@ -27,6 +27,7 @@ class PlayersFragment : Fragment(R.layout.fragment_players), SearchView.OnQueryT
         playersState.onPlayerClicked(
             playerId = it.id
         )
+        clearSearch()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,5 +77,9 @@ class PlayersFragment : Fragment(R.layout.fragment_players), SearchView.OnQueryT
 
     private fun searchDatabase(query: String) {
         viewModel.searchPlayers("%$query%")
+    }
+
+    private fun clearSearch() {
+        searchDatabase("%%")
     }
 }

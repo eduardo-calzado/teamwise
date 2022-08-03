@@ -14,5 +14,5 @@ interface PlayerLocalDataSource {
     suspend fun filterByTeam(team: Int): List<Player>
     suspend fun save (players: List<Player>): Error?
     suspend fun deletePlayers()
-    fun searchPlayers(query: String): Flow<List<Player>>
+    fun searchPlayers(query: String, teamId: Int): Flow<List<Player>>
 }

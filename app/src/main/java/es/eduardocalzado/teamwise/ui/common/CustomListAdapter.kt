@@ -1,8 +1,7 @@
-package es.eduardocalzado.teamwise.ui.detail.player
+package es.eduardocalzado.teamwise.ui.common
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,17 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.ViewListHeaderBinding
 import es.eduardocalzado.teamwise.databinding.ViewListTwoLineItemOverlineBinding
-import es.eduardocalzado.teamwise.domain.PlayerInfoItem
-import es.eduardocalzado.teamwise.framework.dp
+import es.eduardocalzado.teamwise.domain.InfoItem
 import es.eduardocalzado.teamwise.framework.px
-import es.eduardocalzado.teamwise.ui.common.inflate
 
-
-class PlayerAdapter: ListAdapter<PlayerInfoItem, RecyclerView.ViewHolder>(DiffCallback()) {
-
+class CustomListAdapter: ListAdapter<InfoItem, RecyclerView.ViewHolder>(DiffCallback()) {
     private val TYPE_HEADER = 0
     private val TYPE_ITEM = 1
-    private val TYPE_CHILDREN = 2
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == TYPE_HEADER) {
@@ -38,7 +32,7 @@ class PlayerAdapter: ListAdapter<PlayerInfoItem, RecyclerView.ViewHolder>(DiffCa
 
     open class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ViewListTwoLineItemOverlineBinding.bind(view)
-        fun bind(info: PlayerInfoItem) {
+        fun bind(info: InfoItem) {
             binding.overlineTitle.text = info.title
             binding.item.text = info.value
             if (info.isNested) {
@@ -49,7 +43,7 @@ class PlayerAdapter: ListAdapter<PlayerInfoItem, RecyclerView.ViewHolder>(DiffCa
 
     open class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ViewListHeaderBinding.bind(view)
-        fun bind(info: PlayerInfoItem) {
+        fun bind(info: InfoItem) {
             binding.header.text = info.title
             if (info.isNested) {
                 binding.layout.updatePadding(16.px, 0,0, 0)
@@ -63,11 +57,13 @@ class PlayerAdapter: ListAdapter<PlayerInfoItem, RecyclerView.ViewHolder>(DiffCa
         return TYPE_ITEM
     }
 
-
-
-    private class DiffCallback: DiffUtil.ItemCallback<PlayerInfoItem>() {
-        override fun areItemsTheSame(oldItem: PlayerInfoItem, newItem: PlayerInfoItem): Boolean { return false }
-        override fun areContentsTheSame(oldItem: PlayerInfoItem, newItem: PlayerInfoItem): Boolean { return false }
+    private class DiffCallback: DiffUtil.ItemCallback<InfoItem>() {
+        override fun areItemsTheSame(oldItem: InfoItem, newItem: InfoItem): Boolean {
+            return oldItem.getId() == newItem.getId()
+        }
+        override fun areContentsTheSame(oldItem: InfoItem, newItem: InfoItem): Boolean {
+            return oldItem == newItem
+        }
     }
 }
 

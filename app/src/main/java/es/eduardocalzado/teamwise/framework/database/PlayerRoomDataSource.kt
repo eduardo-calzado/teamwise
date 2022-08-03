@@ -19,7 +19,7 @@ class PlayerRoomDataSource @Inject constructor(private val playerDao: PlayerDao)
     // -- find the team players
     override fun findByTeam(team: Int): Flow<List<Player>> = playerDao.findByTeam(team).map { it.toDomainModel() }
     // -- search the team
-    override fun searchPlayers(query: String): Flow<List<Player>> = playerDao.searchPlayers(query).map { it.toDomainModel() }
+    override fun searchPlayers(query: String, teamId: Int): Flow<List<Player>> = playerDao.searchPlayers(query, teamId).map { it.toDomainModel() }
     // -- filter the team players
     override suspend fun filterByTeam(team: Int): List<Player> = playerDao.filterByTeam(team).map { it.toDomainModel() }
     // -- save the player

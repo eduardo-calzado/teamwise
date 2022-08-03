@@ -36,6 +36,7 @@ class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
             teamId = it.id,
             leagueId = getFiltersData().second,
             seasonId = getFiltersData().third)
+        clearSearch()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -169,14 +170,20 @@ class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
      * @return true
      */
     override fun onQueryTextSubmit(p0: String?): Boolean {
-        val query = p0 ?: ""
-        viewModel.searchTeams("%$query%")
+        searchDatabase(p0 ?: "")
         return true
     }
 
     override fun onQueryTextChange(p0: String?): Boolean {
-        val query = p0 ?: ""
-        viewModel.searchTeams("%$query%")
+        searchDatabase(p0 ?: "")
         return true
+    }
+
+    private fun searchDatabase(query: String) {
+        viewModel.searchTeams("%$query%")
+    }
+
+    private fun clearSearch() {
+        searchDatabase("%%")
     }
 }

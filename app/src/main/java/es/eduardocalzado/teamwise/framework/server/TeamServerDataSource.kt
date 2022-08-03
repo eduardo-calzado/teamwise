@@ -33,7 +33,7 @@ class TeamServerDataSource @Inject constructor () : TeamRemoteDataSource {
     /**
      * getTeamStats. Get the team statistics for a specific team.
      */
-    override suspend fun getTeamStats(league: Int, season: Int, team: Int) :Either<Error, TeamStats> = tryCall {
+    override suspend fun getTeamStats(league: Int, season: Int, team: Int) :Either<Error, Team.Stats> = tryCall {
         RemoteConnection
             .service
             .getTeamStats(league, season, team)
@@ -61,15 +61,36 @@ private fun RemoteTeams.Team.toDomainModel(): Team =
         stadiumImage = venue.image ?: "",
         stadiumName = venue.name ?: "",
         favorite = false,
+        emptyList(),
     )
 
 // #MARK: RemoteTeamStats.Stat.toDomainModel
-private fun RemoteTeamStats.Stat.toDomainModel(): TeamStats =
-    TeamStats(
+private fun RemoteTeamStats.Stat.toDomainModel(): Team.Stats =
+    Team.Stats(
         id = team.id,
-        league_name = league.name,
-        league_country = league.country,
-        fixture_draws_total =fixtures.draws.total,
-        fixture_loses_total =fixtures.loses.total,
-        fixture_wins_total =fixtures.wins.total,
+        league = Team.Stats.League(
+            id = league.id,
+            name = league.name,
+            country = league.country,
+            logo = league.logo,
+            flag = league.flag,
+            season = league.season,
+        ),
+        form = form,
+        fixtures = Team.Stats.Fixtures(
+            played = Team.Stats.Fixtures.InnerData(fixtures.played.home, fixtures.played.away, fixtures.played.total),
+            wins = Team.Stats.Fixtures.InnerData(fixtures.wins.home, fixtures.wins.away, fixtures.wins.total),
+            draws = Team.Stats.Fixtures.InnerData(fixtures.draws.home, fixtures.draws.away, fixtures.draws.total),
+            loses = Team.Stats.Fixtures.InnerData(fixtures.loses.home, fixtures.loses.away, fixtures.loses.total),
+        ),
+        biggest = Team.Stats.Biggest(
+            streak =  Team.Stats.Biggest.StreakData(biggest.streak.wins, biggest.streak.draws, biggest.streak.loses),
+            wins =  Team.Stats.Biggest.HomeAwayData(biggest.wins.home, biggest.wins.away),
+            loses =  Team.Stats.Biggest.HomeAwayData(biggest.loses.home, biggest.loses.away),
+        ),
+        cleanSheet = Team.Stats.CleanSheet(
+            home = cleanSheet.home,
+            away = cleanSheet.away,
+            total = cleanSheet.total,
+        )
     )

@@ -11,7 +11,7 @@ import es.eduardocalzado.teamwise.di.SeasonId
 import es.eduardocalzado.teamwise.di.TeamId
 import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Team
-import es.eduardocalzado.teamwise.domain.TeamStats
+import es.eduardocalzado.teamwise.domain.Team.Stats
 import es.eduardocalzado.teamwise.usecases.FindTeamUseCase
 import es.eduardocalzado.teamwise.usecases.RequestTeamStatsUseCase
 import es.eduardocalzado.teamwise.usecases.SwitchTeamFavoriteUseCase
@@ -34,7 +34,7 @@ class DetailViewModel @Inject constructor(
 
     data class UiState(
         val loading: Boolean = false,
-        val teamStats: TeamStats? = null,
+        val teamStats: Stats? = null,
         val teamData: Team? = null,
         val error: Error? = null
     )

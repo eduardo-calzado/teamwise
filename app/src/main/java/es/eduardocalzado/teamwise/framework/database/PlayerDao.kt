@@ -29,6 +29,6 @@ interface PlayerDao {
     @Query("DELETE FROM Player")
     suspend fun deletePlayers()
 
-    @Query("SELECT * FROM Player WHERE name LIKE :playerName OR firstName LIKE :playerName OR lastName LIKE :playerName")
-    fun searchPlayers(playerName: String?): Flow<List<Player>>
+    @Query("SELECT * FROM Player WHERE team = :teamId AND name LIKE :playerName")
+    fun searchPlayers(playerName: String?, teamId: Int): Flow<List<Player>>
 }

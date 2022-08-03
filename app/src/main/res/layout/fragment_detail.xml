@@ -5,13 +5,13 @@
 
     <data>
         <import type="es.eduardocalzado.teamwise.domain.Team"/>
-        <import type="es.eduardocalzado.teamwise.domain.TeamStats"/>
+        <import type="es.eduardocalzado.teamwise.domain.Team.Stats"/>
         <variable
             name="team"
             type="es.eduardocalzado.teamwise.domain.Team" />
         <variable
             name="teamStats"
-            type="es.eduardocalzado.teamwise.domain.TeamStats" />
+            type="es.eduardocalzado.teamwise.domain.Team.Stats" />
         <variable
             name="error"
             type="String" />
@@ -74,6 +74,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -87,14 +88,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="16dp"
                     android:background="?attr/colorError"
                     android:gravity="center"
+                    android:padding="8dp"
                     android:text="@{error}"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:padding="8dp"
                     app:visible="@{error != null}" />
 
                 <LinearLayout
@@ -102,7 +102,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/team_detail_error"
-                    android:layout_marginTop="8dp"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:transitionGroup="true">

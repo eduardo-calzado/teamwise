@@ -58,7 +58,7 @@ class PlayersViewModel @Inject constructor(
 
     fun searchPlayers(query: String) {
         viewModelScope.launch {
-            searchPlayersUseCase(query)
+            searchPlayersUseCase(query, teamId)
                 .collect { players -> _state.update { UiState(players = players) } }
         }
     }

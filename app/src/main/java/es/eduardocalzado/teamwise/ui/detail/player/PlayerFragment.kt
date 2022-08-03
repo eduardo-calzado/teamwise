@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.FragmentPlayerBinding
+import es.eduardocalzado.teamwise.ui.common.CustomListAdapter
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -20,7 +21,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
 
     private lateinit var playerState: PlayerState
     private lateinit var binding: FragmentPlayerBinding
-    private var adapter: PlayerAdapter = PlayerAdapter()
+    private var adapter: CustomListAdapter = CustomListAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

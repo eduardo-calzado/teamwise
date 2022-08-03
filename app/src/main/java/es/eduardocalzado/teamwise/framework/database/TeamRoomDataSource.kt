@@ -46,6 +46,7 @@ private fun TeamDB.toDomainModel(): Team =
         stadiumImage,
         stadiumName,
         favorite,
+        emptyList(),
     )
 
 // #MARK: fromDomainModel

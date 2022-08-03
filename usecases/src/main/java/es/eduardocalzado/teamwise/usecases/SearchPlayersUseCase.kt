@@ -5,5 +5,5 @@ import es.eduardocalzado.teamwise.data.TeamRepository
 import javax.inject.Inject
 
 class SearchPlayersUseCase @Inject constructor (private val repository: PlayerRepository) {
-    operator fun invoke (query: String) = repository.searchPlayers(query)
+    operator fun invoke (query: String, teamId: Int) = repository.searchPlayers(query, teamId)
 }
