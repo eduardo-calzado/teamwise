@@ -11,7 +11,6 @@ import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.ui.common.basicDiffUtil
 import es.eduardocalzado.teamwise.ui.common.inflate
 
-
 private const val HEADER_VIEW_TYPE  = 0
 private const val ITEM_VIEW_TYPE    = 1
 

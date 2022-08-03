@@ -13,7 +13,12 @@ import kotlinx.coroutines.*
 
 @BindingAdapter("url")
 fun ImageView.bindUrl(url: String?) {
-    if (url != null) loadUrl(url)
+    if (!url.isNullOrEmpty() && !url.contains("10503")) loadUrl(url)
+}
+
+@BindingAdapter("visibleIfNotNull")
+fun ImageView.bindVisibleIfNotNull(url: String?) {
+    visibility = if (!url.isNullOrEmpty() && !url.contains("10503")) View.VISIBLE else View.GONE
 }
 
 @BindingAdapter("visible")

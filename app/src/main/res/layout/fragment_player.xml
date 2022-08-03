@@ -13,8 +13,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:context=".ui.detail.stats.DetailFragment">
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/fragment_player_appbarlayout"
@@ -69,29 +68,16 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
-            <LinearLayout
-                android:id="@+id/fragment_player_info_layouts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/team_detail_error"
-                android:layout_marginTop="8dp"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:transitionGroup="true">
-
-                <include
-                    android:id="@+id/fragment_player_info_layout"
-                    layout="@layout/fragment_player_info"
-                    app:player="@{player}" />
-
-                <include
-                    android:id="@+id/fragment_player_stats_layout"
-                    layout="@layout/fragment_player_stats"
-                    app:stats="@{player.statistics}" />
-
-            </LinearLayout>
+            <include
+                android:id="@+id/fragment_player_info_layout"
+                layout="@layout/fragment_player_info"
+                app:player="@{player}" />
 
         </androidx.core.widget.NestedScrollView>
 

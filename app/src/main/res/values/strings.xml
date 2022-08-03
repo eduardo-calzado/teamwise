@@ -3,8 +3,8 @@
 
     <!-- errors strings -->
     <string name="connectivity_error">There was a connectivity error. Please check your connection before continue.</string>
-    <string name="server_error">No way! There was a server error:\n. </string>
-    <string name="unknown_error">No way! There was an unknown error:\n. </string>
+    <string name="server_error">No way! There was a server error:\n</string>
+    <string name="unknown_error">No way! There was an unknown error:\n</string>
 
     <!-- menus names -->
     <string name="menu_teams">Teams</string>
@@ -62,7 +62,7 @@
     <string name="details_stats_fixtures_draws">DRAWS</string>
     <string name="details_stats_fixtures_wins">WINS</string>
     <string name="details_stats_fixtures_loses">LOSES</string>
-    <string name="details_button_view_players">PLAYERS LIST</string>
+    <string name="details_button_view_players">SQUAD</string>
 
     <!-- screen: player -->
     <string name="players_not_results_found">No players found neither in database nor remote API. Please, try it again later.</string>
@@ -77,12 +77,16 @@
     <string name="player_data_height">HEIGHT</string>
     <string name="player_data_weight">WEIGHT</string>
     <string name="player_data_injured">INJURED</string>
+    <string name="player_stats">PLAYER STATS</string>
 
     <!-- others -->
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="unknown">Unknown</string>
+    <string name="overline">OVERLINE</string>
+    <string name="two_line_item">Two line item</string>
+    <string name="header">Header</string>
 
     <!-- arrays -->
     <string-array name="countries">

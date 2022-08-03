@@ -1,9 +1,6 @@
 package es.eduardocalzado.teamwise.ui.detail.player
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -23,12 +20,14 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
 
     private lateinit var playerState: PlayerState
     private lateinit var binding: FragmentPlayerBinding
+    private var adapter: PlayerAdapter = PlayerAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         playerState = buildPlayerState()
         // --
         binding = FragmentPlayerBinding.bind(view).apply {
+            fragmentPlayerInfoLayout.playerRecycler.adapter = adapter
             fragmentPlayerToolbar.setNavigationOnClickListener{findNavController().popBackStack()}
         }
         // --

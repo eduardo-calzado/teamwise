@@ -9,7 +9,7 @@ import androidx.room.TypeConverters
         Team::class,
         Player::class
     ],
-    version = 14,
+    version = 15,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

@@ -246,7 +246,8 @@
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:background="@drawable/ic_grass"
-                    app:url="@{team.stadiumImage}"/>
+                    app:url="@{team.stadiumImage}"
+                    app:visibleIfNotNull="@{team.stadiumImage}"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

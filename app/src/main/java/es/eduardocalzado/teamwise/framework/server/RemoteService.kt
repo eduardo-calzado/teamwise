@@ -8,7 +8,7 @@ interface RemoteService {
 
     companion object {
         const val HOST: String = "x-rapidapi-host: api-football-v1.p.rapidapi.com"
-        const val KEY: String = "x-rapidapi-key: 4e0a1fb7f4msh50bc0de4a5828d2p149427jsn5ce86752dbee"
+        const val KEY: String = "x-rapidapi-key: 8a9e84d8b7msh20b23cf9bbf1058p1f4055jsna3775d7b584a"
     }
 
     @Headers(HOST, KEY)

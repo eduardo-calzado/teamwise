@@ -40,7 +40,7 @@ class PlayersFragment : Fragment(R.layout.fragment_players), SearchView.OnQueryT
         // --
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect { it ->
+                viewModel.state.collect {
                     binding.loading = it.loading
                     binding.players = it.players
                     binding.error = it.error?.let(playersState::errorToString)
