@@ -38,6 +38,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect {
+                    binding.loading = it.loading
                     binding.team = it.teamData
                     binding.teamStats = it.teamStats
                     binding.error = it.error?.let(detailState::errorToString)
