@@ -1,7 +1,6 @@
 package es.eduardocalzado.teamwise.ui.main.teams
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.SearchView
@@ -13,15 +12,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import es.eduardocalzado.teamwise.R
-import es.eduardocalzado.teamwise.data.Constants
 import es.eduardocalzado.teamwise.databinding.FragmentMainBinding
-import es.eduardocalzado.teamwise.domain.TeamLeague
 import es.eduardocalzado.teamwise.domain.getTeamLeagueIdByName
 import es.eduardocalzado.teamwise.domain.getTeamLeagueNameById
 import es.eduardocalzado.teamwise.prefs
-import es.eduardocalzado.teamwise.ui.common.toggleVisibility
 import es.eduardocalzado.teamwise.ui.main.teams.MainState.MainFilters.*
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -89,6 +84,7 @@ class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
                 mainState.requestLocationPermission {
                     viewLifecycleOwner.lifecycleScope.launch {
                         with(binding) {
+                            resetFilterPreferences()
                             loadFilters(getLocation())
                             mainState.toggleVisibility(binding)
                             teamsFilterSubmitButton.run { callOnClick() }
@@ -121,7 +117,7 @@ class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
             val leaguesAdapter = mainState.loadData(League, country)
             teamsTilTvLeague.setAdapter(leaguesAdapter)
             when (prefs.leagueId == -1) {
-                true -> teamsTilTvLeague.setText(leaguesAdapter.getItem(0).toString())
+                true -> teamsTilTvLeague.setText(leaguesAdapter.getItem(0).toString(), false)
                 false -> teamsTilTvLeague.setText(getTeamLeagueNameById(prefs.leagueId), false)
             }
 
@@ -163,6 +159,11 @@ class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
         val season = binding.teamsTilTvSeason.text.toString().toInt()
 
         return Triple(country, league, season)
+    }
+
+    private fun resetFilterPreferences() {
+        prefs.leagueId = -1
+        prefs.seasonId = -1
     }
 
     /**

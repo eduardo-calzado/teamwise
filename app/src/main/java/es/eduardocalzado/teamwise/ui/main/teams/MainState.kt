@@ -76,7 +76,7 @@ class MainState(
                     "Spain" -> context.resources.getStringArray(R.array.spanish_leagues)
                     "England" -> context.resources.getStringArray(R.array.england_leagues)
                     "Italy" -> context.resources.getStringArray(R.array.italy_leagues)
-                    else -> context.resources.getStringArray(R.array.england_leagues)
+                    else -> emptyArray()
                 }
                 ArrayAdapter(context, R.layout.dropdown_item, leagues)
             }
