@@ -46,7 +46,7 @@ class DetailViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             findTeamUseCase(teamId)
-                .collect { value -> _state.value = UiState(teamData = value) }
+                .collect { teamData -> _state.update { it.copy(teamData = teamData) } }
         }
     }
 
@@ -57,6 +57,7 @@ class DetailViewModel @Inject constructor(
             when (val request = requestTeamStatsUseCase(leagueId, seasonId, teamId)) {
                 is Either.Left -> _state.update { it.copy(error = request.value) }
                 is Either.Right -> _state.update { it.copy(teamStats = request.value) }
+                else -> {}
             }
             _state.update { it.copy(loading = false) }
         }
