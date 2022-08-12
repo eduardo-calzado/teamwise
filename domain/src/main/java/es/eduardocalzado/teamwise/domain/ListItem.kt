@@ -1,6 +1,6 @@
 package es.eduardocalzado.teamwise.domain
 
-data class InfoItem(
+data class ListItem(
     val title: String = "",
     val value: String = "",
     val isHeader: Boolean = false,

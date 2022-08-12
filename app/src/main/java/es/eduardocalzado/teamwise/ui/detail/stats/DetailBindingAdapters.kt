@@ -2,7 +2,7 @@ package es.eduardocalzado.teamwise.ui.detail.stats
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import es.eduardocalzado.teamwise.domain.InfoItem
+import es.eduardocalzado.teamwise.domain.ListItem
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.ui.common.CustomListAdapter
 
@@ -23,19 +23,19 @@ fun RecyclerView.setTeamStats(stats: Team.Stats?) {
 /**
  * createTeamAttributes. From a team with some values, creates a list of items.
  */
-fun createTeamAttributes(team: Team): List<InfoItem> {
-    val items = mutableListOf<InfoItem>()
-    items.add(InfoItem("Information", "", true))
-    items.add(InfoItem("Name", team.name))
-    items.add(InfoItem("Founded", team.founded.toString()))
-    items.add(InfoItem("Code", team.code.toString()))
-    items.add(InfoItem("Country", team.country))
+fun createTeamAttributes(team: Team): List<ListItem> {
+    val items = mutableListOf<ListItem>()
+    items.add(ListItem("Information", "", true))
+    items.add(ListItem("Name", team.name))
+    items.add(ListItem("Founded", team.founded.toString()))
+    items.add(ListItem("Code", team.code.toString()))
+    items.add(ListItem("Country", team.country))
 
-    items.add(InfoItem("Stadium", "", true))
-    items.add(InfoItem("Name", team.stadiumName))
-    items.add(InfoItem("Address", team.address.toString()))
-    items.add(InfoItem("Capacity", team.capacity.toString()))
-    items.add(InfoItem("Surface", team.surface.toString()))
+    items.add(ListItem("Stadium", "", true))
+    items.add(ListItem("Name", team.stadiumName))
+    items.add(ListItem("Address", team.address.toString()))
+    items.add(ListItem("Capacity", team.capacity.toString()))
+    items.add(ListItem("Surface", team.surface.toString()))
 
     return items
 }
@@ -43,30 +43,30 @@ fun createTeamAttributes(team: Team): List<InfoItem> {
 /**
  * createTeamAttributes. From a team with some values, creates a list of items.
  */
-fun createTeamStatsAttributes(stats: Team.Stats): List<InfoItem> {
-    val items = mutableListOf<InfoItem>()
-    items.add(InfoItem("League", "", true))
-    items.add(InfoItem("Name", stats.league.name.toString()))
-    items.add(InfoItem("Country", stats.league.country.toString()))
-    items.add(InfoItem("Season", stats.league.season.toString()))
+fun createTeamStatsAttributes(stats: Team.Stats): List<ListItem> {
+    val items = mutableListOf<ListItem>()
+    items.add(ListItem("League", "", true))
+    items.add(ListItem("Name", stats.league.name.toString()))
+    items.add(ListItem("Country", stats.league.country.toString()))
+    items.add(ListItem("Season", stats.league.season.toString()))
 
-    items.add(InfoItem("Form", "", true, isNested = true))
-    items.add(InfoItem("(L: Lose, D: Draw, W: Win)", stats.form.toString(), isNested = true))
+    items.add(ListItem("Form", "", true, isNested = true))
+    items.add(ListItem("(L: Lose, D: Draw, W: Win)", stats.form.toString(), isNested = true))
 
-    items.add(InfoItem("Fixtures", "", true, isNested = true))
-    items.add(InfoItem("Draws (Home, Away)", stats.fixtures.draws?.home.toString()+", "+stats.fixtures.draws?.away.toString(), isNested = true))
-    items.add(InfoItem("Loses (Home, Away)", stats.fixtures.loses?.home.toString()+", "+stats.fixtures.loses?.away.toString(), isNested = true))
-    items.add(InfoItem("Wins (Home, Away)", stats.fixtures.wins?.home.toString()+", "+stats.fixtures.wins?.away.toString(), isNested = true))
+    items.add(ListItem("Fixtures", "", true, isNested = true))
+    items.add(ListItem("Draws (Home, Away)", stats.fixtures.draws?.home.toString()+", "+stats.fixtures.draws?.away.toString(), isNested = true))
+    items.add(ListItem("Loses (Home, Away)", stats.fixtures.loses?.home.toString()+", "+stats.fixtures.loses?.away.toString(), isNested = true))
+    items.add(ListItem("Wins (Home, Away)", stats.fixtures.wins?.home.toString()+", "+stats.fixtures.wins?.away.toString(), isNested = true))
 
-    items.add(InfoItem("Biggest", "", true, isNested = true))
-    items.add(InfoItem("Streak (Wins, Draws, Loses)", stats.biggest.streak?.wins.toString()+", "+stats.biggest.streak?.draws.toString()+", "+stats.biggest.streak?.loses.toString(), isNested = true))
-    items.add(InfoItem("Wins (Home, Away)", stats.biggest.wins?.home.toString()+", "+stats.biggest.wins?.away.toString(), isNested = true))
-    items.add(InfoItem("Loses (Home, Away)", stats.biggest.loses?.home.toString()+", "+stats.biggest.loses?.away.toString(), isNested = true))
+    items.add(ListItem("Biggest", "", true, isNested = true))
+    items.add(ListItem("Streak (Wins, Draws, Loses)", stats.biggest.streak?.wins.toString()+", "+stats.biggest.streak?.draws.toString()+", "+stats.biggest.streak?.loses.toString(), isNested = true))
+    items.add(ListItem("Wins (Home, Away)", stats.biggest.wins?.home.toString()+", "+stats.biggest.wins?.away.toString(), isNested = true))
+    items.add(ListItem("Loses (Home, Away)", stats.biggest.loses?.home.toString()+", "+stats.biggest.loses?.away.toString(), isNested = true))
 
-    items.add(InfoItem("Clean Sheet", "", true, isNested = true))
-    items.add(InfoItem("Draws (Home, Away)", stats.fixtures.draws?.home.toString()+", "+stats.fixtures.draws?.away.toString(), isNested = true))
-    items.add(InfoItem("Loses (Home, Away)", stats.fixtures.loses?.home.toString()+", "+stats.fixtures.loses?.away.toString(), isNested = true))
-    items.add(InfoItem("Wins (Home, Away)", stats.fixtures.wins?.home.toString()+", "+stats.fixtures.wins?.away.toString(), isNested = true))
+    items.add(ListItem("Clean Sheet", "", true, isNested = true))
+    items.add(ListItem("Draws (Home, Away)", stats.fixtures.draws?.home.toString()+", "+stats.fixtures.draws?.away.toString(), isNested = true))
+    items.add(ListItem("Loses (Home, Away)", stats.fixtures.loses?.home.toString()+", "+stats.fixtures.loses?.away.toString(), isNested = true))
+    items.add(ListItem("Wins (Home, Away)", stats.fixtures.wins?.home.toString()+", "+stats.fixtures.wins?.away.toString(), isNested = true))
 
     return items
 }

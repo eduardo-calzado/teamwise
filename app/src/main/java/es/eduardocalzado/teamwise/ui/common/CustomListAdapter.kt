@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import es.eduardocalzado.teamwise.R
 import es.eduardocalzado.teamwise.databinding.ViewListHeaderBinding
 import es.eduardocalzado.teamwise.databinding.ViewListTwoLineItemOverlineBinding
-import es.eduardocalzado.teamwise.domain.InfoItem
+import es.eduardocalzado.teamwise.domain.ListItem
 import es.eduardocalzado.teamwise.framework.px
 
-class CustomListAdapter: ListAdapter<InfoItem, RecyclerView.ViewHolder>(DiffCallback()) {
+class CustomListAdapter: ListAdapter<ListItem, RecyclerView.ViewHolder>(DiffCallback()) {
     private val TYPE_HEADER = 0
     private val TYPE_ITEM = 1
 
@@ -32,10 +32,10 @@ class CustomListAdapter: ListAdapter<InfoItem, RecyclerView.ViewHolder>(DiffCall
 
     open class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ViewListTwoLineItemOverlineBinding.bind(view)
-        fun bind(info: InfoItem) {
-            binding.overlineTitle.text = info.title
-            binding.item.text = info.value
-            if (info.isNested) {
+        fun bind(list: ListItem) {
+            binding.overlineTitle.text = list.title
+            binding.item.text = list.value
+            if (list.isNested) {
                 binding.layout.updatePadding (32.px, 0,0, 0)
             }
         }
@@ -43,9 +43,9 @@ class CustomListAdapter: ListAdapter<InfoItem, RecyclerView.ViewHolder>(DiffCall
 
     open class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ViewListHeaderBinding.bind(view)
-        fun bind(info: InfoItem) {
-            binding.header.text = info.title
-            if (info.isNested) {
+        fun bind(list: ListItem) {
+            binding.header.text = list.title
+            if (list.isNested) {
                 binding.layout.updatePadding(16.px, 0,0, 0)
             }
         }
@@ -57,11 +57,11 @@ class CustomListAdapter: ListAdapter<InfoItem, RecyclerView.ViewHolder>(DiffCall
         return TYPE_ITEM
     }
 
-    private class DiffCallback: DiffUtil.ItemCallback<InfoItem>() {
-        override fun areItemsTheSame(oldItem: InfoItem, newItem: InfoItem): Boolean {
+    private class DiffCallback: DiffUtil.ItemCallback<ListItem>() {
+        override fun areItemsTheSame(oldItem: ListItem, newItem: ListItem): Boolean {
             return oldItem.getId() == newItem.getId()
         }
-        override fun areContentsTheSame(oldItem: InfoItem, newItem: InfoItem): Boolean {
+        override fun areContentsTheSame(oldItem: ListItem, newItem: ListItem): Boolean {
             return oldItem == newItem
         }
     }
