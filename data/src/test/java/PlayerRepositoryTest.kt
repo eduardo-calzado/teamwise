@@ -5,10 +5,14 @@ import es.eduardocalzado.teamwise.data.datasource.PlayerLocalDataSource
 import es.eduardocalzado.teamwise.data.datasource.PlayerRemoteDataSource
 import es.eduardocalzado.teamwise.data.datasource.TeamLocalDataSource
 import es.eduardocalzado.teamwise.data.datasource.TeamRemoteDataSource
+import es.eduardocalzado.teamwise.domain.Player
 import es.eduardocalzado.teamwise.samplePlayer
 import es.eduardocalzado.teamwise.samplePlayers
 import es.eduardocalzado.teamwise.sampleTeam
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -36,7 +40,7 @@ class PlayerRepositoryTest {
     }
 
     @Test
-    fun `Teams are taken from local data source if available` (): Unit = runBlocking {
+    fun `Players are taken from local data source if available` (): Unit = runBlocking {
         // GIVEN
         // ...
         // WHEN

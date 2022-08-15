@@ -57,7 +57,7 @@ val sampleTeam3 = Team (
     emptyList()
 )
 
-val samplePlayers by lazy { listOf(samplePlayer) }
+val samplePlayers by lazy { listOf(samplePlayer, samplePlayer2) }
 
 val samplePlayer = Player(
     1,
@@ -71,5 +71,19 @@ val samplePlayer = Player(
     false,
     "https://media.api-sports.io/football/players/276.png",
     1,
+    emptyList()
+)
+val samplePlayer2 = Player(
+    2,
+    "Milan Rodić",
+    "Milan",
+    "Rodić",
+    31,
+    "Serbia",
+    "185 cm",
+    "75 kg",
+    false,
+    "https://media.api-sports.io/football/players/345.png",
+    2,
     emptyList()
 )
