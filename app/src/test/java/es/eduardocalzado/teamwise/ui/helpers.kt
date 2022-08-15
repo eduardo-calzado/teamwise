@@ -1,5 +1,9 @@
 package es.eduardocalzado.teamwise.ui
 
+import es.eduardocalzado.teamwise.FakeLocalDataSource
+import es.eduardocalzado.teamwise.FakeLocationDataSource
+import es.eduardocalzado.teamwise.FakePermissionChecker
+import es.eduardocalzado.teamwise.FakeRemoteDataSource
 import es.eduardocalzado.teamwise.data.RegionRepository
 import es.eduardocalzado.teamwise.data.TeamRepository
 import es.eduardocalzado.teamwise.domain.Team

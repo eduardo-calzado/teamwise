@@ -1,9 +1,8 @@
-package es.eduardocalzado.teamwise.usecases
-
 import es.eduardocalzado.teamwise.sampleTeam
+import es.eduardocalzado.teamwise.usecases.GetTeamsUseCase
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock

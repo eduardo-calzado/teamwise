@@ -1,15 +1,15 @@
 package es.eduardocalzado.teamwise.ui.main.teams
 
 import app.cash.turbine.test
-import es.eduardocalzado.teamwise.testrules.CoroutinesTestRule
-import es.eduardocalzado.teamwise.usecases.GetTeamsUseCase
-import es.eduardocalzado.teamwise.usecases.RequestTeamsByRegionUseCase
 import es.eduardocalzado.teamwise.sampleTeam
+import es.eduardocalzado.teamwise.testrules.CoroutinesTestRule
+import es.eduardocalzado.teamwise.usecases.*
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.*
+import kotlinx.coroutines.test.runCurrent
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -24,14 +24,17 @@ class MainViewModelTest {
     @get: Rule val coroutinesTestRule = CoroutinesTestRule()
 
     @Mock lateinit var getTeamsUseCase: GetTeamsUseCase
-    @Mock lateinit var requestTeamsByRegionUseCase: RequestTeamsByRegionUseCase
+    @Mock lateinit var requestTeamsUseCase: RequestTeamsUseCase
+    @Mock lateinit var deleteTeamsUseCase: DeleteTeamsUseCase
+    @Mock lateinit var searchTeamsUseCase: SearchTeamsUseCase
+    @Mock lateinit var getRegionRepositoryUseCase: GetRegionRepositoryUseCase
     private lateinit var vm: MainViewModel
     private var teams = listOf(sampleTeam.copy(id = 1))
 
     @Before
     fun setUp() {
         whenever(getTeamsUseCase()).thenReturn(flowOf(teams))
-        vm = MainViewModel(getTeamsUseCase, requestTeamsByRegionUseCase)
+        vm = MainViewModel(getTeamsUseCase, requestTeamsUseCase, deleteTeamsUseCase, searchTeamsUseCase, getRegionRepositoryUseCase)
     }
 
     @Test
@@ -51,8 +54,6 @@ class MainViewModelTest {
     fun `Progress is shown when screen start and hidden when it finishes requesting teams`() = runTest {
         // 2nd method. UiState will have multiple values during execution. In this method, we'll
         // check all the possible values.
-        vm.onUiReady()
-
         vm.state.test {
             // awaitItem(). if you don't want to test some intermediate states
             assertEquals(MainViewModel.UiState(), awaitItem())

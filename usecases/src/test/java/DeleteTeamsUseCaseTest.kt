@@ -1,20 +1,19 @@
-package es.eduardocalzado.teamwise.usecases
-
 import es.eduardocalzado.teamwise.data.TeamRepository
+import es.eduardocalzado.teamwise.usecases.DeleteTeamsUseCase
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 
-class RequestTeamsByRegionUseCaseTest {
+class DeleteTeamsUseCaseTest {
     @Test
     fun `Invoke call teams repository`() : Unit = runBlocking {
         // GIVEN
         val teamRepository = mock<TeamRepository>()
-        val requestTeamsUseCase = RequestTeamsByRegionUseCase(teamRepository)
-        // WHEN
-        requestTeamsUseCase()
+        val deleteTeamsUseCase = DeleteTeamsUseCase(teamRepository)
         // THEN
-        verify(teamRepository).requestTeamsByRegion()
+        deleteTeamsUseCase()
+        // WHEN
+        verify(teamRepository).deleteTeams()
     }
 }

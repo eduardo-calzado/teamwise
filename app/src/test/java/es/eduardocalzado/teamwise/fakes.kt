@@ -1,5 +1,6 @@
-package es.eduardocalzado.teamwise.ui
+package es.eduardocalzado.teamwise
 
+import arrow.core.Either
 import arrow.core.right
 import es.eduardocalzado.teamwise.data.PermissionChecker
 import es.eduardocalzado.teamwise.data.datasource.LocationDataSource
@@ -7,17 +8,10 @@ import es.eduardocalzado.teamwise.data.datasource.TeamLocalDataSource
 import es.eduardocalzado.teamwise.data.datasource.TeamRemoteDataSource
 import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Team
-import es.eduardocalzado.teamwise.usecases.sampleTeam
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flowOf
 
-val defaultFakeTeams = listOf(
-    sampleTeam.copy(1),
-    sampleTeam.copy(2),
-    sampleTeam.copy(3),
-    sampleTeam.copy(4)
-)
+val defaultFakeTeams = sampleTeams
 
 class FakeLocalDataSource : TeamLocalDataSource {
     val inMemoryTeams = MutableStateFlow<List<Team>>(emptyList())
@@ -36,11 +30,36 @@ class FakeLocalDataSource : TeamLocalDataSource {
         }
         return null
     }
+
+    override suspend fun deleteTeams() {
+        TODO("Not yet implemented")
+    }
+
+    override fun searchTeams(search: String): Flow<List<Team>> {
+        TODO("Not yet implemented")
+    }
 }
 
 class FakeRemoteDataSource : TeamRemoteDataSource {
     var teams = defaultFakeTeams
+
     override suspend fun getTeamsByRegion(region: String) = teams.right()
+
+    override suspend fun getTeamStats(
+        league: Int,
+        season: Int,
+        team: Int
+    ): Either<Error, Team.Stats> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getTeams(
+        country: String,
+        league: Int,
+        season: Int
+    ): Either<Error, List<Team>> {
+        TODO("Not yet implemented")
+    }
 }
 
 class FakeLocationDataSource : LocationDataSource {

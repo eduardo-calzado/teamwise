@@ -114,5 +114,6 @@ object Libs {
         const val inject = "javax.inject:javax.inject:1"
     }
 
+    // -- it helps to test state flows quickier and easier
     const val turbine = "app.cash.turbine:turbine:0.7.0"
 }

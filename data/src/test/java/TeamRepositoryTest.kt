@@ -1,8 +1,9 @@
-package es.eduardocalzado.teamwise.data
-
+import es.eduardocalzado.teamwise.data.RegionRepository
+import es.eduardocalzado.teamwise.data.TeamRepository
 import es.eduardocalzado.teamwise.data.datasource.TeamLocalDataSource
 import es.eduardocalzado.teamwise.data.datasource.TeamRemoteDataSource
 import es.eduardocalzado.teamwise.sampleTeam
+import es.eduardocalzado.teamwise.sampleTeams
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -18,14 +19,16 @@ import org.mockito.kotlin.whenever
 @RunWith(MockitoJUnitRunner::class)
 class TeamRepositoryTest {
 
+    // Use Mockito (@Mock) to generate the mocks automatically
     @Mock lateinit var localDataSource: TeamLocalDataSource
     @Mock lateinit var remoteDataSource: TeamRemoteDataSource
     @Mock lateinit var regionRepository: RegionRepository
     private lateinit var teamRepository: TeamRepository
-    private var localTeams = flowOf(listOf(sampleTeam.copy(1)))
+    private var localTeams = flowOf(sampleTeams)
 
     @Before
     fun setUp() {
+
         whenever(localDataSource.teams).thenReturn(localTeams)
         teamRepository = TeamRepository(regionRepository, localDataSource, remoteDataSource)
     }
