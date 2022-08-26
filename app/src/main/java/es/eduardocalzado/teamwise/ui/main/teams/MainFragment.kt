@@ -44,6 +44,7 @@ class MainFragment : Fragment(R.layout.fragment_main), OnQueryTextListener {
             teamsFilterSubmitButton.setOnClickListener {
                 val (country, league, season) = getFiltersData()
                 viewModel.onSubmitClicked(country, league, season)
+                viewModel.saveFilterValues(country, league, season)
                 mainState.toggleVisibility(binding)
             }
             teamsFilterClearButton.setOnClickListener {

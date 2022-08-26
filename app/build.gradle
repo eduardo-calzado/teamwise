@@ -46,6 +46,9 @@ android {
             java.srcDirs += "$projectDir/src/testShared/java"
         }
     }
+    testOptions {
+        animationsDisabled = true
+    }
 }
 
 dependencies {
@@ -87,5 +90,8 @@ dependencies {
     androidTestImplementation Libs.AndroidX.Test.Espresso.contrib
     androidTestImplementation Libs.AndroidX.Test.Rules.runner
     androidTestImplementation Libs.AndroidX.Test.Rules.rules
+    androidTestImplementation(Libs.AndroidX.Test.Barista.core) {
+        exclude group: 'org.jetbrains.kotlin'
+    }
 
 }

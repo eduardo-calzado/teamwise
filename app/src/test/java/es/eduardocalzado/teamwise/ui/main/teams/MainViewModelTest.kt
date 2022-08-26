@@ -1,10 +1,13 @@
 package es.eduardocalzado.teamwise.ui.main.teams
 
 import app.cash.turbine.test
+import es.eduardocalzado.teamwise.Prefs
+import es.eduardocalzado.teamwise.framework.database.Team
 import es.eduardocalzado.teamwise.sampleTeam
 import es.eduardocalzado.teamwise.testrules.CoroutinesTestRule
 import es.eduardocalzado.teamwise.usecases.*
 import junit.framework.Assert.assertEquals
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
@@ -16,7 +19,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
+import java.util.prefs.Preferences
 
 @RunWith(MockitoJUnitRunner::class)
 class MainViewModelTest {
@@ -47,7 +52,6 @@ class MainViewModelTest {
         job.cancel() // if not, the state loop will never finishes
 
         assertEquals(MainViewModel.UiState(teams = teams), results[0])
-
     }
 
     @Test

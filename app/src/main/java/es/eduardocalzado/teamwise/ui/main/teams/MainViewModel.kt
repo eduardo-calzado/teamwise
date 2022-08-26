@@ -51,10 +51,9 @@ class MainViewModel @Inject constructor(
             _state.update { it.copy(error = error) }
             _state.update { it.copy(loading = false) }
         }
-        saveFilterValues(country, league, season)
     }
 
-    private fun saveFilterValues(country: String, league: Int, season: Int) {
+    fun saveFilterValues(country: String, league: Int, season: Int) {
         prefs.countryId = country
         prefs.leagueId = league
         prefs.seasonId = season

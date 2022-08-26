@@ -10,6 +10,7 @@ import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Team
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flowOf
 
 val defaultFakeTeams = sampleTeams
 
@@ -32,11 +33,11 @@ class FakeLocalDataSource : TeamLocalDataSource {
     }
 
     override suspend fun deleteTeams() {
-        TODO("Not yet implemented")
+        inMemoryTeams.value = emptyList()
     }
 
     override fun searchTeams(search: String): Flow<List<Team>> {
-        TODO("Not yet implemented")
+       return flowOf(inMemoryTeams.value.filter { it.name.contains(search) })
     }
 }
 
@@ -58,8 +59,9 @@ class FakeRemoteDataSource : TeamRemoteDataSource {
         league: Int,
         season: Int
     ): Either<Error, List<Team>> {
-        TODO("Not yet implemented")
+        return teams.right()
     }
+
 }
 
 class FakeLocationDataSource : LocationDataSource {
@@ -70,4 +72,8 @@ class FakeLocationDataSource : LocationDataSource {
 class FakePermissionChecker : PermissionChecker {
     var permissionGranted = true
     override fun check(permission: PermissionChecker.Permission) = permissionGranted
+}
+
+interface Prefs {
+    fun getAccessToken(): String
 }

@@ -1,6 +1,5 @@
 package es.eduardocalzado.teamwise.buildsrc
 
-
 object Libs {
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:7.1.2"
@@ -67,6 +66,10 @@ object Libs {
                 private const val version="3.4.0"
                 const val core = "androidx.test.espresso:espresso-core:$version"
                 const val contrib = "androidx.test.espresso:espresso-contrib:$version"
+            }
+            object Barista{
+                private const val version="4.2.0"
+                const val core = "com.adevinta.android:barista:$version"
             }
         }
     }

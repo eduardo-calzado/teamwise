@@ -28,7 +28,6 @@ class TeamRepositoryTest {
 
     @Before
     fun setUp() {
-
         whenever(localDataSource.teams).thenReturn(localTeams)
         teamRepository = TeamRepository(regionRepository, localDataSource, remoteDataSource)
     }

@@ -38,7 +38,7 @@ class MainViewModelTest {
     }
 
     @Test
-    fun `UI is updated with the movie on start`() = runTest {
+    fun `UI is updated with the team on start`() = runTest {
         vm.state.test {
             assertEquals(DetailViewModel.UiState(), awaitItem())
             assertEquals(DetailViewModel.UiState(teamData = team), awaitItem())

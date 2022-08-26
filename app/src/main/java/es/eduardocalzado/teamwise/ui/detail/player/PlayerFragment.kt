@@ -19,13 +19,11 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
 
     private val viewModel: PlayerViewModel by viewModels()
 
-    private lateinit var playerState: PlayerState
     private lateinit var binding: FragmentPlayerBinding
     private var adapter: CustomListAdapter = CustomListAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        playerState = buildPlayerState()
         // --
         binding = FragmentPlayerBinding.bind(view).apply {
             fragmentPlayerInfoLayout.playerRecycler.adapter = adapter
