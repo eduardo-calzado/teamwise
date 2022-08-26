@@ -15,7 +15,6 @@ import es.eduardocalzado.teamwise.domain.Team.Stats
 import es.eduardocalzado.teamwise.usecases.FindTeamUseCase
 import es.eduardocalzado.teamwise.usecases.RequestTeamStatsUseCase
 import es.eduardocalzado.teamwise.usecases.SwitchTeamFavoriteUseCase
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

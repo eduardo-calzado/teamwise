@@ -1,10 +1,7 @@
 package es.eduardocalzado.teamwise.usecases
 
-import arrow.core.Either
 import es.eduardocalzado.teamwise.data.PlayerRepository
-import es.eduardocalzado.teamwise.data.TeamRepository
 import es.eduardocalzado.teamwise.domain.Error
-import es.eduardocalzado.teamwise.domain.Player
 import javax.inject.Inject
 
 class RequestPlayersByTeamUseCase @Inject constructor(

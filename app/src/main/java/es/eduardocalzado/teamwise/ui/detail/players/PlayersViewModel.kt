@@ -1,19 +1,15 @@
 package es.eduardocalzado.teamwise.ui.detail.players
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import es.eduardocalzado.teamwise.data.Constants
 import es.eduardocalzado.teamwise.di.LeagueId
 import es.eduardocalzado.teamwise.di.SeasonId
 import es.eduardocalzado.teamwise.di.TeamId
 import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Player
 import es.eduardocalzado.teamwise.framework.toError
-import es.eduardocalzado.teamwise.ui.main.teams.MainViewModel
 import es.eduardocalzado.teamwise.usecases.FindPlayersByTeamUseCase
-import es.eduardocalzado.teamwise.usecases.GetPlayersUseCase
 import es.eduardocalzado.teamwise.usecases.RequestPlayersByTeamUseCase
 import es.eduardocalzado.teamwise.usecases.SearchPlayersUseCase
 import kotlinx.coroutines.flow.*

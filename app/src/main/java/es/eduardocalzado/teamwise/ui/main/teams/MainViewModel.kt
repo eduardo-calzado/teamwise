@@ -1,17 +1,13 @@
 package es.eduardocalzado.teamwise.ui.main.teams
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import es.eduardocalzado.teamwise.data.Constants
-import es.eduardocalzado.teamwise.data.TeamRepository
 import es.eduardocalzado.teamwise.domain.Error
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.framework.toError
 import es.eduardocalzado.teamwise.prefs
 import es.eduardocalzado.teamwise.usecases.*
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject

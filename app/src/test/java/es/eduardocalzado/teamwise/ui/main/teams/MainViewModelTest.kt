@@ -1,13 +1,11 @@
 package es.eduardocalzado.teamwise.ui.main.teams
 
 import app.cash.turbine.test
-import es.eduardocalzado.teamwise.Prefs
-import es.eduardocalzado.teamwise.framework.database.Team
+import es.eduardocalzado.teamwise.domain.TeamLeague
 import es.eduardocalzado.teamwise.sampleTeam
 import es.eduardocalzado.teamwise.testrules.CoroutinesTestRule
 import es.eduardocalzado.teamwise.usecases.*
 import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
@@ -19,9 +17,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
-import java.util.prefs.Preferences
 
 @RunWith(MockitoJUnitRunner::class)
 class MainViewModelTest {
@@ -55,9 +51,11 @@ class MainViewModelTest {
     }
 
     @Test
-    fun `Progress is shown when screen start and hidden when it finishes requesting teams`() = runTest {
+    fun `Progress is shown when submit button is clicked and it finishes when the process is completed`() = runTest {
         // 2nd method. UiState will have multiple values during execution. In this method, we'll
         // check all the possible values.
+        vm.onSubmitClicked("England", TeamLeague.PREMIER_LEAGUE.id, 2021)
+
         vm.state.test {
             // awaitItem(). if you don't want to test some intermediate states
             assertEquals(MainViewModel.UiState(), awaitItem())

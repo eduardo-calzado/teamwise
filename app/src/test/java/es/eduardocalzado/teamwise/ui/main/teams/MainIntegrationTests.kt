@@ -1,13 +1,13 @@
 package es.eduardocalzado.teamwise.ui.main.teams
 
 import app.cash.turbine.test
-import es.eduardocalzado.teamwise.*
 import es.eduardocalzado.teamwise.data.RegionRepository
 import es.eduardocalzado.teamwise.data.TeamRepository
 import es.eduardocalzado.teamwise.domain.Team
 import es.eduardocalzado.teamwise.domain.TeamLeague
 import es.eduardocalzado.teamwise.testrules.CoroutinesTestRule
-import es.eduardocalzado.teamwise.ui.main.teams.MainViewModel.*
+import es.eduardocalzado.teamwise.ui.fakes.*
+import es.eduardocalzado.teamwise.ui.main.teams.MainViewModel.UiState
 import es.eduardocalzado.teamwise.usecases.*
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -56,8 +56,8 @@ class MainIntegrationTests {
         val locationDataSource = FakeLocationDataSource()
         val permissionChecker = FakePermissionChecker()
         val regionRepository = RegionRepository(locationDataSource, permissionChecker)
-        val localDataSource = FakeLocalDataSource().apply { teams.value = localData }
-        val remoteDataSource = FakeRemoteDataSource().apply { teams = remoteData }
+        val localDataSource = FakeTeamLocalDataSource().apply { teams.value = localData }
+        val remoteDataSource = FakeTeamRemoteDataSource().apply { teams = remoteData }
         val teamRepository = TeamRepository(regionRepository, localDataSource, remoteDataSource)
         val getTeamsUseCase = GetTeamsUseCase(teamRepository)
         val requestTeamsUseCase = RequestTeamsUseCase(teamRepository)
